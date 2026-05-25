@@ -1,13 +1,18 @@
 import express from 'express'
 import dotenv from 'dotenv'
 const app = express()
+import { connectDatabase } from './config/dbConnect.js'
 
 dotenv.config({path: 'backend/config/config.env'})
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+// Database connection
+connectDatabase()
+
+// Import all Routes
+import productRoutes from './routes/products.js'
+app.use('/api/v1', productRoutes)
+
 
 app.listen(process.env.PORT, () => {
-  console.log(`App listening on port ${process.env.PORT}`)
+  console.log(`App listening on port ${process.env.PORT} in ${process.env.NODE_ENV} mode`)
 })
