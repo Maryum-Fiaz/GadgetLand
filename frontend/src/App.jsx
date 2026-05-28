@@ -4,7 +4,8 @@ function App() {
 
   return (
     <>
-    <h1 className="bg-pink-700 text-2xl text-pink-200">Bismillah</h1>
+    <h1 className="text-5xl text-pink-200 font-heading">Bismillah</h1>
+    <h3 className="font-sans">Gadgets premium</h3>
     </>
   )
 }

@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@theme {
+  /* Registering custom typography definitions */
+  --font-heading: "Syne", sans-serif;
+  --font-sans: "Inter", sans-serif;
+
+  /* Registering other premium colors */
+  --color-brand-bg: #f4f4f5;      /* Ultra-soft light grey base (zinc-100 style) */
+  --color-brand-dark: #1e293b;    /* Rich slate-800 for buttons and accents */
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-zinc-900 font-sans antialiased;
+  }
+}
