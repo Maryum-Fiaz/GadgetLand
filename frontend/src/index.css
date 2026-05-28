@@ -12,6 +12,6 @@
 
 @layer base {
   body {
-    @apply bg-brand-bg text-zinc-900 font-sans antialiased;
+    @apply bg-zinc-100 text-zinc-900 font-sans antialiased;
   }
 }
