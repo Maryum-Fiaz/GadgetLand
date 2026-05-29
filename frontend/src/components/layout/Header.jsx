@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Search, ShoppingCart, LogIn, Menu, X } from 'lucide-react';
 import Container from '../Container';
+import logo from '../../assets/logo.png'
+import { Link } from 'react-router';
 
-// TODO: set it for medium screens like tabs
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,21 +12,25 @@ function Header() {
   return (
     <header className="sticky top-0 z-50 w-full bg-zinc-100/90 border-b border-zinc-200/80 backdrop-blur-md">
       <Container>
-        <nav className="flex h-20 items-center justify-between px-2">
+        <nav className="flex h-22 items-center justify-between px-2">
           
           {/* Logo Frame */}
           <div className="flex items-center shrink-0">
-            <span className="font-heading text-xl sm:text-2xl font-black tracking-tight text-slate-900">
-              GadgetLand
-            </span>
+            <Link to='/'>
+            <img 
+              src={logo} 
+              alt="GadgetLand Logo" 
+              className="h-16 w-auto object-contain" 
+            />
+            </Link>
           </div>
 
           {/* 💻 Desktop Navigation Links (Hidden on Mobile) */}
           <ul className="hidden md:flex items-center gap-6 lg:gap-8 font-sans text-sm font-semibold text-zinc-600">
+            <li className="cursor-pointer transition-colors hover:text-mauve-400">Home</li>
             <li className="cursor-pointer transition-colors hover:text-mauve-400">Products</li>
             <li className="cursor-pointer transition-colors hover:text-mauve-400">Top Selling</li>
-            <li className="cursor-pointer transition-colors hover:text-mauve-400">Deals</li>
-            <li className="cursor-pointer transition-colors hover:text-mauve-400">New Arrivals</li>
+            <li className="cursor-pointer transition-colors hover:text-mauve-400">About Us</li>
           </ul>
 
           <div className="hidden md:flex items-center gap-4">
