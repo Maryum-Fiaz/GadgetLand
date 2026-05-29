@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Search, ShoppingCart, LogIn, Menu, X } from 'lucide-react';
 import Container from '../Container';
 
+// TODO: set it for medium screens like tabs
+
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
