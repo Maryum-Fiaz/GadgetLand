@@ -20,7 +20,7 @@ function Header() {
             <img 
               src={logo} 
               alt="GadgetLand Logo" 
-              className="h-16 w-auto object-contain" 
+              className="h-22 w-auto object-contain" 
             />
             </Link>
           </div>

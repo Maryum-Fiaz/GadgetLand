@@ -1,4 +1,4 @@
-import MetaData from "../layout/MetaData"
+import {MetaData} from "../components/index.js"
 
 
 function Home() {
