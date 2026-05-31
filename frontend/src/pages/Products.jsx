@@ -2,7 +2,7 @@
 
 import { SlidersHorizontal, X, ChevronDown } from 'lucide-react';
 import Container from '../components/Container';
-import ProductCard from '../components/product/ProductCard';
+import { ProductCard } from '../components/index';
 import { useState } from 'react';
 import { useGetProductsQuery } from '../redux/api/productApi';
 

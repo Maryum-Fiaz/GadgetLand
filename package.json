@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node backend/app.js",
-    "dev": "node --watch backend/app.js",
+    "dev": "set NODE_ENV=DEVELOPMENT&& node --watch backend/app.js",
+    "prod": "set NODE_ENV=PRODUCTION&& node backend/app.js",
     "seeder": "node backend/seeder/seeder.js"
   },
   "author": "Maryum Fiaz",
