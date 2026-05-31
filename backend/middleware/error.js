@@ -8,7 +8,7 @@ export default (err, req, res, next) => {
     }
 
 
-    res.statusCode(error.statusCode).json({
+    res.status(error.statusCode).json({
         message: error.message,
     })
 
