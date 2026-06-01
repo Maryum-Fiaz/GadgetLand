@@ -5,12 +5,18 @@ import Container from '../components/Container';
 import { ProductCard } from '../components/index';
 import { useState } from 'react';
 import { useGetProductsQuery } from '../redux/api/productApi';
+import { useSearchParams } from 'react-router';
 
 
 function Products() {
 const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
-    const { data, isLoading, error } = useGetProductsQuery();
+  const [searchParams] = useSearchParams();
 
+  const keyword = searchParams.get("keyword") || "";
+
+    const { data, isLoading, error } = useGetProductsQuery({ keyword });
+
+    
   if (isLoading) return <div className="text-center py-20 font-mono text-zinc-500">Loading products...</div>;
   if (error) return <div className="text-center py-20 text-red-500">Connection Error</div>;
 
@@ -24,11 +30,12 @@ const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between pt-12 pb-6 px-2">
           <div>
             <h1 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">
-              Our Products
+              {keyword ? `Search Results for "${keyword}"` : "Our Products"}
             </h1>
             <p className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mt-1">
               Architecture / Premium Tech Gear
             </p>
+
           </div>
 
           {/* 📱 Mobile Quick Filter Row: Hidden on Desktop, Visible on Mobile */}

@@ -1,14 +1,18 @@
 import { useState } from 'react';
-import { Search, ShoppingCart, LogIn, Menu, X } from 'lucide-react';
+import { ShoppingCart, LogIn, Menu, X } from 'lucide-react';
 import Container from '../Container';
 import logo from '../../assets/logo.png'
 import { Link } from 'react-router';
+import SearchBar from './SearchBar';
 
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
 
+
+  // TODO: -> set search bar ui
+
+  
   return (
     <header className="sticky top-0 z-50 w-full bg-zinc-100/90 border-b border-zinc-200/80 backdrop-blur-md">
       <Container>
@@ -37,16 +41,7 @@ function Header() {
             
             {/* Expandable Search Input Container */}
             <div className="relative flex items-center group h-10">
-              <input
-                type="text"
-                placeholder="Search premium tech..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-10 group-hover:w-56 focus:w-56 h-full pl-10 pr-4 rounded-xl border border-transparent bg-transparent group-hover:bg-white focus:bg-white group-hover:border-zinc-200 focus:border-zinc-200 font-sans text-xs font-medium outline-none transition-all duration-300 ease-in-out cursor-pointer group-hover:cursor-text focus:cursor-text"
-              />
-              <div className="absolute left-3 pointer-events-none text-zinc-600 group-hover:text-mauve-500 focus:text-mauve-500 transition-colors">
-                <Search size={18} strokeWidth={2.2} />
-              </div>
+              <SearchBar />
             </div>
 
             
@@ -79,16 +74,7 @@ function Header() {
         <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-zinc-200 shadow-xl px-6 py-6 transition-all z-40">
           
           <div className="relative flex items-center mb-6">
-            <input
-              type="text"
-              placeholder="Search premium tech..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-11 pl-11 pr-4 rounded-xl border border-zinc-200 bg-zinc-50 font-sans text-sm outline-none focus:border-[rgba(139,123,171,1)] focus:bg-white transition-all"
-            />
-            <div className="absolute left-3.5 text-zinc-400">
-              <Search size={18} />
-            </div>
+            <SearchBar />
           </div>
 
           <ul className="flex flex-col gap-5 font-sans font-semibold text-zinc-700">
