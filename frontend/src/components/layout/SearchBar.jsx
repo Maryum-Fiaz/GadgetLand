@@ -25,7 +25,7 @@ function SearchBar() {
     
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} className="relative flex items-center group h-10">
         <input
                 type="text"
                 placeholder="Search premium tech..."

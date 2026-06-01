@@ -10,8 +10,7 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 
-  // TODO: -> set search bar ui
-
+  // TODO: -> if user write keyword zdfzdd -> not exist -> our ui still show all products
   
   return (
     <header className="sticky top-0 z-50 w-full bg-zinc-100/90 border-b border-zinc-200/80 backdrop-blur-md">
@@ -40,9 +39,9 @@ function Header() {
           <div className="hidden md:flex items-center gap-4">
             
             {/* Expandable Search Input Container */}
-            <div className="relative flex items-center group h-10">
+            
               <SearchBar />
-            </div>
+            
 
             
             <button className="p-2 text-zinc-600 transition-all hover:scale-110 hover:text-mauve-400 cursor-pointer">
