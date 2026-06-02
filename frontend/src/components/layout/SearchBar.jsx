@@ -1,31 +1,30 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Search } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router';
+import useDebounce from '../../hook/useDebounce';
 
 function SearchBar() {
 
     const [keyword, setKeyword] = useState("")
+    const debounceValue = useDebounce(keyword, 500)
     const navigate = useNavigate();
     const location = useLocation()
 
-    //TODO: -> add debounce for better performance
-
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-
-        if(keyword?.trim()) {
-            navigate(`/products?keyword=${keyword}`)
-        } else {
-          if(location.pathname === "/products")
-            navigate('/products')
-        }
-    }
-    console.log('render in search bar....', keyword);
     
 
+    useEffect(() => {
+      if(debounceValue.trim()){
+        navigate(`/products?keyword=${debounceValue}`)
+      } else {
+        if(location.pathname === "/products") {
+            navigate('/products')
+        }
+      }
+    }, [debounceValue, navigate, location.pathname])
+
+
   return (
-    <form onSubmit={submitHandler} className="relative flex items-center group h-10">
+    <div  className="relative flex items-center group h-10">
         <input
                 type="text"
                 placeholder="Search premium tech..."
@@ -36,7 +35,7 @@ function SearchBar() {
               <div className="absolute left-3 pointer-events-none text-zinc-600 group-hover:text-mauve-500 focus:text-mauve-500 transition-colors">
                 <Search size={18} strokeWidth={2.2} />
               </div>
-    </form>
+    </div>
   )
 }
 
