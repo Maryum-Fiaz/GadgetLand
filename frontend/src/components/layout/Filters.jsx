@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { Star } from 'lucide-react';
 import { useSearchParams } from 'react-router';
 import { getPriceQueryParams } from '../../helper/helper';
+import { PRODUCT_CATEGORIES } from '../../constants/constants';
 
 function Filters() {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   
-  // 1. Correctly get the current URL params state and its updater function
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handlePriceSubmit = (e) => {
@@ -66,7 +66,7 @@ function Filters() {
           Categories
         </h3>
         <div className="flex flex-col gap-2.5">
-          {['Laptops', 'Headphones', 'Audio Gear', 'Wearables'].map((category) => (
+          {PRODUCT_CATEGORIES.map((category) => (
             <label 
               key={category} 
               className="flex items-center gap-2.5 text-xs font-bold text-zinc-600 hover:text-zinc-900 transition-colors cursor-pointer"
