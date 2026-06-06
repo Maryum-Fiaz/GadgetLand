@@ -4,12 +4,35 @@ import { useSearchParams } from 'react-router';
 import { getPriceQueryParams } from '../../helper/helper';
 import { PRODUCT_CATEGORIES } from '../../constants/constants';
 
+
 function Filters() {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   
   const [searchParams, setSearchParams] = useSearchParams();
 
+  // Handle category & rating filter
+  const handleCheck = (checkbox) => {
+    const checkboxes = document.getElementsByName(checkbox.name)
+
+    checkboxes.forEach(box => 
+      {if(box !== checkbox) box.checked = false}
+  )
+
+  let newParams = new URLSearchParams(searchParams)
+
+  if(checkbox.checked === false) {
+    newParams.delete(checkbox.name)
+
+  } else {
+    newParams.set(checkbox.name, checkbox.value)
+  }
+
+  setSearchParams(newParams)
+  }
+
+
+  // Handle price filter
   const handlePriceSubmit = (e) => {
     e.preventDefault();
 
@@ -68,11 +91,15 @@ function Filters() {
         <div className="flex flex-col gap-2.5">
           {PRODUCT_CATEGORIES.map((category) => (
             <label 
-              key={category} 
+              key={category}
               className="flex items-center gap-2.5 text-xs font-bold text-zinc-600 hover:text-zinc-900 transition-colors cursor-pointer"
             >
               <input 
-                type="checkbox" 
+                type="checkbox"
+                name="category"
+                value={category}
+                onClick={(e) => handleCheck(e.target)}
+                defaultChecked={searchParams.get("category") === category}  // TODO: -> check why not working?
                 className="w-4 h-4 rounded border-zinc-300 text-zinc-900 accent-zinc-900 focus:ring-0 cursor-pointer" 
               />
               <span>{category}</span>
