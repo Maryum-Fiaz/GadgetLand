@@ -8,9 +8,6 @@ import SearchBar from './SearchBar';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-
-  // TODO: -> if user write keyword zdfzdd -> not exist -> our ui still show all products
   
   return (
     <header className="sticky top-0 z-50 w-full bg-zinc-100/90 border-b border-zinc-200/80 backdrop-blur-md">

@@ -8,7 +8,6 @@ export const getProducts = catchAsyncErrors(async(req, res) => {
 
     const apiFilters = new ApiFilters(Product.find(), req.query).search().filter();
     const products = await apiFilters.query;
-    console.log('======> controller ====> ', apiFilters);
     
 
     const filteredProductsCount = products.length;
