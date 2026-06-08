@@ -41,8 +41,33 @@ function Filters() {
     setSearchParams(newParams);
   };
 
+  // Clear all filters
+  const handleClearFilters = () => {
+  const keyword = searchParams.get("keyword");
+  let newParams = new URLSearchParams();
+
+  if (keyword) {
+    newParams.set("keyword", keyword);
+  }
+
+  setSearchParams(newParams);
+  
+  setMinPrice('');
+  setMaxPrice('');
+};
+
   return (
     <div className="flex flex-col gap-8 w-full">
+
+      {/* 🔄 Clear Filters Action Trigger */}
+      {(searchParams.get("category") || searchParams.get("ratings") || searchParams.get("min") || searchParams.get("max")) && (
+        <button
+          onClick={handleClearFilters}
+          className="text-xs text-start font-bold text-mauve-600 hover:text-mauve-700 transition-colors cursor-pointer underline underline-offset-4"
+        >
+          Clear Filters
+        </button>
+      )}
       
       {/* 💰 Price Filter Section */}
       <div className="flex flex-col gap-3">
