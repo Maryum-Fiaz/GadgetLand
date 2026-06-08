@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 @theme {
   /* Registering custom typography definitions */
   --font-heading: "Syne", sans-serif;

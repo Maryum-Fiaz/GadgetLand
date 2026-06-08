@@ -1,5 +1,6 @@
 import { useSearchParams } from "react-router";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect } from "react";
 
 const CustomPagination = ({ resPerPage, filteredProductsCount }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -12,6 +13,13 @@ const CustomPagination = ({ resPerPage, filteredProductsCount }) => {
   // If all products fit on a single page, hide the pagination bar
   if (filteredProductsCount <= resPerPage) return null;
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }, [currentPage]);
+
   // Handle page change
   const handlePageChange = (pageNumber) => {
     let newParams = new URLSearchParams(searchParams);
@@ -19,12 +27,6 @@ const CustomPagination = ({ resPerPage, filteredProductsCount }) => {
     newParams.set("page", pageNumber);
     
     setSearchParams(newParams);
-
-    // Automatically scrolls the user smoothly back to the top!
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
   };
 
   return (
