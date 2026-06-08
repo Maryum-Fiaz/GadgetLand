@@ -19,6 +19,12 @@ const CustomPagination = ({ resPerPage, filteredProductsCount }) => {
     newParams.set("page", pageNumber);
     
     setSearchParams(newParams);
+
+    // Automatically scrolls the user smoothly back to the top!
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
   };
 
   return (
