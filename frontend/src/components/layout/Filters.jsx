@@ -18,6 +18,8 @@ function Filters() {
   
     let newParams = new URLSearchParams(searchParams)
 
+    newParams.set("page", "1");
+
   if(!checked) {
     newParams.delete(name)
 
@@ -35,6 +37,8 @@ function Filters() {
 
     let newParams = new URLSearchParams(searchParams);
 
+    newParams.set("page", "1");
+
     newParams = getPriceQueryParams(newParams, "min", minPrice);
     newParams = getPriceQueryParams(newParams, "max", maxPrice);
 
@@ -49,7 +53,7 @@ function Filters() {
   if (keyword) {
     newParams.set("keyword", keyword);
   }
-
+  
   setSearchParams(newParams);
   
   setMinPrice('');

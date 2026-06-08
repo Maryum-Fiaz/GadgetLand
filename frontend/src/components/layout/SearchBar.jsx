@@ -18,6 +18,7 @@ function SearchBar() {
 
     if (debounceValue.trim()) {
       newParams.set("keyword", debounceValue.trim());
+      newParams.set("page", "1");
     } else {
       newParams.delete("keyword");
     }
