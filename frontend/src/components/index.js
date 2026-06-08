@@ -4,6 +4,7 @@ import ProductCard from './product/ProductCard.jsx'
 import Container from './Container.jsx'
 import MetaData from './layout/MetaData.jsx';
 import Filters from './layout/Filters.jsx';
+import CustomPagination from './layout/CustomPagination.jsx';
 
 export {
     Footer,
@@ -12,4 +13,5 @@ export {
     Container,
     MetaData,
     Filters,
+    CustomPagination,
 }
