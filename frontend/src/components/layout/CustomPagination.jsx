@@ -6,19 +6,21 @@ const CustomPagination = ({ resPerPage, filteredProductsCount }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const currentPage = Number(searchParams.get("page")) || 1;
-
   // Total pages needed
   const totalPages = Math.ceil(filteredProductsCount / resPerPage);
 
-  // If all products fit on a single page, hide the pagination bar
-  if (filteredProductsCount <= resPerPage) return null;
 
+  // Scroll smoothly up on each page click
   useEffect(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth"
     });
   }, [currentPage]);
+
+  // If all products fit on a single page, hide the pagination bar
+  if (filteredProductsCount <= resPerPage) return null;
+
 
   // Handle page change
   const handlePageChange = (pageNumber) => {
