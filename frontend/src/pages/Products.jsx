@@ -15,11 +15,15 @@ const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const keyword = searchParams.get("keyword") || "";
   const min = searchParams.get("min");
   const max = searchParams.get("max");
+  const category = searchParams.get("category");
+  const ratings = searchParams.get("ratings")
 
   const queryParams = { keyword };
 
   if (min !== null) queryParams.min = min;
   if (max !== null) queryParams.max = max;
+  if (category !== null) queryParams.category = category;
+  if (ratings !== null) queryParams.ratings = ratings;
 
   const { data, isLoading, error } = useGetProductsQuery(queryParams);
   

@@ -7,6 +7,7 @@ export const products = [
         description: "High-performance gaming laptop with Intel i9 processor and RTX 4080 graphics.",
         category: "Laptops",
         seller: "ASUS Official",
+        ratings: 5,
         stock: 12,
         images: [{ url: "https://picsum.photos/id/1/600/400" }]
     },
@@ -17,6 +18,7 @@ export const products = [
         category: "Smartphones",
         seller: "Apple Store",
         stock: 25,
+        ratings: 3,
         images: [{ url: "https://picsum.photos/id/0/600/400" }]
     },
     {
@@ -25,6 +27,7 @@ export const products = [
         description: "Industry-leading noise canceling over-ear headphones with premium sound quality.",
         category: "Headphones",
         seller: "Sony Pakistan",
+        ratings: 2,
         stock: 15,
         images: [{ url: "https://picsum.photos/id/10/600/400" }]
     },
@@ -34,6 +37,7 @@ export const products = [
         description: "Tactile clicky mechanical gaming keyboard with customizable per-key Chroma RGB.",
         category: "Gaming Gear",
         seller: "Razer Zone",
+        ratings: 3,
         stock: 40,
         images: [{ url: "https://picsum.photos/id/60/600/400" }]
     },
@@ -43,6 +47,7 @@ export const products = [
         description: "Advanced sleep coaching, personalized heart rate zones, and sleek aluminum finish.",
         category: "Wearables",
         seller: "Samsung Direct",
+        ratings: 3,
         stock: 8,
         images: [{ url: "https://picsum.photos/id/48/600/400" }]
     },
@@ -52,6 +57,7 @@ export const products = [
         description: "Ultra-high capacity external battery with 200W fast charging capability.",
         category: "Accessories",
         seller: "Anker Official",
+        ratings: 5,
         stock: 100,
         images: [{ url: "https://picsum.photos/id/26/600/400" }]
     },
@@ -97,6 +103,7 @@ export const products = [
         description: "Ultra-lightweight wireless gaming mouse designed with top esports professionals.",
         category: "Gaming Gear",
         seller: "Logitech Hub",
+        ratings: 5,
         stock: 35,
         images: [{ url: "https://picsum.photos/id/365/600/400" }]
     },
@@ -106,6 +113,7 @@ export const products = [
         description: "Ergonomic gaming chair offering heavy-duty magnetic memory foam pillows and personalized lumbar posture support.",
         category: "Gaming Gear",
         seller: "Secretlab Direct",
+        ratings: 4,
         stock: 5,
         images: [{ url: "https://picsum.photos/id/201/600/400" }]
     },
@@ -124,6 +132,7 @@ export const products = [
         description: "Apple-designed dynamic driver provides high-fidelity audio with exceptional active noise control.",
         category: "Headphones",
         seller: "Apple Store",
+        ratings: 5,
         stock: 10,
         images: [{ url: "https://picsum.photos/id/367/600/400" }]
     },
@@ -133,6 +142,7 @@ export const products = [
         description: "High-capacity NVMe solid-state storage featuring 1050MB/s read speeds wrapped in a rugged design.",
         category: "Accessories",
         seller: "SanDisk Outlet",
+        ratings: 5,
         stock: 75,
         images: [{ url: "https://picsum.photos/id/445/600/400" }]
     }

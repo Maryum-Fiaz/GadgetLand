@@ -95,7 +95,6 @@ function Filters() {
                 type="checkbox"
                 name="category"
                 value={category}
-                // onClick={(e) => handleCheck(e.target)}
                 onChange={handleCheck}
                 checked={searchParams.get("category") === category}
                 className="w-4 h-4 rounded border-zinc-300 text-zinc-900 accent-zinc-900 focus:ring-0 cursor-pointer" 
@@ -107,35 +106,38 @@ function Filters() {
       </div>
 
       {/* ⭐ Ratings Filter Section */}
-      <div className="flex flex-col gap-3 border-t border-zinc-100 pt-6">
-        <h3 className="text-xs font-black uppercase tracking-widest text-zinc-400 font-sans">
-          Minimum Rating
-        </h3>
-        <div className="flex flex-col gap-2.5">
-          {[5, 4, 3, 2, 1].map((stars) => (
-            <label 
-              key={stars} 
-              className="flex items-center gap-2.5 text-xs font-bold text-zinc-500 hover:text-zinc-900 transition-colors cursor-pointer"
-            >
-              <input 
-                type="radio" 
-                name="rating" 
-                className="w-4 h-4 border-zinc-300 text-zinc-900 accent-zinc-900 focus:ring-0 cursor-pointer" 
-              />
-              <div className="flex items-center gap-0.5">
-                {[...Array(5)].map((_, i) => (
-                  <Star 
-                    key={i} 
-                    size={13} 
-                    fill={i < stars ? "#fbbf24" : "none"} 
-                    className={i < stars ? "text-amber-400" : "text-zinc-200"} 
-                  />
-                ))}
-              </div>
-            </label>
+<div className="flex flex-col gap-3 border-t border-zinc-100 pt-6">
+  <h3 className="text-xs font-black uppercase tracking-widest text-zinc-400 font-sans">
+    Minimum Rating
+  </h3>
+  <div className="flex flex-col gap-2.5">
+    {[5, 4, 3, 2, 1].map((stars) => (
+      <label 
+        key={stars} 
+        className="flex items-center gap-2.5 text-xs font-bold text-zinc-500 hover:text-zinc-900 transition-colors cursor-pointer"
+      >
+        <input 
+          type="checkbox"
+          name="ratings"
+          value={stars}
+          onChange={handleCheck}
+          checked={searchParams.get("ratings") === stars.toString()}
+          className="w-4 h-4 rounded border-zinc-300 text-zinc-900 accent-zinc-900 focus:ring-0 cursor-pointer" 
+        />
+        <div className="flex items-center gap-0.5">
+          {[...Array(5)].map((_, i) => (
+            <Star 
+              key={i} 
+              size={13} 
+              fill={i < stars ? "#fbbf24" : "none"} 
+              className={i < stars ? "text-amber-400" : "text-zinc-200"} 
+            />
           ))}
         </div>
-      </div>
+      </label>
+    ))}
+  </div>
+</div>
 
     </div>
   );

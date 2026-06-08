@@ -19,7 +19,7 @@ const productSchema = new mongoose.Schema({
     },
     ratings: {
         type: Number,
-        default: 0         //no reviews by default
+        default: 0         //no rating by default
     },
     images: [
         {
