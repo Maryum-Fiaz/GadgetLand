@@ -1,6 +1,6 @@
 
 
-import { SlidersHorizontal, X, ChevronDown } from 'lucide-react';
+import { SlidersHorizontal, X } from 'lucide-react';
 import Container from '../components/Container';
 import { Filters, ProductCard } from '../components/index.js';
 import { useState } from 'react';
@@ -61,21 +61,9 @@ const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
               <span>Filter & Refine</span>
             </button>
             
-            <button className="flex items-center gap-2 px-4 py-3 bg-white border border-zinc-200 text-xs font-bold uppercase tracking-wider text-zinc-700 rounded-2xl shadow-sm cursor-pointer">
-              <span>Sort</span>
-              <ChevronDown size={14} className="text-zinc-400" />
-            </button>
           </div>
 
-          {/* Desktop Filter Controls Header Panel (Hidden on Mobile) */}
-          <div className="hidden lg:flex items-center gap-3">
-            <div className="relative">
-              <button className="flex items-center gap-2 px-4 py-2 bg-white border border-zinc-200 text-xs font-bold uppercase tracking-wider text-zinc-600 rounded-xl shadow-sm hover:border-zinc-300 transition-all cursor-pointer">
-                <span>Sort: Featured</span>
-                <ChevronDown size={14} className="text-zinc-400" />
-              </button>
-            </div>
-          </div>
+          
         </div>
 
         {/* 🌌 SECTION 2: Grid Split Canvas Workspace */}
@@ -107,7 +95,7 @@ const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
         <div className={`fixed inset-0 z-50 bg-zinc-950/40 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${isMobileFilterOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
           
           {/* Slide-Up White Card Frame Box layout sheet */}
-          <div className={`fixed inset-x-0 bottom-0 max-h-[85vh] bg-white rounded-t-[32px] shadow-2xl flex flex-col transition-transform duration-300 ease-out transform ${isMobileFilterOpen ? 'translate-y-0' : 'translate-y-full'}`}>
+          <div className={`fixed inset-x-0 bottom-0 max-h-[85vh] bg-white rounded-t-4xl shadow-2xl flex flex-col transition-transform duration-300 ease-out transform ${isMobileFilterOpen ? 'translate-y-0' : 'translate-y-full'}`}>
             
             {/* Header Toolbar block */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-zinc-100">
@@ -125,18 +113,9 @@ const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
             {/* Scrollable Filtering Interactive Form Canvas Options List */}
             <div className="grow overflow-y-auto p-6">
-              <Filters /> {/* 👈 REUSED HERE */}
+              <Filters />
             </div>
 
-            {/* Bottom Form Action Buttons */}
-            <div className="p-4 border-t border-zinc-100 grid grid-cols-2 gap-3 bg-zinc-50/50 rounded-b-[32px]">
-              <button onClick={() => setIsMobileFilterOpen(false)} className="py-3 bg-white border border-zinc-200 text-xs font-bold uppercase tracking-wider text-zinc-500 rounded-xl shadow-sm cursor-pointer">
-                Clear All
-              </button>
-              <button onClick={() => setIsMobileFilterOpen(false)} className="py-3 bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-md cursor-pointer">
-                Apply Filters
-              </button>
-            </div>
 
           </div>
         </div>
