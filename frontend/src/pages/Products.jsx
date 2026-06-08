@@ -22,6 +22,7 @@ const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   if (max !== null) queryParams.max = max;
 
   const { data, isLoading, error } = useGetProductsQuery(queryParams);
+  
 
   if (isLoading) return <div className="text-center py-20 font-mono text-zinc-500">Loading products...</div>;
   if (error) return <div className="text-center py-20 text-red-500">Connection Error</div>;

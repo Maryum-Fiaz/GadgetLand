@@ -6,26 +6,23 @@ import { PRODUCT_CATEGORIES } from '../../constants/constants';
 
 
 function Filters() {
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
-  
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const [minPrice, setMinPrice] = useState(searchParams.get("min") || '');
+  const [maxPrice, setMaxPrice] = useState(searchParams.get("max") || '');
+
+  
   // Handle category & rating filter
-  const handleCheck = (checkbox) => {
-    const checkboxes = document.getElementsByName(checkbox.name)
+  const handleCheck = (e) => {
+    const {name, value, checked} = e.target;
+  
+    let newParams = new URLSearchParams(searchParams)
 
-    checkboxes.forEach(box => 
-      {if(box !== checkbox) box.checked = false}
-  )
-
-  let newParams = new URLSearchParams(searchParams)
-
-  if(checkbox.checked === false) {
-    newParams.delete(checkbox.name)
+  if(!checked) {
+    newParams.delete(name)
 
   } else {
-    newParams.set(checkbox.name, checkbox.value)
+    newParams.set(name, value)
   }
 
   setSearchParams(newParams)
@@ -98,8 +95,9 @@ function Filters() {
                 type="checkbox"
                 name="category"
                 value={category}
-                onClick={(e) => handleCheck(e.target)}
-                defaultChecked={searchParams.get("category") === category}  // TODO: -> check why not working?
+                // onClick={(e) => handleCheck(e.target)}
+                onChange={handleCheck}
+                checked={searchParams.get("category") === category}
                 className="w-4 h-4 rounded border-zinc-300 text-zinc-900 accent-zinc-900 focus:ring-0 cursor-pointer" 
               />
               <span>{category}</span>

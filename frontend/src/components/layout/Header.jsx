@@ -74,10 +74,10 @@ function Header() {
           </div>
 
           <ul className="flex flex-col gap-5 font-sans font-semibold text-zinc-700">
+            <li className="cursor-pointer hover:text-mauve-400 py-1" onClick={() => setIsMenuOpen(false)}>Home</li>
             <li className="cursor-pointer hover:text-mauve-400 py-1" onClick={() => setIsMenuOpen(false)}>Products</li>
             <li className="cursor-pointer hover:text-mauve-400 py-1" onClick={() => setIsMenuOpen(false)}>Top Selling</li>
-            <li className="cursor-pointer hover:text-mauve-400 py-1" onClick={() => setIsMenuOpen(false)}>Deals</li>
-            <li className="cursor-pointer hover:text-mauve-400 py-1" onClick={() => setIsMenuOpen(false)}>New Arrivals</li>
+            <li className="cursor-pointer hover:text-mauve-400 py-1" onClick={() => setIsMenuOpen(false)}>About</li>
           </ul>
           
           {/* Mobile Cart & Action Controls */}
