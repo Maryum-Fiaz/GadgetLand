@@ -5,6 +5,7 @@ import Container from './Container.jsx'
 import MetaData from './layout/MetaData.jsx';
 import Filters from './layout/Filters.jsx';
 import CustomPagination from './layout/CustomPagination.jsx';
+import ProductRating from './layout/ProductRating.jsx';
 
 export {
     Footer,
@@ -14,4 +15,5 @@ export {
     MetaData,
     Filters,
     CustomPagination,
+    ProductRating,
 }

@@ -37,7 +37,10 @@ function Header() {
 
         {/* 💻 Desktop Controls */}
         <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-4">
           <SearchBar />
+
+          </div>
           
           <button className="p-2 text-zinc-600 transition-all hover:scale-110 hover:text-mauve-400 cursor-pointer">
             <ShoppingCart size={20} strokeWidth={2.2} />
@@ -69,12 +72,7 @@ function Header() {
 
       </nav>
 
-      {/* 📱 Mobile Search Dropdown Panel (Appears right beneath the header row) */}
-      {isSearchOpen && (
-        <div className="block md:hidden absolute top-full left-0 w-full bg-white border-b border-zinc-200 p-3 shadow-md z-50">
-          <SearchBar />
-        </div>
-      )}
+      <SearchBar />
     </div>
   </Container>
 

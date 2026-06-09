@@ -8,6 +8,7 @@ export const products = [
         category: "Laptops",
         seller: "ASUS Official",
         ratings: 5,
+        numOfReviews: 63,
         stock: 12,
         images: [{ url: "https://picsum.photos/id/1/600/400" }]
     },
@@ -19,6 +20,7 @@ export const products = [
         seller: "Apple Store",
         stock: 25,
         ratings: 3,
+        numOfReviews: 32,
         images: [{ url: "https://picsum.photos/id/0/600/400" }]
     },
     {
@@ -29,6 +31,7 @@ export const products = [
         seller: "Sony Pakistan",
         ratings: 2,
         stock: 15,
+        numOfReviews: 3,
         images: [{ url: "https://picsum.photos/id/10/600/400" }]
     },
     {
@@ -39,6 +42,7 @@ export const products = [
         seller: "Razer Zone",
         ratings: 3,
         stock: 40,
+        numOfReviews: 12,
         images: [{ url: "https://picsum.photos/id/60/600/400" }]
     },
     {
@@ -47,8 +51,9 @@ export const products = [
         description: "Advanced sleep coaching, personalized heart rate zones, and sleek aluminum finish.",
         category: "Wearables",
         seller: "Samsung Direct",
-        ratings: 3,
+        ratings: 4,
         stock: 8,
+        numOfReviews: 132,
         images: [{ url: "https://picsum.photos/id/48/600/400" }]
     },
     {
@@ -115,6 +120,7 @@ export const products = [
         seller: "Secretlab Direct",
         ratings: 4,
         stock: 5,
+        numOfReviews: 22,
         images: [{ url: "https://picsum.photos/id/201/600/400" }]
     },
     {
@@ -134,6 +140,7 @@ export const products = [
         seller: "Apple Store",
         ratings: 5,
         stock: 10,
+        numOfReviews: 32,
         images: [{ url: "https://picsum.photos/id/367/600/400" }]
     },
     {

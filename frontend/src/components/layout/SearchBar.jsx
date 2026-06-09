@@ -1,73 +1,94 @@
-import { useState } from "react";
-import { Search } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Search, X } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router";
-
 
 function SearchBar() {
   const [searchParams] = useSearchParams();
   const [keyword, setKeyword] = useState(searchParams.get("keyword") || "");
+  const [isOpen, setIsOpen] = useState(false); // Controls the full overlay view
   const navigate = useNavigate();
-  
-  
+  const inputRef = useRef(null);
+
+  // Automatically focus the input box the exact millisecond the overlay pops up
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
+
   const submitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    const newParams = new URLSearchParams(searchParams);
 
-    const newParams = new URLSearchParams(searchParams)
-
-    console.log(newParams);
-
-    if(keyword.trim()){
-      if(newParams.has('page')){
-        newParams.set('page', 1)
+    if (keyword.trim()) {
+      if (newParams.has("page")) {
+        newParams.set("page", 1);
       }
-      newParams.set('keyword', keyword)
-
+      newParams.set("keyword", keyword);
     } else {
-      newParams.delete('keyword')
+      newParams.delete("keyword");
     }
 
-    navigate(`/products?${newParams}`)
-
-  }
-
+    navigate(`/products?${newParams}`);
+    setIsOpen(false); // Close modal instantly when routing triggers
+  };
 
   return (
-    <form onSubmit={submitHandler} className="relative flex items-center group h-10">
-      <input
-        type="text"
-        placeholder="Search premium tech..."
-        value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
-        className="w-10 group-hover:w-56 focus:w-56 h-full pl-10 pr-4 rounded-xl border border-transparent bg-transparent group-hover:bg-white focus:bg-white group-hover:border-zinc-200 focus:border-zinc-200 font-sans text-xs font-medium outline-none transition-all duration-300 ease-in-out cursor-pointer group-hover:cursor-text focus:cursor-text"
-      />
-      {/* TODO : get prop of mobileView = true & by default it should be 'false' & then conditionally write tailwind of inputbox to provide 'x' to close search bar */}
+    <>
+      {/* 🔍 TRIGGER ICON: Always visible on both mobile and desktop headers */}
+      <button
+        type="button"
+        onClick={() => setIsOpen(true)}
+        className="p-2 text-zinc-600 hover:text-mauve-500 transition-colors cursor-pointer"
+      >
+        <Search size={20} strokeWidth={2.2} />
+      </button>
 
-      <div className="absolute left-3 pointer-events-none text-zinc-600 group-hover:text-mauve-500 focus:text-mauve-500 transition-colors">
-        <Search size={18} strokeWidth={2.2} />
-      </div>
-    </form>
+      {/* 🖼️ FULL OVERLAY PANEL: Displays across all viewports when triggered */}
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-start justify-center bg-zinc-900/40 backdrop-blur-md pt-20 px-4 animate-in fade-in duration-200">
+          
+          {/* Main search form wrapper */}
+          <form 
+            onSubmit={submitHandler} 
+            className="relative flex items-center w-full max-w-2xl bg-white rounded-2xl border border-zinc-200 shadow-xl h-14 px-4 overflow-hidden"
+          >
+            <Search size={20} className="text-zinc-400 shrink-0" />
+            
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="Search premium tech products..."
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+              className="w-full h-full pl-3 pr-12 font-sans text-sm font-medium outline-none text-zinc-800 bg-transparent"
+            />
+
+            {/* 🎯 CLEAR / CLOSE BUTTON */}
+            <button
+              type="button"
+              onClick={() => {
+                if (keyword) {
+                  setKeyword(""); // First click clears typing text entry
+                } else {
+                  setIsOpen(false); // Second click shuts down modal window layer
+                }
+              }}
+              className="absolute right-4 p-1 text-zinc-400 hover:text-zinc-600 transition-colors cursor-pointer"
+            >
+              <X size={20} strokeWidth={2.2} />
+            </button>
+          </form>
+
+          {/* BACKGROUND CLICK AWAY MASK LAYER */}
+          <div 
+            className="absolute inset-0 -z-10 cursor-default" 
+            onClick={() => setIsOpen(false)} 
+          />
+        </div>
+      )}
+    </>
   );
 }
 
 export default SearchBar;
-
-// return (
-//   <form ref={searchRef} onSubmit={handleSearchSubmit} className="relative flex items-center h-10">
-//     <input
-//       type="text"
-//       placeholder="Search premium tech..."
-//       value={keyword}
-//       onChange={(e) => setKeyword(e.target.value)}
-//       // 🎯 Show input if open OR if there's text inside it from the URL
-//       className={`h-full pl-10 pr-4 rounded-xl border font-sans text-xs font-medium outline-none transition-all duration-300 ease-in-out bg-white border-zinc-200
-//         ${isOpen || keyword ? "w-56 opacity-100" : "w-0 opacity-0 pointer-events-none border-transparent"}`}
-//     />
-
-//     <button
-//       type="button"
-//       onClick={handleIconClick}
-//       className="absolute left-3 text-zinc-600 hover:text-mauve-500 transition-colors cursor-pointer z-10"
-//     >
-//       <Search size={18} strokeWidth={2.2} />
-//     </button>
-//   </form>

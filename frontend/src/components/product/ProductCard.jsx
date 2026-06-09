@@ -1,5 +1,6 @@
-import { ShoppingCart, Star } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import { useNavigate } from 'react-router';
+import ProductRating from '../layout/ProductRating';
 
 function ProductCard({ product }) {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ function ProductCard({ product }) {
       {/* 1. Image Frame */}
       <div className="w-full h-48 rounded-2xl bg-zinc-50 flex items-center justify-center overflow-hidden mb-4 shrink-0">
         <img 
-          src={product?.image} 
+          src={product?.images[0]?.url} 
           alt={product.name} 
           className="max-h-36 object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
         />
@@ -26,12 +27,7 @@ function ProductCard({ product }) {
         </h3>
         
         {/* Star Badges */}
-        <div className="flex items-center gap-1 text-[11px] font-semibold text-zinc-400 mt-auto pb-2">
-          <div className="flex items-center text-amber-400">
-            <Star size={12} fill="currentColor" stroke="none" /><Star size={12} fill="currentColor" stroke="none" /><Star size={12} fill="currentColor" stroke="none" />
-          </div>
-          <span className="text-zinc-600 ml-1">{product.rating || "0"}</span>
-        </div>
+        <ProductRating rating={product.ratings} reviewsCount={product.numOfReviews} />
       </div>
 
       {/* 3. Footer Action Frame */}
