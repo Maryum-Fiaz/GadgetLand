@@ -6,6 +6,7 @@ import MetaData from './layout/MetaData.jsx';
 import Filters from './layout/Filters.jsx';
 import CustomPagination from './layout/CustomPagination.jsx';
 import ProductRating from './layout/ProductRating.jsx';
+import Loader from './layout/Loader.jsx';
 
 export {
     Footer,
@@ -16,4 +17,5 @@ export {
     Filters,
     CustomPagination,
     ProductRating,
+    Loader,
 }

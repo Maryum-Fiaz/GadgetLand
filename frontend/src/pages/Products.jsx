@@ -1,6 +1,6 @@
 import { SlidersHorizontal, X } from "lucide-react";
 import Container from "../components/Container";
-import { CustomPagination, Filters, ProductCard } from "../components/index.js";
+import { CustomPagination, Filters, Loader, ProductCard } from "../components/index.js";
 import { useState } from "react";
 import { useGetProductsQuery } from "../redux/api/productApi";
 import { useSearchParams } from "react-router";
@@ -25,12 +25,7 @@ function Products() {
 
   const { data, isLoading, error } = useGetProductsQuery(queryParams);
 
-  if (isLoading)
-    return (
-      <div className="text-center py-20 font-mono text-zinc-500">
-        Loading products...
-      </div>
-    );
+  if (isLoading) return <Loader />
   if (error)
     return (
       <div className="text-center py-20 text-red-500">Connection Error</div>
