@@ -1,4 +1,3 @@
-import { ShoppingCart } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import ProductRating from '../layout/ProductRating';
 
@@ -32,10 +31,10 @@ function ProductCard({ product }) {
 
       {/* 3. Footer Action Frame */}
       <div className="flex items-center justify-between mt-auto pt-4 border-t border-zinc-100">
-        <span className="font-black text-zinc-900 text-lg tracking-tight">${product.price}</span>
-        <button className="p-2.5 bg-zinc-100 text-zinc-600 hover:bg-mauve-50 hover:text-mauve-600 rounded-xl transition-all">
-          <ShoppingCart size={16} strokeWidth={2.5} />
-        </button>
+        <span className="font-black text-zinc-900 text-lg tracking-tight">Rs.</span>
+        <span className="p-2.5 bg-zinc-100 text-zinc-600 hover:bg-mauve-50 hover:text-mauve-600 rounded-xl transition-all">
+          {product.price}/-
+        </span>
       </div>
     </div>
   );

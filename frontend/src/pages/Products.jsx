@@ -1,9 +1,10 @@
 import { SlidersHorizontal, X } from "lucide-react";
 import Container from "../components/Container";
 import { CustomPagination, Filters, Loader, ProductCard } from "../components/index.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetProductsQuery } from "../redux/api/productApi";
 import { useSearchParams } from "react-router";
+import toast from "react-hot-toast";
 
 function Products() {
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
@@ -23,13 +24,19 @@ function Products() {
   if (category !== null) queryParams.category = category;
   if (ratings !== null) queryParams.ratings = ratings;
 
-  const { data, isLoading, error } = useGetProductsQuery(queryParams);
+  const { data, isLoading, error, isError } = useGetProductsQuery(queryParams);
+  
+ useEffect(() => {
+  if (isError) {
+    
+    const errorMessage = error?.data?.message || "Failed to fetch products. Connection Error.";
+    toast.error(errorMessage);
+  }
+}, [isError, error]);
+
 
   if (isLoading) return <Loader />
-  if (error)
-    return (
-      <div className="text-center py-20 text-red-500">Connection Error</div>
-    );
+  
 
   const productList = data?.products || [];
 
