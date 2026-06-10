@@ -80,7 +80,7 @@ function Filters() {
         </h3>
         <form onSubmit={handlePriceSubmit} className="flex gap-2 items-center">
           <div className="flex items-center bg-zinc-100/80 border border-zinc-200/60 rounded-xl px-3 py-2 w-full shadow-inner">
-            <span className="text-zinc-400 mr-1 text-xs">$</span>
+            <span className="text-zinc-400 mr-1 text-xs"></span>
             <input
               type="number"
               placeholder="Min"
@@ -91,7 +91,7 @@ function Filters() {
           </div>
           <span className="text-zinc-300 text-xs">—</span>
           <div className="flex items-center bg-zinc-100/80 border border-zinc-200/60 rounded-xl px-3 py-2 w-full shadow-inner">
-            <span className="text-zinc-400 mr-1 text-xs">$</span>
+            <span className="text-zinc-400 mr-1 text-xs"></span>
             <input
               type="number"
               placeholder="Max"
