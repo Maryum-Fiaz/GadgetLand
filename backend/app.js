@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 const app = express()
+import cookieParser from 'cookie-parser'
 import { connectDatabase } from './config/dbConnect.js'
 import errorMiddleware from './middleware/error.js'
 
@@ -18,6 +19,8 @@ connectDatabase()
 
 app.set('query parser', 'extended');
 app.use(express.json());
+
+app.use(cookieParser());
 
 
 // Import all Routes

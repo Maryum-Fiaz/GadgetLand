@@ -1,10 +1,11 @@
 import express from 'express';
 import { deleteProduct, getProductDetails, getProducts, newProduct, updateProduct } from '../controllers/productControllers.js';
+import { isAuthenticateUser } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Maps the endpoint to the logic
-router.route('/products').get(getProducts);
+// endpoints
+router.route('/products').get(isAuthenticateUser, getProducts);
 router.route('/admin/products').post(newProduct);
 router.route('/products/:id').get(getProductDetails);
 router.route('/admin/products/:id').put(updateProduct);
