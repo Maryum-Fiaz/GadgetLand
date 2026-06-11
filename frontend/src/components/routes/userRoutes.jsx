@@ -1,6 +1,7 @@
 import Home from "../../pages/Home";
 import Products from "../../pages/Products";
 import Login from "../auth/Login";
+import Register from "../auth/Register";
 
 
 
@@ -17,5 +18,9 @@ export const userRoutes = [
     {
         path: '/login',
         element: <Login />
+    },
+    {
+        path: '/register',
+        element: <Register />
     }
 ]

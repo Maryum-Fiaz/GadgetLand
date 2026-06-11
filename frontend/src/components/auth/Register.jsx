@@ -1,53 +1,70 @@
+
+import MetaData from '../layout/MetaData'
 import { useEffect, useState } from 'react';
-import MetaData from '../layout/MetaData';
-import { useLoginMutation } from '../../redux/api/authApi';
+import { useRegisterMutation } from '../../redux/api/authApi';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router';
 
-const Login = () => {
-  
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+function Register() {
 
-  const [login, {isLoading ,error, data}] = useLoginMutation();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    // if (isAuthenticated) {
-    //   navigate("/");
-    // }
-    if (error) {
-      toast.error(error?.data?.message);
+    const [register, {isLoading, error, data}] = useRegisterMutation();
+
+    useEffect(() => {
+        if(error){
+            toast.error(error?.data?.message);
+        }
+    }, [error])
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const registerData = {
+            name,
+            email,
+            password
+        }
+
+        register(registerData)
+
     }
-  }, [error]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    const loginData = {
-        email,
-        password,
-    }
-
-    login(loginData)
-  };
-
   return (
     <>
-  <MetaData title={"Login"} />
+  <MetaData title={"Register"} />
   
   {/* Centered responsive container wrapper */}
   <div className="flex min-h-[75vh] items-center justify-center px-4 py-12 font-sans selection:bg-mauve-100">
     <div className="w-full max-w-110 px-2">
       
-      {/* Main Login Card View */}
+      {/* Main Premium Card View */}
       <form 
         onSubmit={handleSubmit} 
         className="bg-zinc-50 border border-zinc-200/80 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6"
       >
-        
+        {/* Card Header Title */}
         <div className="space-y-1">
-          <h2 className="text-2xl font-bold tracking-tight text-zinc-800">Login</h2>
-          <p className="text-xs font-medium text-zinc-400">Access your premium gadget space</p>
+          <h2 className="text-2xl font-bold tracking-tight text-zinc-800">Create Account</h2>
+          <p className="text-xs font-medium text-zinc-400">Join our premium gadget platform today</p>
+        </div>
+
+        {/* Name Field Block */}
+        <div className="space-y-1.5">
+          <label htmlFor="name_field" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
+            Full Name
+          </label>
+          <input
+            type="text"
+            id="name_field"
+            name="name"
+            placeholder="John Doe"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full h-11 px-4 text-sm font-medium rounded-xl bg-white border border-zinc-200 text-zinc-800 placeholder-zinc-300 outline-none transition-all duration-200 focus:border-mauve-400 focus:ring-2 focus:ring-mauve-100"
+            required
+          />
         </div>
 
         {/* Email Field Block */}
@@ -69,17 +86,9 @@ const Login = () => {
 
         {/* Password Field Block */}
         <div className="space-y-1.5">
-          <div className="flex items-center justify-between">
-            <label htmlFor="password_field" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
-              Password
-            </label>
-            <a 
-              href="/password/forgot" 
-              className="text-xs font-semibold text-zinc-400 hover:text-mauve-500 transition-colors"
-            >
-              Forgot Password?
-            </a>
-          </div>
+          <label htmlFor="password_field" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
+            Password
+          </label>
           <input
             type="password"
             id="password_field"
@@ -92,25 +101,25 @@ const Login = () => {
           />
         </div>
 
-        {/* Action Button */}
+        {/* Premium Action Button */}
         <button
-          id="login_button"
+          id="register_button"
           type="submit"
           disabled={isLoading}
           className="w-full h-11 bg-mauve-500 hover:bg-mauve-600 active:bg-mauve-700 text-white font-sans text-xs uppercase font-bold tracking-widest rounded-xl transition-all shadow-sm disabled:bg-zinc-300 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center"
         >
-          {isLoading ? "Authenticating..." : "LOGIN"}
+          {isLoading ? "Creating Account..." : "REGISTER"}
         </button>
 
         {/* Form Footer Redirect Block */}
         <div className="pt-2 border-t border-zinc-100 text-center">
           <p className="text-xs font-medium text-zinc-400">
-            Don't have an account?{" "}
-            <Link 
-              to="/register" 
+            Already have an account?{" "}
+            <Link
+              to="/login" 
               className="font-bold text-zinc-600 hover:text-mauve-500 transition-colors ml-1"
             >
-              Sign up
+              Log in
             </Link>
           </p>
         </div>
@@ -119,7 +128,7 @@ const Login = () => {
     </div>
   </div>
 </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Register
