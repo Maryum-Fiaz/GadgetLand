@@ -46,7 +46,7 @@ function SearchBar() {
 
       {/* 🖼️ FULL OVERLAY PANEL: Displays across all viewports when triggered */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center bg-zinc-900/40 backdrop-blur-md pt-20 px-4 animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 flex items-start justify-center backdrop-blur-md pt-15 px-4 animate-in fade-in duration-200">
           
           {/* Main search form wrapper */}
           <form 

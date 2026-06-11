@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router"
 import RootLayout from "./RootLayout"
-import { userRoutes } from "./components/routes/UserRoutes"
+import { userRoutes } from "./components/routes/userRoutes"
 
 
 

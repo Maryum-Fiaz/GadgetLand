@@ -7,6 +7,7 @@ import Filters from './layout/Filters.jsx';
 import CustomPagination from './layout/CustomPagination.jsx';
 import ProductRating from './layout/ProductRating.jsx';
 import Loader from './layout/Loader.jsx';
+import Login from './auth/Login.jsx';
 
 export {
     Footer,
@@ -18,4 +19,5 @@ export {
     CustomPagination,
     ProductRating,
     Loader,
+    Login,
 }
