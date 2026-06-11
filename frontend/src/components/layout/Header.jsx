@@ -4,6 +4,7 @@ import Container from '../Container';
 import logo from '../../assets/logo.png';
 import { Link, useNavigate } from 'react-router';
 import SearchBar from './SearchBar';
+import { useGetMeQuery } from '../../redux/api/userApi';
 
 
 // ─── Nav links data ───────────────────────────────────────────────────────────
@@ -21,11 +22,17 @@ function Header() {
 
   const navigate = useNavigate()
 
+  const {data} = useGetMeQuery();
+  console.log(data);
+  
+
   // ─── Handlers — write once, used everywhere ────────────────────────────────
   const handleCart  = () => { /* cart logic here */ };
   const handleLogin = () => { 
     navigate('/login')
   };
+
+  
 
 
   return (
