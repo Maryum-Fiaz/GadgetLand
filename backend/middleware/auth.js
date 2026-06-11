@@ -20,7 +20,7 @@ export const isAuthenticateUser = catchAsyncErrors(async (req, res, next) => {
     
 });
 
-// Authorize User Roles
+// Authorize User Roles  (closure function)
 export const authorizeRoles = (...roles) => {
     return (req, res, next) => {
         if(!roles.includes(req.user.role)) {
