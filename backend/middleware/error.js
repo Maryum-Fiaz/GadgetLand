@@ -19,6 +19,18 @@ export default (err, req, res, next) => {
     error = new ErrorHandler(message, 400);
   }
 
+  // Handle Mongoose Duplicate Key Error
+  if (err.code === 11000) {
+    const message = `Duplicate ${Object.keys(err.keyValue)} entered.`;
+    error = new ErrorHandler(message, 400);
+  }
+
+  // Handle wrong JWT Error
+  if (err.name === "JsonWebTokenError") {
+    const message = `JSON Web Token is invalid. Try Again!!!`;
+    error = new ErrorHandler(message, 400);
+  }
+
 
 
     // Development error to display
