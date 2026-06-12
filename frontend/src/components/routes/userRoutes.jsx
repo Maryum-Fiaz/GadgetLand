@@ -2,6 +2,8 @@ import Register from "../../pages/auth/Register";
 import Home from "../../pages/Home";
 import Products from "../../pages/Products";
 import Login from "../../pages/auth/Login";
+import UserLayout from "../../pages/user/UserLayout";
+import Profile from "../../pages/user/Profile";
 
 
 
@@ -23,5 +25,19 @@ export const userRoutes = [
     {
         path: '/register',
         element: <Register />
+    },
+    {
+        path: '/me',
+        element: <UserLayout />,
+        children: [
+            {
+                path: 'profile',
+                element: <Profile />
+            },
+            {
+                path: 'update/profile',
+                element: <div>Hey update profile</div>
+            }
+        ]
     }
 ]
