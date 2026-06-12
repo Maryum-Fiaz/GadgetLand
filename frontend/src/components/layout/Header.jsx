@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { ShoppingCart, LogIn, Menu, X } from 'lucide-react';
+import { ShoppingCart, LogIn, Menu, X, User } from 'lucide-react';
 import Container from '../Container';
 import logo from '../../assets/logo.png';
 import { Link, useNavigate } from 'react-router';
 import SearchBar from './SearchBar';
 import { useGetMeQuery } from '../../redux/api/userApi';
+import { useSelector } from 'react-redux';
 
 
 // ─── Nav links data ───────────────────────────────────────────────────────────
@@ -19,11 +20,15 @@ const NAV_LINKS = [
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate()
 
-  const {data} = useGetMeQuery();
-  console.log(data);
+  const { isLoading } = useGetMeQuery();
+  console.log('loading -> ', isLoading);
+  
+
+  const { user } = useSelector(state => state.auth);
   
 
   // ─── Handlers — write once, used everywhere ────────────────────────────────
@@ -77,13 +82,72 @@ function Header() {
             </button>
 
             {/* Login — one button, one handler, visible everywhere */}
+            {user ? (
+              <div className="relative font-sans">
+
             <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="flex items-center relative gap-2 bg-mauve-500 hover:bg-mauve-600 text-white font-sans text-xs uppercase font-bold tracking-widest px-4 md:px-5 py-2.5 rounded-xl transition-all shadow-sm cursor-pointer"
+            >
+              <User size={14} strokeWidth={2.5} />
+              <span className="hidden sm:inline">{user?.name}</span>
+            </button>
+            {isOpen && (
+      <div className="absolute right-0 mt-2 w-48 bg-zinc-50 border border-zinc-200/80 rounded-xl p-1.5 shadow-md z-50 animate-in fade-in slide-in-from-top-1 duration-100">
+        
+        {user?.role === "admin" && (
+          <Link
+            to="/admin/dashboard"
+            onClick={() => setIsOpen(false)}
+            className="block px-3 py-2.5 text-xs font-semibold text-zinc-600 hover:text-mauve-500 hover:bg-zinc-100/50 rounded-lg transition-colors"
+          >
+            Dashboard
+          </Link>
+        )}
+
+        <Link
+          to="/me/orders"
+          onClick={() => setIsOpen(false)}
+          className="block px-3 py-2.5 text-xs font-semibold text-zinc-600 hover:text-mauve-500 hover:bg-zinc-100/50 rounded-lg transition-colors"
+        >
+          My Orders
+        </Link>
+
+        <Link
+          to="/me/profile"
+          onClick={() => setIsOpen(false)}
+          className="block px-3 py-2.5 text-xs font-semibold text-zinc-600 hover:text-mauve-500 hover:bg-zinc-100/50 rounded-lg transition-colors"
+        >
+          Profile Settings
+        </Link>
+
+        {/* Premium Divider Separator */}
+        <div className="my-1 border-t border-zinc-200/60" />
+
+        {/* Logout Action Trigger */}
+        <Link
+          to="/"
+          onClick={() => {
+            setIsOpen(false);
+            
+          }}
+          className="block px-3 py-2.5 text-xs font-bold text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+        >
+          Log Out
+        </Link>
+      </div>
+    )}
+  </div>
+              
+            ):(
+              <button
               onClick={handleLogin}
               className="flex items-center gap-2 bg-mauve-500 hover:bg-mauve-600 text-white font-sans text-xs uppercase font-bold tracking-widest px-4 md:px-5 py-2.5 rounded-xl transition-all shadow-sm cursor-pointer"
             >
               <LogIn size={14} strokeWidth={2.5} />
               <span className="hidden sm:inline">Login</span>
             </button>
+            )}
 
             {/* Hamburger — only visible on mobile, toggles nav links dropdown */}
             <button
