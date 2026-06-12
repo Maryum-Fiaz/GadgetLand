@@ -1,7 +1,8 @@
+import Register from "../../pages/auth/Register";
 import Home from "../../pages/Home";
 import Products from "../../pages/Products";
-import Login from "../auth/Login";
-import Register from "../auth/Register";
+import Login from "../../pages/auth/Login";
+
 
 
 
