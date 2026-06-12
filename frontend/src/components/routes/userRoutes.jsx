@@ -5,6 +5,7 @@ import Login from "../../pages/auth/Login";
 import UserLayout from "../../pages/user/UserLayout";
 import Profile from "../../pages/user/Profile";
 import UpdateProfile from "../../pages/user/UpdateProfile";
+import ProtectedRoute from "../ProtectedRoute";
 
 
 
@@ -29,7 +30,12 @@ export const userRoutes = [
     },
     {
         path: '/me',
-        element: <UserLayout />,
+        element: (
+            <ProtectedRoute>
+                <UserLayout />
+
+            </ProtectedRoute>
+        ),
         children: [
             {
                 path: 'profile',

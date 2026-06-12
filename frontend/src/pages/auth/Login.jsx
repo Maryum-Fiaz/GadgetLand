@@ -34,6 +34,7 @@ const Login = () => {
     }
 
     login(loginData)
+    navigate('/')
   };
 
   return (
