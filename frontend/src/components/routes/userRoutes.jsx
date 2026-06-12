@@ -4,6 +4,7 @@ import Products from "../../pages/Products";
 import Login from "../../pages/auth/Login";
 import UserLayout from "../../pages/user/UserLayout";
 import Profile from "../../pages/user/Profile";
+import UpdateProfile from "../../pages/user/UpdateProfile";
 
 
 
@@ -35,8 +36,8 @@ export const userRoutes = [
                 element: <Profile />
             },
             {
-                path: 'update/profile',
-                element: <div>Hey update profile</div>
+                path: 'update',
+                element: <UpdateProfile />
             }
         ]
     }

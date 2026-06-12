@@ -170,7 +170,7 @@ export const updateProfile = catchAsyncErrors(async (req, res, next) => {
   };
 
   const user = await User.findByIdAndUpdate(req.user._id, newUserData, {
-    new: true,
+    returnDocument: 'after',
   });
 
   res.status(200).json({
