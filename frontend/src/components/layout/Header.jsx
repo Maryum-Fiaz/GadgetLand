@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router';
 import SearchBar from './SearchBar';
 import { useGetMeQuery } from '../../redux/api/userApi';
 import { useSelector } from 'react-redux';
+import { useLazyLogoutQuery } from '../../redux/api/authApi';
 
 
 // ─── Nav links data ───────────────────────────────────────────────────────────
@@ -25,7 +26,7 @@ function Header() {
   const navigate = useNavigate()
 
   const { isLoading } = useGetMeQuery();
-  console.log('loading -> ', isLoading);
+  const [logout] = useLazyLogoutQuery();
   
 
   const { user } = useSelector(state => state.auth);
@@ -36,6 +37,12 @@ function Header() {
   const handleLogin = () => { 
     navigate('/login')
   };
+
+  const handleLogout = () => {
+    logout();
+    setIsOpen(false)
+    navigate(0) //refresh the page
+  }
 
   
 
@@ -129,7 +136,7 @@ function Header() {
           to="/"
           onClick={() => {
             setIsOpen(false);
-            
+            handleLogout();
           }}
           className="block px-3 py-2.5 text-xs font-bold text-red-500 hover:bg-red-50 rounded-lg transition-colors"
         >
@@ -139,7 +146,8 @@ function Header() {
     )}
   </div>
               
-            ):(
+            ):( !isLoading && (
+
               <button
               onClick={handleLogin}
               className="flex items-center gap-2 bg-mauve-500 hover:bg-mauve-600 text-white font-sans text-xs uppercase font-bold tracking-widest px-4 md:px-5 py-2.5 rounded-xl transition-all shadow-sm cursor-pointer"
@@ -147,6 +155,7 @@ function Header() {
               <LogIn size={14} strokeWidth={2.5} />
               <span className="hidden sm:inline">Login</span>
             </button>
+            )
             )}
 
             {/* Hamburger — only visible on mobile, toggles nav links dropdown */}

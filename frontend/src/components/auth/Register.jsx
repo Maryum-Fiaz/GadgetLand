@@ -3,7 +3,8 @@ import MetaData from '../layout/MetaData'
 import { useEffect, useState } from 'react';
 import { useRegisterMutation } from '../../redux/api/authApi';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 
 function Register() {
 
@@ -11,13 +12,21 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate()
+
     const [register, {isLoading, error, data}] = useRegisterMutation();
 
-    useEffect(() => {
-        if(error){
-            toast.error(error?.data?.message);
-        }
-    }, [error])
+    const { isAuthenticated } = useSelector(state => state.auth)
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+    if (error) {
+      toast.error(error?.data?.message);
+    }
+  }, [error, isAuthenticated, navigate]);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
