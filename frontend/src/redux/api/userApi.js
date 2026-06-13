@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setIsAuthenticated, setLoading, setUser } from "../features/userSlice";
-// import { userApi } from "./userApi";
 
 export const userApi = createApi({
   reducerPath: "userApi",
@@ -8,7 +7,7 @@ export const userApi = createApi({
   tagTypes: ["User"],
   endpoints: (builder) => ({
     getMe: builder.query({
-      query: () => `/me`, 
+      query: () => `/me`,
       transformResponse: (result) => result.user,
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
@@ -29,9 +28,9 @@ export const userApi = createApi({
           url: "/me/update",
           method: "PUT",
           body,
-        }
+        };
       },
-      invalidatesTags: ['User'],
+      invalidatesTags: ["User"],
     }),
     updatePassword: builder.mutation({
       query(body) {
@@ -39,10 +38,34 @@ export const userApi = createApi({
           url: "/password/update",
           method: "PUT",
           body,
-        }
-      }
-    })
-  })
-})
+        };
+      },
+    }),
+    forgotPassword: builder.mutation({
+      query(body) {
+        return {
+          url: "/password/forgot",
+          method: "POST",
+          body,
+        };
+      },
+    }),
+    ResetPassword: builder.mutation({
+      query({ token, body }) {
+        return {
+          url: `/password/reset/${token}`,
+          method: "PUT",
+          body,
+        };
+      },
+    }),
+  }),
+});
 
-export const { useGetMeQuery, useUpdateProfileMutation, useUpdatePasswordMutation } = userApi
+export const {
+  useGetMeQuery,
+  useUpdateProfileMutation,
+  useUpdatePasswordMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
+} = userApi;

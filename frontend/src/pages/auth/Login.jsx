@@ -11,15 +11,13 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const [login, {isLoading ,error, data}] = useLoginMutation();
+  const [login, {isLoading ,error}] = useLoginMutation();
 
 
   const { isAuthenticated } = useSelector(state => state.auth)
-  const { user } = useSelector(state => state.auth)
 
   useEffect(() => {
     if (isAuthenticated) {
-      console.log('you are here: ', user);
       
       navigate("/");
     }
@@ -81,12 +79,12 @@ const Login = () => {
             <label htmlFor="password_field" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
               Password
             </label>
-            <a 
-              href="/password/forgot" 
+            <Link
+              to="/password/forgot" 
               className="text-xs font-semibold text-zinc-400 hover:text-mauve-500 transition-colors"
             >
               Forgot Password?
-            </a>
+            </Link>
           </div>
           <input
             type="password"
