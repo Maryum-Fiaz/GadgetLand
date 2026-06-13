@@ -26,19 +26,21 @@ function Header() {
   const navigate = useNavigate()
 
   const { isLoading } = useGetMeQuery();
-  const [logout] = useLazyLogoutQuery();
+  const [logout, {isSuccess}] = useLazyLogoutQuery();
   
 
   const { user } = useSelector(state => state.auth);
   
 
-  // ─── Handlers — write once, used everywhere ────────────────────────────────
+  // ─── Handlers 
   const handleCart  = () => { /* cart logic here */ };
   const handleLogin = () => { 
     navigate('/login')
   };
 
   const handleLogout = () => {
+    // console.log("logout--- test", user);
+    
     logout();
     setIsOpen(false)
     navigate(0) //refresh the page

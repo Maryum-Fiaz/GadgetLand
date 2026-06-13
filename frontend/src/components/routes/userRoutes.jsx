@@ -6,6 +6,7 @@ import UserLayout from "../../pages/user/UserLayout";
 import Profile from "../../pages/user/Profile";
 import UpdateProfile from "../../pages/user/UpdateProfile";
 import ProtectedRoute from "../ProtectedRoute";
+import UpdatePassword from "../../pages/user/UpdatePassword";
 
 
 
@@ -44,6 +45,10 @@ export const userRoutes = [
             {
                 path: 'update',
                 element: <UpdateProfile />
+            },
+            {
+                path: 'password/update',
+                element: <UpdatePassword />
             }
         ]
     }

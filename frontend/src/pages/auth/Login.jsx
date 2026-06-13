@@ -15,9 +15,12 @@ const Login = () => {
 
 
   const { isAuthenticated } = useSelector(state => state.auth)
+  const { user } = useSelector(state => state.auth)
 
   useEffect(() => {
     if (isAuthenticated) {
+      console.log('you are here: ', user);
+      
       navigate("/");
     }
     if (error) {
@@ -34,7 +37,6 @@ const Login = () => {
     }
 
     login(loginData)
-    navigate('/')
   };
 
   return (
