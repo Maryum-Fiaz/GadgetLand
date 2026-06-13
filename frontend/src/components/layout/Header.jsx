@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router';
 import SearchBar from './SearchBar';
 import { useGetMeQuery } from '../../redux/api/userApi';
 import { useSelector } from 'react-redux';
-import { useLazyLogoutQuery } from '../../redux/api/authApi';
+import {  useLogoutMutation } from '../../redux/api/authApi';
 
 
 // ─── Nav links data ───────────────────────────────────────────────────────────
@@ -26,7 +26,7 @@ function Header() {
   const navigate = useNavigate()
 
   const { isLoading } = useGetMeQuery();
-  const [logout, {isSuccess}] = useLazyLogoutQuery();
+  const [logout] = useLogoutMutation();
   
 
   const { user } = useSelector(state => state.auth);
@@ -38,13 +38,20 @@ function Header() {
     navigate('/login')
   };
 
-  const handleLogout = () => {
-    // console.log("logout--- test", user);
+ const handleLogout = async () => {
+  try {
+    setIsOpen(false);
     
-    logout();
-    setIsOpen(false)
-    navigate(0) //refresh the page
+    await logout().unwrap(); 
+
+
+    navigate("/"); 
+    
+
+  } catch (error) {
+    console.error("Logout failed:", error);
   }
+};
 
   
 
@@ -134,16 +141,15 @@ function Header() {
         <div className="my-1 border-t border-zinc-200/60" />
 
         {/* Logout Action Trigger */}
-        <Link
-          to="/"
+        <div
           onClick={() => {
             setIsOpen(false);
             handleLogout();
           }}
-          className="block px-3 py-2.5 text-xs font-bold text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+          className="block px-3 py-2.5 text-xs font-bold text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
         >
           Log Out
-        </Link>
+        </div>
       </div>
     )}
   </div>
