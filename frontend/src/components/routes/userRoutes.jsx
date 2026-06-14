@@ -9,6 +9,7 @@ import ProtectedRoute from "../ProtectedRoute";
 import UpdatePassword from "../../pages/user/UpdatePassword";
 import ForgotPassword from "../../pages/auth/ForgotPassword";
 import ResetPassword from "../../pages/auth/ResetPassword";
+import ProductDetail from "../product/ProductDetail";
 
 export const userRoutes = [
   {
@@ -18,6 +19,10 @@ export const userRoutes = [
   {
     path: "/products",
     element: <Products />,
+  },
+  {
+    path: "/products/:id",
+    element: <ProductDetail />,
   },
   {
     path: "/login",

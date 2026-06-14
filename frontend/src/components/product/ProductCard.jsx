@@ -7,7 +7,7 @@ function ProductCard({ product }) {
   return (
     <div 
       // TODO -> go to product details page
-      onClick={() => navigate(`/product/${product._id}`)}
+      onClick={() => navigate(`/products/${product._id}`)}
       className="group relative flex flex-col bg-white border border-zinc-200/60 rounded-3xl p-5 transition-all duration-300 hover:shadow-xl hover:shadow-zinc-200/50 hover:-translate-y-1 min-h-105 cursor-pointer"
     >
       {/* 1. Image Frame */}
