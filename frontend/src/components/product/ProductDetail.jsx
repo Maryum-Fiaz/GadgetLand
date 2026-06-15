@@ -8,12 +8,14 @@ import defaultProduct from '../../assets/defaultProduct.png'
 
 function ProductDetail() {
     const params = useParams()
+    const [activeImg, setActiveImg ] = useState(defaultProduct)
+    const [quantity, setQuantity] = useState(1)
     
+    // fetching product data
     const {data, error, isError, isLoading } = useGetProductDetailsQuery(params?.id)
     const { isAuthenticated } = useSelector(state => state.auth)
     
     const product = data?.product;
-    const [activeImg, setActiveImg ] = useState(defaultProduct)
 
     useEffect(() => {
         setActiveImg(product?.images[0] ? product?.images[0].url : defaultProduct)
@@ -28,22 +30,33 @@ function ProductDetail() {
    
     if (isLoading) return <Loader />
 
-    console.log('data is -> ', data, "  --  product is -> ", product)
+    // Quantity increase/decrease
+    const increaseQty = () => {
+        if(quantity >= product.stock) return;
+        setQuantity(prev => prev+1)
+    }
+    
+    const decreaseQty = () => {
+        if(quantity <= 1 ) return;
+        setQuantity(prev => prev-1)
+        
+    }
+
 
     return (
         <>
             <MetaData title={product?.name} />
 
-            {/* Main Responsive Canvas Workspace */}
+            {/* Main Workspace */}
             <div className="w-full bg-zinc-50 min-h-screen font-sans text-zinc-900 antialiased selection:bg-mauve-100 selection:text-mauve-900 px-4 sm:px-6 py-8 md:py-16">
                 <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
                     
                     {/* ── LEFT FRAME: Media Viewer Display Gallery ── */}
                     <div className="lg:col-span-6 space-y-6">
                         {/* Hero Image Container - Crisp white card floating softly */}
-                        <div className="w-full bg-white border border-zinc-200/80 rounded-[2rem] p-6 sm:p-12 flex items-center justify-center min-h-[340px] sm:min-h-[460px] shadow-xs">
+                        <div className="w-full bg-white border border-zinc-200/80 rounded-4xl p-6 sm:p-12 flex items-center justify-center min-h-85 sm:min-h-115 shadow-xs">
                             <img
-                                className="max-h-[320px] sm:max-h-[380px] w-auto object-contain"
+                                className="max-h-80 sm:max-h-95 w-auto object-contain"
                                 src={activeImg}
                                 alt={product?.name}
                             />
@@ -127,6 +140,7 @@ function ProductDetail() {
                             <div className="h-12 flex items-center justify-between sm:justify-start bg-white border border-zinc-200 rounded-xl px-2 shadow-2xs">
                                 <button
                                     type="button"
+                                    onClick={decreaseQty}
                                     className="w-10 h-10 flex items-center justify-center text-zinc-400 hover:text-zinc-900 font-bold rounded-lg hover:bg-zinc-50 transition-all cursor-pointer active:scale-90"
                                 >
                                     —
@@ -134,11 +148,12 @@ function ProductDetail() {
                                 <input
                                     type="number"
                                     className="w-12 bg-transparent text-center font-sans text-sm font-bold text-zinc-800 outline-none select-none"
-                                    value="1"
+                                    value={quantity}
                                     readOnly
                                 />
                                 <button
                                     type="button"
+                                    onClick={increaseQty}
                                     className="w-10 h-10 flex items-center justify-center text-zinc-400 hover:text-zinc-900 font-bold rounded-lg hover:bg-zinc-50 transition-all cursor-pointer active:scale-90"
                                 >
                                     ＋
