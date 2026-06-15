@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Loader, MetaData, ProductRating } from '../index.js'
 import { useGetProductDetailsQuery } from '../../redux/api/productApi.js';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import toast from 'react-hot-toast';
 import defaultProduct from '../../assets/defaultProduct.png'
+import { setCartItem } from '../../redux/features/cartSlice.js';
 
 function ProductDetail() {
-    const params = useParams()
+    const params = useParams();
+    const dispatch = useDispatch();
+
     const [activeImg, setActiveImg ] = useState(defaultProduct)
     const [quantity, setQuantity] = useState(1)
     
@@ -32,7 +35,7 @@ function ProductDetail() {
 
     // Quantity increase/decrease
     const increaseQty = () => {
-        if(quantity >= product.stock) return;
+        if(quantity >= product?.stock) return;
         setQuantity(prev => prev+1)
     }
     
@@ -41,6 +44,21 @@ function ProductDetail() {
         setQuantity(prev => prev-1)
         
     }
+
+    // Adding item to cart
+    const setItemToCart = () => {
+    const cartItem = {
+      product: product?._id,
+      name: product?.name,
+      price: product?.price,
+      image: product?.images[0]?.url,
+      stock: product?.stock,
+      quantity,
+    };
+
+    dispatch(setCartItem(cartItem))
+    toast.success("Item added to Cart");
+}
 
 
     return (
@@ -103,7 +121,7 @@ function ProductDetail() {
                             </div>
                         </div>
 
-                        {/* Ratings Assessment Node */}
+                        {/* Ratings */}
                         <div className="flex items-center gap-3 py-1">
                             <ProductRating rating={product?.ratings} numOfReviews={product?.numOfReviews} />
                             <span className="text-xs font-bold text-zinc-400 pt-0.5">
@@ -113,7 +131,7 @@ function ProductDetail() {
 
                         <hr className="border-zinc-200/80" />
 
-                        {/* Financial Matrix & Stock Metrics Row */}
+                        {/* price & stock */}
                         <div className="flex items-baseline justify-between gap-4">
                             <div className="text-zinc-900">
                                 <span className="text-[10px] font-bold tracking-widest uppercase text-zinc-400 block mb-0.5">Price</span>
@@ -133,10 +151,9 @@ function ProductDetail() {
                             </div>
                         </div>
 
-                        {/* 🎯 Updated Operational Action Group: Stacks on Mobile, Rows on Desktop */}
+                        {/* Action Group: inc / dec Qty + Add to Cart btn */}
                         <div className="flex flex-col sm:flex-row gap-4 items-stretch pt-2">
                             
-                            {/* Premium Minimal Quantity Counter Box */}
                             <div className="h-12 flex items-center justify-between sm:justify-start bg-white border border-zinc-200 rounded-xl px-2 shadow-2xs">
                                 <button
                                     type="button"
@@ -160,10 +177,11 @@ function ProductDetail() {
                                 </button>
                             </div>
 
-                            {/* Premium Full-Width Tappable Mauve Button */}
+                            {/* Add to cart Button */}
                             <button
                                 type="button"
                                 disabled={product.stock <= 0}
+                                onClick={setItemToCart}
                                 className="flex-1 h-12 p-4 bg-mauve-600 hover:bg-mauve-700 active:bg-mauve-800 text-white font-sans text-xs uppercase font-bold tracking-widest rounded-xl transition-all shadow-sm disabled:bg-zinc-200 disabled:text-zinc-400 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center active:scale-[0.98]"
                             >
                                 Add to Cart
@@ -172,7 +190,7 @@ function ProductDetail() {
 
                         <hr className="border-zinc-200/80" />
 
-                        {/* Content Narrative Summary */}
+                        {/* Product Summary */}
                         <div className="space-y-2">
                             <h4 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Technical Details / Specifications</h4>
                             <p className="text-sm text-zinc-600 leading-relaxed font-normal">
@@ -180,7 +198,7 @@ function ProductDetail() {
                             </p>
                         </div>
 
-                        {/* Interactive Customer Review Feedback Canvas Frame */}
+                        {/* Customer Review Feedback Canvas Frame */}
                         <div className="pt-2">
                             {isAuthenticated ? (
                                 <div className="text-sm font-medium text-zinc-700 bg-white border border-zinc-200 p-4 rounded-xl shadow-2xs">
