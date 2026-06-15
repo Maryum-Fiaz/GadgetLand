@@ -56,11 +56,8 @@ function Header() {
 };
 
 
-// cart value
+// cart value from redux store
 const { cartItems } = useSelector(state => state.cart)
-
-console.log('cart in header -- ', cartItems.length);
-
 
   
 

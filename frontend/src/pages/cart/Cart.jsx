@@ -191,7 +191,7 @@ function Cart() {
                   <div className="flex items-center justify-between text-sm">
                     <span className="font-medium text-zinc-500">Est. Shipping Taxes</span>
                     <span className="font-mono text-xs font-bold text-emerald-600 uppercase tracking-wider bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-100">
-                      Gratis / Free
+                      Free
                     </span>
                   </div>
 
