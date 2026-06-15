@@ -10,6 +10,7 @@ import UpdatePassword from "../../pages/user/UpdatePassword";
 import ForgotPassword from "../../pages/auth/ForgotPassword";
 import ResetPassword from "../../pages/auth/ResetPassword";
 import ProductDetail from "../product/ProductDetail";
+import Cart from "../../pages/cart/Cart";
 
 export const userRoutes = [
   {
@@ -62,4 +63,12 @@ export const userRoutes = [
     path: "/password/reset/:token",
     element: <ResetPassword />,
   },
+  {
+    path: "/cart",
+    element: (
+      <Cart>
+        <UserLayout />
+      </Cart>
+    ),
+  }
 ];

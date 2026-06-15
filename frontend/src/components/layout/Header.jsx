@@ -33,7 +33,9 @@ function Header() {
   
 
   // ─── Handlers 
-  const handleCart  = () => { /* cart logic here */ };
+  const handleCart  = () => { 
+    navigate('/cart')
+  };
   const handleLogin = () => { 
     navigate('/login')
   };
