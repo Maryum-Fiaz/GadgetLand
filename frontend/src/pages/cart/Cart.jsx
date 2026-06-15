@@ -184,7 +184,7 @@ function Cart() {
                   <div className="flex items-center justify-between text-sm">
                     <span className="font-medium text-zinc-500">Allocated Units</span>
                     <span className="font-mono font-bold text-zinc-800">
-                      {cartItems?.reduce((acc, item) => acc + item?.quantity, 0)} items
+                      {cartItems?.reduce((acc, item) => acc + item?.quantity, 0)} units
                     </span>
                   </div>
                   
