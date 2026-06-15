@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Search, X } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router";
 
-function SearchBar() {
+function SearchBar({ className= '' }) {
   const [searchParams] = useSearchParams();
   const [keyword, setKeyword] = useState(searchParams.get("keyword") || "");
   const [isOpen, setIsOpen] = useState(false); // Controls the full overlay view
@@ -39,7 +39,7 @@ function SearchBar() {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="p-2 text-zinc-600 hover:text-mauve-500 transition-colors cursor-pointer"
+        className={`text-zinc-600 transition-colors cursor-pointer ${className}`}
       >
         <Search size={20} strokeWidth={2.2} />
       </button>

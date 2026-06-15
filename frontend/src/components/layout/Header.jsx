@@ -53,6 +53,13 @@ function Header() {
   }
 };
 
+
+// cart value
+const { cartItems } = useSelector(state => state.cart)
+
+console.log('cart in header -- ', cartItems.length);
+
+
   
 
 
@@ -86,15 +93,17 @@ function Header() {
           {/*    Write the handler once above, it works on both mobile & desktop */}
           <div className="flex items-center gap-1 md:gap-3">
 
-            {/* Search — has its own internal open/close logic */}
-            <SearchBar />
+            {/* Search component */}
+            <SearchBar className='hover:scale-110 hover:text-mauve-400' />
 
             {/* Cart — one button, one handler, visible everywhere */}
             <button
               onClick={handleCart}
-              className="p-2 text-zinc-600 transition-all hover:scale-110 hover:text-mauve-400 cursor-pointer"
+              className="p-2 relative text-zinc-600 transition-all hover:scale-110 hover:text-mauve-400 cursor-pointer"
             >
               <ShoppingCart size={20} strokeWidth={2.2} />
+
+            <span className='py-0.5 px-1.5 absolute top-0 bg-zinc-600 text-white rounded-xl hover:scale-110 text-xs'>{cartItems.length}</span>
             </button>
 
             {/* Login — one button, one handler, visible everywhere */}
