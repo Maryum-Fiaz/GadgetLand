@@ -12,6 +12,7 @@ import ResetPassword from "../../pages/auth/ResetPassword";
 import ProductDetail from "../product/ProductDetail";
 import Cart from "../../pages/cart/Cart";
 import Shipping from "../../pages/cart/Shipping";
+import ConfirmOrder from "../../pages/cart/ConfirmOrder";
 
 export const userRoutes = [
   {
@@ -73,6 +74,14 @@ export const userRoutes = [
     element: (
       <ProtectedRoute>
         <Shipping />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/confirm_order",
+    element: (
+      <ProtectedRoute>
+        <ConfirmOrder />
       </ProtectedRoute>
     ),
   },

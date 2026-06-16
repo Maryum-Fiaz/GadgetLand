@@ -3,6 +3,7 @@ import { MetaData } from '../../components/index'
 import { Link, useNavigate } from 'react-router';
 import { removeCartItem, setCartItem } from '../../redux/features/cartSlice';
 import { Trash } from 'lucide-react';
+import { caluclateOrderCost } from '../../helper/helper';
 
 
 function Cart() {
@@ -56,169 +57,155 @@ function Cart() {
     const checkoutHandler = () => {
       navigate('/shipping')
     }
+    
+    const { shippingPrice } = caluclateOrderCost(cartItems);
 
   return (
     <>
   <MetaData title={"Your Cart"} />
   
-  <div className="w-full bg-zinc-50 min-h-screen font-sans text-zinc-900 antialiased selection:bg-mauve-100 selection:text-mauve-900 px-4 sm:px-6 py-10 md:py-16">
-    <div className="max-w-6xl mx-auto">
+  <div className="w-full bg-white min-h-screen font-sans text-zinc-900 antialiased selection:bg-zinc-100 px-4 sm:px-8 py-10 md:py-16">
+    <div className="max-w-5xl mx-auto">
       
       {cartItems?.length === 0 ? (
-        /* Empty State Screen View */
-        <div className="text-center py-24 bg-white border border-zinc-200/80 rounded-4xl p-8 shadow-2xs max-w-md mx-auto space-y-4">
-          <h2 className="text-2xl font-black tracking-tight text-zinc-800">Your Cart is Empty</h2>
-          <p className="text-sm text-zinc-400">Looks like you haven't added any premium tech gear to your collection yet.</p>
+        /* ── EMPTY STATE VIEW ── */
+        <div className="text-center py-24 max-w-md mx-auto space-y-5">
+          <h2 className="text-xl font-bold tracking-tight text-zinc-900">Your Cart is Empty</h2>
+          <p className="text-sm text-zinc-400">Looks like you haven't added any gear to your collection yet.</p>
           <div className="pt-2">
-            <Link to="/products" className="inline-flex h-11 items-center justify-center px-6 bg-zinc-900 hover:bg-zinc-800 text-white font-sans text-xs uppercase font-bold tracking-widest rounded-xl transition-all shadow-xs">
+            <Link to="/products" className="inline-flex h-11 items-center justify-center px-6 bg-mauve-600 hover:bg-mauve-700 text-white text-xs uppercase font-bold tracking-widest rounded-lg transition-colors shadow-xs">
               Explore Products
             </Link>
           </div>
         </div>
       ) : (
         <>
-          {/* Section Dynamic Heading Block */}
-          <div className="mb-10">
+          {/* ── HEADER MANIFEST BLOCK ── */}
+          <div className="mb-12 border-b border-zinc-100 pb-6">
             <h1 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">
               Your Cart
             </h1>
-            <p className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mt-1">
-              Reviewing <span className="text-mauve-600 font-bold">{cartItems?.length} selected items</span>
+            <p className="text-xs text-zinc-400 mt-1 font-mono uppercase tracking-wider">
+              {cartItems?.length} items selected
             </p>
           </div>
 
-          {/* Core Master Grid Workspace Layout Splitting Item List and Checkout Summary */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+          {/* ── LAYOUT RESPONSIVE GRID ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
-            {/* ── LEFT CANVAS: Continuous Responsive List of Cart Items ── */}
-            <div className="lg:col-span-8 space-y-4">
-              {cartItems?.map((item) => (
-                <div 
-                  key={item?.product} 
-                  className="bg-white border border-zinc-200/80 rounded-2xl p-4 sm:p-5 shadow-2xs transition-all hover:border-zinc-300"
-                >
-                  {/* Dynamic Inner Layout Flexbox Grid: Completely custom matching image/text ratios */}
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    
-                    {/* Visual & Text Identity Wrapper Block */}
-                    <div className="flex items-center gap-4 w-full sm:w-auto">
-                      {/* Product Thumbnail Shell Frame Container */}
-                      <div className="h-20 w-20 sm:h-24 sm:w-24 bg-zinc-50 border border-zinc-100 rounded-xl p-2 flex items-center justify-center shrink-0">
-                        <img
-                          src={item?.image}
-                          alt={item?.name || "Product Item"}
-                          className="max-h-full max-w-full object-contain mix-blend-multiply"
-                        />
-                      </div>
-                      
-                      {/* Typographic Metadata Container Node */}
-                      <div className="space-y-1 min-w-0">
+            {/* LEFT SIDEBAR: Active Items Stream */}
+            <div className="lg:col-span-7 space-y-4">
+              <div className="divide-y divide-zinc-100">
+                {cartItems?.map((item) => (
+                  <div 
+                    key={item?.product} 
+                    className="py-6 first:pt-0 last:pb-0 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+                  >
+                    {/* Item Identity and Media Segment */}
+                    <div className="flex items-center gap-4 min-w-0 w-full sm:w-auto">
+                      <img
+                        src={item?.image}
+                        alt={item?.name || "Product Item"}
+                        className="h-14 w-16 object-contain mix-blend-multiply shrink-0"
+                      />
+                      <div className="min-w-0">
                         <Link 
                           to={`/products/${item?.product}`}
-                          className="text-sm font-extrabold text-zinc-800 hover:text-mauve-600 transition-colors block leading-snug truncate max-w-[220px] sm:max-w-sm"
+                          className="text-sm font-medium text-zinc-900 hover:text-mauve-600 transition-colors block truncate max-w-[200px] sm:max-w-xs"
                         >
                           {item?.name}
                         </Link>
-                        <p className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider">
-                          MSRP Item Unit Price
+                        <p className="text-xs font-semibold text-zinc-900 mt-0.5">
+                          Rs. {item?.price?.toLocaleString()}/-
                         </p>
                       </div>
                     </div>
 
-                    {/* Operational Interactions Controller Strip (Responsive spacing ensures layout alignment) */}
+                    {/* Quantity Adjustment Controls Strip */}
                     <div className="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto border-t sm:border-t-0 border-zinc-100 pt-3 sm:pt-0">
                       
-                      {/* Responsive Dynamic Unit Value Calculation Node */}
-                      <div className="text-left sm:text-right">
-                        <span className="text-[10px] font-bold text-zinc-400 block sm:hidden uppercase tracking-wider mb-0.5">Price</span>
-                        <p className="text-base font-black text-zinc-900">
-                          Rs. {item?.price?.toLocaleString()}/-
-                        </p>
-                      </div>
-
-                      {/* Minimal Custom Counter Box Container Module */}
-                      <div className="h-10 flex items-center bg-zinc-50 border border-zinc-200 rounded-xl px-1">
+                      {/* Operational Interactive Quantity Counter Module */}
+                      <div className="h-9 flex items-center bg-zinc-50 border border-zinc-200 rounded-lg p-0.5">
                         <button
                           type="button"
                           onClick={() => decreaseQty(item, item.quantity)}
-                          className="w-8 h-8 flex items-center justify-center text-zinc-400 hover:text-zinc-900 font-bold rounded-lg hover:bg-white transition-all cursor-pointer active:scale-90"
+                          className="w-7 h-7 flex items-center justify-center text-zinc-400 hover:text-zinc-900 font-bold rounded transition-colors cursor-pointer active:scale-90"
                         >
                           —
                         </button>
                         <input
                           type="number"
-                          className="w-10 bg-transparent text-center font-sans text-xs font-bold text-zinc-800 outline-none select-none"
+                          className="w-8 bg-transparent text-center text-xs font-bold text-zinc-800 outline-none select-none"
                           value={item?.quantity}
                           readOnly
                         />
                         <button
                           type="button"
                           onClick={() => increaseQty(item, item.quantity)}
-                          className="w-8 h-8 flex items-center justify-center text-zinc-400 hover:text-zinc-900 font-bold rounded-lg hover:bg-white transition-all cursor-pointer active:scale-90"
+                          className="w-7 h-7 flex items-center justify-center text-zinc-400 hover:text-zinc-900 font-bold rounded transition-colors cursor-pointer active:scale-90"
                         >
                           ＋
                         </button>
                       </div>
 
-                      {/* Quiet Functional Trashing Overlay Control Icon */}
+                      {/* Trashing Handler Link Trigger */}
                       <button
                         type="button"
                         onClick={() => removeCartItemHandler(item?.product)}
-                        className="p-2.5 text-zinc-400 hover:text-rose-600 rounded-xl transition-all cursor-pointer active:scale-95"
-                        title="Remove item configuration"
+                        className="p-2 text-zinc-400 hover:text-rose-600 transition-colors cursor-pointer active:scale-95"
+                        title="Remove configuration"
                       >
-                        <Trash size={20} strokeWidth={2.2} />
+                        <Trash size={18} strokeWidth={2.2} />
                       </button>
 
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
-            {/* ── RIGHT CANVAS: Order Summary Sidebar Card ── */}
-            <div className="lg:col-span-4">
-              <div className="bg-white border border-zinc-200/80 rounded-[2rem] p-6 shadow-2xs space-y-5 sticky top-28">
-                <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-400">
+            {/* RIGHT SIDEBAR: Total Cost Summary Module */}
+            <div className="lg:col-span-5 lg:sticky lg:top-12 border border-zinc-200 rounded-xl p-6 sm:p-8 bg-zinc-50/50">
+              <div className="space-y-4">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-6">
                   Order Summary
                 </h3>
                 
-                <div className="border-b border-zinc-100 pb-1" />
-
-                {/* Computational Metric Rows Stack */}
-                <div className="space-y-3.5">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-medium text-zinc-500">Allocated Units</span>
-                    <span className="font-mono font-bold text-zinc-800">
+                <div className="space-y-3 text-sm border-b border-zinc-200 pb-4">
+                  <div className="flex items-center justify-between text-zinc-600">
+                    <span>Allocated Volume</span>
+                    <span className="font-medium text-zinc-900">
                       {cartItems?.reduce((acc, item) => acc + item?.quantity, 0)} units
                     </span>
                   </div>
                   
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-medium text-zinc-500">Est. Shipping Taxes</span>
-                    <span className="font-mono text-xs font-bold text-emerald-600 uppercase tracking-wider bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-100">
+                  <div className="flex items-center justify-between text-zinc-600">
+                    <span>Shipping</span>
+                    {shippingPrice === 0 ? (
+                    <span className="text-xs font-bold text-emerald-600 uppercase tracking-wider bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
                       Free
                     </span>
-                  </div>
 
-                  <div className="border-b border-dashed border-zinc-200 pt-1" />
-
-                  <div className="flex items-baseline justify-between pt-1">
-                    <span className="text-xs font-bold uppercase tracking-wider text-zinc-500">Estimated Total</span>
-                    <div className="text-2xl font-black text-zinc-900">
-                      Rs. <span className="font-sans font-extrabold text-xl ml-0.5">
-                        {cartItems?.reduce((acc, item) => acc + item?.quantity * item.price, 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}/-
-                      </span>
-                    </div>
+                    ) : (
+                      <span className="font-medium text-zinc-900">
+                      {shippingPrice}
+                    </span>
+                    )}
                   </div>
                 </div>
 
-                <div className="pt-2">
-                  {/* Master Checkout Redirect Button Trigger */}
+                <div className="flex items-baseline justify-between pt-2">
+                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">Estimated Total</span>
+                  <span className="text-2xl font-black text-zinc-900 tracking-tight">
+                    Rs. {cartItems?.reduce((acc, item) => acc + item?.quantity * item.price, 0).toLocaleString()}/-
+                  </span>
+                </div>
+
+                <div className="pt-4">
                   <button
                     type="button"
                     onClick={checkoutHandler}
-                    className="w-full h-12 bg-mauve-600 hover:bg-mauve-700 active:bg-mauve-800 text-white font-sans text-xs uppercase font-bold tracking-widest rounded-xl transition-all shadow-sm flex items-center justify-center cursor-pointer active:scale-[0.98]"
+                    className="w-full h-11 bg-mauve-600 hover:bg-mauve-700 active:bg-mauve-800 text-white font-sans text-xs uppercase font-bold tracking-widest rounded-lg transition-colors flex items-center justify-center shadow-xs cursor-pointer select-none"
                   >
                     Proceed to Checkout
                   </button>

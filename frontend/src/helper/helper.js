@@ -1,5 +1,6 @@
 // utility functions
 
+// min/max price filter
 export const getPriceQueryParams = (searchParams, key, value) => {
     const hasValueInParam = searchParams.has(key)
 
@@ -17,3 +18,23 @@ export const getPriceQueryParams = (searchParams, key, value) => {
     return searchParams;
 
 }
+
+// calculating order cost
+export const caluclateOrderCost = (cartItems) => {
+  const itemsPrice = cartItems?.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+
+  const shippingPrice = itemsPrice > 200 ? 0 : 50;
+  const taxPrice = Number((0.15 * itemsPrice).toFixed(2));
+  const totalPrice = (itemsPrice + shippingPrice + taxPrice).toFixed(2);
+
+  return {
+    itemsPrice: Number(itemsPrice).toFixed(2),
+    shippingPrice,
+    taxPrice,
+    totalPrice,
+  };
+};
+

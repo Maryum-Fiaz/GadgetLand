@@ -3,11 +3,13 @@ import { MetaData } from '../../components/index'
 import { countries } from 'countries-list'
 import { saveShippingInfo } from '../../redux/features/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 function Shipping() {
 
     const countriesList = Object.values(countries)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
 
     const [address, setAddress] = useState('')
@@ -33,6 +35,7 @@ function Shipping() {
         e.preventDefault();
 
         dispatch(saveShippingInfo({ address, city, phoneNo, zipCode, country }));
+        navigate('/confirm_order')
     }
 
   return (
