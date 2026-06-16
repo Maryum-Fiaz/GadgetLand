@@ -1,20 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MetaData } from '../../components/index'
 import { countries } from 'countries-list'
+import { saveShippingInfo } from '../../redux/features/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Shipping() {
 
     const countriesList = Object.values(countries)
+    const dispatch = useDispatch();
+
+
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [zipCode, setZipCode] = useState('')
     const [phoneNo, setPhoneNo] = useState('')
     const [country, setCountry] = useState('')
 
+    const { shippingInfo } = useSelector(state => state.cart)
+
+    useEffect(() => {
+    if (shippingInfo) {
+      setAddress(shippingInfo?.address);
+      setCity(shippingInfo?.city);
+      setZipCode(shippingInfo?.zipCode);
+      setPhoneNo(shippingInfo?.phoneNo);
+      setCountry(shippingInfo?.country);
+    }
+  }, [shippingInfo]);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        dispatch(saveShippingInfo({ address, city, phoneNo, zipCode, country }));
     }
 
   return (
