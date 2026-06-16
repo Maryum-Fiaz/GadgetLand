@@ -1,18 +1,53 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MetaData } from '../../components/index'
 import CheckoutSteps from './CheckoutSteps'
+import { useSelector } from 'react-redux';
+import { caluclateOrderCost } from '../../helper/helper';
+import { useCreateNewOrderMutation } from '../../redux/api/orderApi';
+import { toast } from 'react-hot-toast'
+import { useNavigate } from 'react-router';
 
 
 function PaymentMethod() {
 
     const [method, setMethod] = useState("")
+    const navigate = useNavigate();
+
+    const {shippingInfo, cartItems} = useSelector(state => state.cart);
+    const { itemsPrice, shippingPrice, taxPrice, totalPrice } =
+        caluclateOrderCost(cartItems);
+
+    const [createNewOrder, {isLoading, error, isSuccess}] = useCreateNewOrderMutation();
+
+    useEffect(() => {
+    if (error) {
+      toast.error(error?.data?.message);
+    }
+
+    if (isSuccess) {
+      navigate("/me/orders?order_success=true");
+    }
+  }, [error, isSuccess, navigate]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if(method === 'COD'){
             // create COD order
-            alert('COD')
+            const orderData = {
+        shippingInfo,
+        orderItems: cartItems,
+        itemsPrice,
+        shippingAmount: shippingPrice,
+        taxAmount: taxPrice,
+        totalAmount: totalPrice,
+        paymentInfo: {
+          status: "Not Paid",
+        },
+        paymentMethod: "COD",
+      };
+
+      createNewOrder(orderData);
         }
 
         if(method === 'Card'){
@@ -102,10 +137,10 @@ function PaymentMethod() {
             <button
               id="shipping_btn"
               type="submit"
-            //   disabled={isLoading}
+              disabled={isLoading}
               className="w-full h-11 bg-mauve-600 hover:bg-mauve-700 active:bg-mauve-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-sans text-xs uppercase font-bold tracking-widest rounded-lg transition-colors shadow-xs flex items-center justify-center cursor-pointer select-none active:scale-[0.99]"
             >
-              {/* {isLoading ? "Processing..." : "Continue"} */} Continue
+              {isLoading ? "Processing..." : "Continue"}
             </button>
           </div>
 
