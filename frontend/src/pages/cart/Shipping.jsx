@@ -4,6 +4,7 @@ import { countries } from 'countries-list'
 import { saveShippingInfo } from '../../redux/features/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import CheckoutSteps from './CheckoutSteps';
 
 function Shipping() {
 
@@ -48,7 +49,7 @@ function Shipping() {
       
       {/* ── CHECKOUT STEPS TIMELINE WRAPPER ── */}
       <div className="w-full overflow-x-auto pb-2">
-        {/* <CheckoutSteps shipping /> */} Checkout steps
+        <CheckoutSteps shipping />
       </div>
 
       {/* ── FORM ── */}

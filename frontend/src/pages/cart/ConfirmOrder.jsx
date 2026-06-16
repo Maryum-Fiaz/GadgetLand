@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { MetaData } from '../../components/index'
 import { Link } from 'react-router'
 import { caluclateOrderCost } from '../../helper/helper';
+import CheckoutSteps from './CheckoutSteps';
 
 
 function ConfirmOrder() {
@@ -21,7 +22,7 @@ function ConfirmOrder() {
       
       {/* ── STEPS TIMELINE WRAPPER ── */}
       <div className="w-full mb-12">
-        {/* <CheckoutSteps shipping confirmOrder /> */}
+        <CheckoutSteps shipping confirmOrder />
       </div>
 
       {/* ── MAIN WORKSPACE GRID ── */}
