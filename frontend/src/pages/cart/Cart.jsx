@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { MetaData } from '../../components/index'
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { removeCartItem, setCartItem } from '../../redux/features/cartSlice';
 import { Trash } from 'lucide-react';
 
@@ -10,6 +10,7 @@ function Cart() {
 
     const { cartItems } = useSelector(state => state.cart);
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     // Quantity increase/decrease
         const increaseQty = (item, quantity) => {
@@ -46,10 +47,15 @@ function Cart() {
         dispatch(setCartItem(cartItem))
     }
 
+    // Removing items from cart
     const removeCartItemHandler = (itemId) => {
        dispatch(removeCartItem(itemId))
     }
     
+    // Checking out
+    const checkoutHandler = () => {
+      navigate('/shipping')
+    }
 
   return (
     <>
@@ -211,7 +217,7 @@ function Cart() {
                   {/* Master Checkout Redirect Button Trigger */}
                   <button
                     type="button"
-                    // onClick={checkoutHandler}
+                    onClick={checkoutHandler}
                     className="w-full h-12 bg-mauve-600 hover:bg-mauve-700 active:bg-mauve-800 text-white font-sans text-xs uppercase font-bold tracking-widest rounded-xl transition-all shadow-sm flex items-center justify-center cursor-pointer active:scale-[0.98]"
                   >
                     Proceed to Checkout

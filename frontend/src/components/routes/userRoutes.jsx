@@ -11,6 +11,7 @@ import ForgotPassword from "../../pages/auth/ForgotPassword";
 import ResetPassword from "../../pages/auth/ResetPassword";
 import ProductDetail from "../product/ProductDetail";
 import Cart from "../../pages/cart/Cart";
+import Shipping from "../../pages/cart/Shipping";
 
 export const userRoutes = [
   {
@@ -32,6 +33,18 @@ export const userRoutes = [
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/password/forgot",
+    element: <ForgotPassword />,
+  },
+  {
+    path: "/password/reset/:token",
+    element: <ResetPassword />,
+  },
+  {
+    path: "/cart",
+    element: <Cart />,
   },
   {
     path: "/me",
@@ -56,19 +69,11 @@ export const userRoutes = [
     ],
   },
   {
-    path: "/password/forgot",
-    element: <ForgotPassword />,
-  },
-  {
-    path: "/password/reset/:token",
-    element: <ResetPassword />,
-  },
-  {
-    path: "/cart",
+    path: "/shipping",
     element: (
-      <Cart>
-        <UserLayout />
-      </Cart>
+      <ProtectedRoute>
+        <Shipping />
+      </ProtectedRoute>
     ),
-  }
+  },
 ];
