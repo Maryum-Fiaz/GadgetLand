@@ -25,7 +25,7 @@ function PaymentMethod() {
     }
 
     if (isSuccess) {
-      navigate("/me/orders?order_success=true");
+      navigate("/");
     }
   }, [error, isSuccess, navigate]);
 
