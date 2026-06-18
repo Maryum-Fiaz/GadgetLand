@@ -1,11 +1,13 @@
 import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
+
 import Stripe from "stripe";
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Create stripe checkout session   =>  /api/v1/payment/checkout_session
 export const stripeCheckoutSession = catchAsyncErrors(
   async (req, res, next) => {
     const body = req?.body;
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+    // console.log("STRIPE KEY:", process.env.STRIPE_SECRET_KEY);
 
     const line_items = body?.orderItems?.map((item) => {
       return {
@@ -27,7 +29,7 @@ export const stripeCheckoutSession = catchAsyncErrors(
 
     const shipping_rate =
       body?.itemsPrice >= 200
-        ? "shr_1SWeqDIX7S2MNZE0yWKmLDXA"
+        ? "shr_1TjeyeIX7S2MNZE05epumHJT"
         : "shr_1TjKOeIX7S2MNZE0sy8AKBkc";
 
     const session = await stripe.checkout.sessions.create({
@@ -46,7 +48,7 @@ export const stripeCheckoutSession = catchAsyncErrors(
       line_items,
     });
 
-    console.log("---------------------", session);
+    console.log("---------------------session : ", session);
     
 
     res.status(200).json({

@@ -3,7 +3,7 @@ import { MetaData } from '../../components/index'
 import CheckoutSteps from './CheckoutSteps'
 import { useSelector } from 'react-redux';
 import { caluclateOrderCost } from '../../helper/helper';
-import { useCreateNewOrderMutation } from '../../redux/api/orderApi';
+import { useCreateNewOrderMutation, useStripeCheckoutSessionMutation } from '../../redux/api/orderApi';
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router';
 
@@ -17,8 +17,25 @@ function PaymentMethod() {
     const { itemsPrice, shippingPrice, taxPrice, totalPrice } =
         caluclateOrderCost(cartItems);
 
-    const [createNewOrder, {isLoading, error, isSuccess}] = useCreateNewOrderMutation();
+    const [createNewOrder, { error, isSuccess}] = useCreateNewOrderMutation();
+    const [stripeCheckoutSession, { data: checkoutData, error: checkoutError, isLoading }] = useStripeCheckoutSessionMutation()
 
+  // for Card
+  useEffect(() => {
+    console.log('checkoutData: ', checkoutData);
+    if(checkoutData){
+      window.location.href = checkoutData.url;
+    }
+
+    if(checkoutError) {
+      toast.error(checkoutError?.data?.message);
+      console.error('error: ', checkoutError);
+      
+    }
+    
+  }, [checkoutData, checkoutError])
+
+  // for COD
     useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
@@ -52,7 +69,16 @@ function PaymentMethod() {
 
         if(method === 'Card'){
             // stripe checkout
-            alert('Card')
+            const orderData = {
+        shippingInfo,
+        orderItems: cartItems,
+        itemsPrice,
+        shippingAmount: shippingPrice,
+        taxAmount: taxPrice,
+        totalAmount: totalPrice,
+      };
+
+      stripeCheckoutSession(orderData);
         }
     }
 
