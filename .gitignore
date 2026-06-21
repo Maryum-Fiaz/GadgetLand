@@ -4,3 +4,5 @@ backend/config/config.env
 .DS_Store
 dist/
 build/
+
+stripe.exe
