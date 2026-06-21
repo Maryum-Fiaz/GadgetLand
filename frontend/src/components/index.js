@@ -8,6 +8,7 @@ import CustomPagination from './layout/CustomPagination.jsx';
 import ProductRating from './layout/ProductRating.jsx';
 import Loader from './layout/Loader.jsx';
 import DashboardLayout from './layout/DashboardLayout.jsx';
+import ScrollToTop from './ScrollToTop.jsx';
 
 export {
     Footer,
@@ -20,4 +21,5 @@ export {
     ProductRating,
     Loader,
     DashboardLayout,
+    ScrollToTop,
 }
