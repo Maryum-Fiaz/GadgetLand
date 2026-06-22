@@ -15,6 +15,7 @@
     "countries-list": "^3.3.0",
     "lucide-react": "^1.17.0",
     "react": "^19.2.6",
+    "react-datepicker": "^9.1.0",
     "react-dom": "^19.2.6",
     "react-helmet-async": "^3.0.0",
     "react-hot-toast": "^2.6.0",
