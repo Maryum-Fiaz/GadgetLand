@@ -9,6 +9,7 @@ import ProductRating from './layout/ProductRating.jsx';
 import Loader from './layout/Loader.jsx';
 import DashboardLayout from './layout/DashboardLayout.jsx';
 import ScrollToTop from './ScrollToTop.jsx';
+import ProtectedRoute from './ProtectedRoute.jsx'
 
 export {
     Footer,
@@ -22,4 +23,5 @@ export {
     Loader,
     DashboardLayout,
     ScrollToTop,
+    ProtectedRoute,
 }
