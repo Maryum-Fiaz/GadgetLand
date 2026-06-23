@@ -10,7 +10,10 @@ function AdminDashboard() {
   const [endDate, setEndDate] = useState(new Date());
 
     const handleSubmit = () => {
-
+      console.log('startDate: ', new Date(startDate).toISOString());
+      console.log('endDate: ', new Date(endDate).toISOString());
+      
+      
     }
   return (
     <>
@@ -115,7 +118,7 @@ function AdminDashboard() {
       </div>
 
       {/* ── DATA VISUALIZATION AREA ── */}
-      <div className="w-full pt-4 border-t border-zinc-100">
+      <div className="w-full h-80 sm:h-96 bg-white border border-zinc-200/80 rounded-xl p-4">
         <SalesChart />
       </div>
 
