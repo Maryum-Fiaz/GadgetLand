@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { MetaData, SalesChart } from "../../components/index.js";
+import { useState, useEffect } from "react";
+import { Loader, MetaData, SalesChart } from "../../components/index.js";
+import { useLazyGetDashboardSalesQuery } from "../../redux/api/orderApi.js";
+import toast from "react-hot-toast";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,12 +11,35 @@ function AdminDashboard() {
     const [startDate, setStartDate] = useState(new Date().setDate(1));
   const [endDate, setEndDate] = useState(new Date());
 
-    const handleSubmit = () => {
-      console.log('startDate: ', new Date(startDate).toISOString());
-      console.log('endDate: ', new Date(endDate).toISOString());
-      
-      
+  const [getDashboardSales, {isLoading, error, data}] = useLazyGetDashboardSalesQuery();
+
+  useEffect(() => {
+    if(error) {
+      toast.error(error?.data?.message);
     }
+
+    if(startDate && endDate && !data){
+      getDashboardSales({
+      startDate: new Date(startDate).toISOString(),
+      endDate: endDate.toISOString(),
+    });
+    }
+
+
+  }, [error, data, startDate, endDate, getDashboardSales])
+
+    const handleSubmit = () => {
+      getDashboardSales({
+      startDate: new Date(startDate).toISOString(),
+      endDate: endDate.toISOString(),
+    });
+    }
+
+
+    console.log(data);
+    
+    if(isLoading) return <Loader />;
+
   return (
     <>
   <MetaData title={"Admin Dashboard"} />
@@ -95,7 +120,7 @@ function AdminDashboard() {
               Gross Revenue
             </span>
             <h3 className="text-3xl font-black text-zinc-900 tracking-tight font-mono mt-2">
-              Rs. 0.00
+              Rs. {data?.totalSales?.toFixed(2)}
             </h3>
           </div>
           <div className="absolute top-0 right-0 w-1 h-full bg-mauve-600" />
@@ -108,7 +133,7 @@ function AdminDashboard() {
               Processed Volume
             </span>
             <h3 className="text-3xl font-black text-zinc-900 tracking-tight font-mono mt-2">
-              0
+              {data?.totalNumOfOrders}
               <span className="text-xs font-sans font-bold text-zinc-400 uppercase tracking-wider ml-1.5">Orders</span>
             </h3>
           </div>
@@ -119,7 +144,7 @@ function AdminDashboard() {
 
       {/* ── DATA VISUALIZATION AREA ── */}
       <div className="w-full h-80 sm:h-96 bg-white border border-zinc-200/80 rounded-xl p-4">
-        <SalesChart />
+        <SalesChart salesData={data?.sales} />
       </div>
 
     </div>

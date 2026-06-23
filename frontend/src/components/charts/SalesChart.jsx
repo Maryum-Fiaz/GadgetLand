@@ -82,7 +82,7 @@ export default function SalesChart({ salesData }) {
           <Line
             yAxisId="right"
             type="monotone"
-            dataKey="numOrders"
+            dataKey="numOfOrders"
             name="Orders Placed"
             stroke="#8b5cf6"
             strokeWidth={2.5}
