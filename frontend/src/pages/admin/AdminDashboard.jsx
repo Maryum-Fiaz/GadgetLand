@@ -34,9 +34,6 @@ function AdminDashboard() {
       endDate: endDate.toISOString(),
     });
     }
-
-
-    console.log(data);
     
     if(isLoading) return <Loader />;
 

@@ -53,9 +53,6 @@ const getSalesData = async(startDate, endDate) => {
         }
       }
     ])
-
-    console.log("=============================");
-    console.log('salesData: ', salesData);
     
     // Create a Map to store sales data and num of order by data
     const salesMap = new Map()
@@ -81,10 +78,6 @@ const getSalesData = async(startDate, endDate) => {
     sales: salesMap.get(date)?.sales ?? 0, // if date exists in salesMap then assign to sales || assign 0
     numOfOrders: salesMap.get(date)?.numOfOrders ?? 0,
   }));
-
-  console.log('slaesMap: ', salesMap);
-  
-  console.log('finalSalesData', finalSalesData);
   
 
   return { salesData: finalSalesData, totalSales, totalNumOfOrders };
