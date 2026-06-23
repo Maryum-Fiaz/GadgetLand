@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MetaData } from "../../components/index.js";
+import { MetaData, SalesChart } from "../../components/index.js";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -40,8 +40,8 @@ function AdminDashboard() {
             <label className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block">
               Start Date
             </label>
-            {/* Added relative and z-50 wrapper to fix the see-through overlap layout */}
-            <div className="relative z-50 [&>.react-datepicker-wrapper]:w-full [&>.react-datepicker__popper]:z-50 [&>.react-datepicker]:bg-white [&>.react-datepicker]:border-zinc-200 [&>.react-datepicker]:shadow-xl [&>.react-datepicker]:rounded-xl [&>.react-datepicker]:font-sans">
+            {/* Added relative and z-20 wrapper to fix the see-through overlap layout */}
+            <div className="relative z-20 [&>.react-datepicker-wrapper]:w-full [&>.react-datepicker__popper]:z-20 [&>.react-datepicker]:bg-white [&>.react-datepicker]:border-zinc-200 [&>.react-datepicker]:shadow-xl [&>.react-datepicker]:rounded-xl [&>.react-datepicker]:font-sans">
               <DatePicker
                 selected={startDate}
                 onChange={setStartDate}
@@ -58,7 +58,7 @@ function AdminDashboard() {
             <label className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block">
               End Date
             </label>
-            <div className="relative z-50 [&>.react-datepicker-wrapper]:w-full [&>.react-datepicker__popper]:z-50 [&>.react-datepicker]:bg-white [&>.react-datepicker]:border-zinc-200 [&>.react-datepicker]:shadow-xl [&>.react-datepicker]:rounded-xl [&>.react-datepicker]:font-sans">
+            <div className="relative z-20 [&>.react-datepicker-wrapper]:w-full [&>.react-datepicker__popper]:z-20 [&>.react-datepicker]:bg-white [&>.react-datepicker]:border-zinc-200 [&>.react-datepicker]:shadow-xl [&>.react-datepicker]:rounded-xl [&>.react-datepicker]:font-sans">
               <DatePicker
                 selected={endDate}
                 onChange={setEndDate}
@@ -86,7 +86,7 @@ function AdminDashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         
         {/* Gross Sales Revenue Display Node */}
-        <div className="bg-zinc-50/60 border border-zinc-200/60 rounded-xl p-6 relative overflow-hidden flex flex-col justify-between min-h-[120px]">
+        <div className="bg-zinc-50/60 border border-zinc-200/60 rounded-xl p-6 relative overflow-hidden flex flex-col justify-between min-h-30">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block">
               Gross Revenue
@@ -116,7 +116,7 @@ function AdminDashboard() {
 
       {/* ── DATA VISUALIZATION AREA ── */}
       <div className="w-full pt-4 border-t border-zinc-100">
-        {/* <SalesChart salesData={data?.sales} /> */} SALES CHART
+        <SalesChart />
       </div>
 
     </div>

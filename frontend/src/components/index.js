@@ -10,6 +10,7 @@ import Loader from './layout/Loader.jsx';
 import DashboardLayout from './layout/DashboardLayout.jsx';
 import ScrollToTop from './ScrollToTop.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx'
+import SalesChart from './charts/SalesChart.jsx';
 
 export {
     Footer,
@@ -24,4 +25,5 @@ export {
     DashboardLayout,
     ScrollToTop,
     ProtectedRoute,
+    SalesChart,
 }
