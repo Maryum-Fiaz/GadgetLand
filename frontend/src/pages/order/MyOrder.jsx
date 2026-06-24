@@ -1,19 +1,32 @@
 import { CustomTable, Loader, MetaData } from "../../components";
 import { useMyOrdersQuery } from "../../redux/api/orderApi";
-import { Link } from 'react-router'
+import { Link, useNavigate, useSearchParams } from 'react-router'
 import toast from 'react-hot-toast'
 import { useEffect } from "react";
 import { Printer } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../../redux/features/cartSlice";
 
 
 const MyOrder = () => {
   const { data, isLoading, error } = useMyOrdersQuery();
 
+  const [searchParams] = useSearchParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const orderSuccess = searchParams.get("order_success");
+
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
     }
-  }, [error]);
+
+    if(orderSuccess){
+      dispatch(clearCart());
+      navigate("/me/orders");
+    }
+  }, [error, orderSuccess, navigate, dispatch]);
 
   
   const columns = [
