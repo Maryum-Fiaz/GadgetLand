@@ -55,13 +55,11 @@ const Invoice = () => {
 
         {/* MOBILE RESPONSIVE WRAPPER */}
         <div className="w-full overflow-x-auto rounded-2xl border border-zinc-200/80 shadow-xs bg-white">
-          
           {/* FIXED DESKTOP CANVAS */}
           <div
-  id="order_invoice"
-  className="min-w-[800px] p-12 bg-white text-[#3f3f46] font-sans antialiased"
->
-            
+            id="order_invoice"
+            className="min-w-[800px] p-12 bg-white text-[#3f3f46] font-sans antialiased"
+          >
             {/* TOP CENTERED HEADER SECTION */}
             <header className="flex flex-col items-center text-center border-b border-zinc-100 pb-8 mb-8">
               <div id="logo" className="flex flex-col items-center mb-4">
@@ -74,13 +72,16 @@ const Invoice = () => {
                   GadgetLand
                 </h2>
               </div>
-              
+
               <div className="mt-2">
                 <h1 className="text-sm font-bold uppercase tracking-widest text-zinc-400 font-mono">
                   Official Statement
                 </h1>
                 <p className="text-xs font-mono text-zinc-500 mt-1">
-                  Token ID: <span className="text-zinc-900 font-semibold select-all">{order?._id}</span>
+                  Token ID:{" "}
+                  <span className="text-zinc-900 font-semibold select-all">
+                    {order?._id}
+                  </span>
                 </p>
               </div>
             </header>
