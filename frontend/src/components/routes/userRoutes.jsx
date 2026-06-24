@@ -15,6 +15,7 @@ import Shipping from "../../pages/cart/Shipping";
 import ConfirmOrder from "../../pages/cart/ConfirmOrder";
 import PaymentMethod from "../../pages/cart/PaymentMethod";
 import MyOrder from "../../pages/order/MyOrder";
+import OrderDetails from "../../pages/order/OrderDetails";
 
 export const userRoutes = [
   {
@@ -100,6 +101,14 @@ export const userRoutes = [
     element: (
       <ProtectedRoute>
         <MyOrder />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/me/order/:id",
+    element: (
+      <ProtectedRoute>
+        <OrderDetails />
       </ProtectedRoute>
     ),
   },

@@ -43,6 +43,24 @@ export const myOrders = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// Get Order by Id =>  /api/v1/orders/:id
+export const getOrderDetails = catchAsyncErrors(async (req, res, next) => {
+  const order = await Order.findById(req.params.id).populate(
+    "user",
+    "name email" // only these fields
+  );
+
+  if (!order) {
+    return next(
+      new ErrorHandler(`NO Order found with Id: ${req.params.id}`, 404)
+    );
+  }
+
+  res.status(200).json({
+    order,
+  });
+});
+
 const getSalesData = async(startDate, endDate) => {
     const salesData = await Order.aggregate([
       {
