@@ -113,7 +113,7 @@ function AdminDashboard() {
         {/* Gross Sales Revenue Display Node */}
         <div className="bg-zinc-50/60 border border-zinc-200/60 rounded-xl p-6 relative overflow-hidden flex flex-col justify-between min-h-30">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#10b981] block">
               Gross Revenue
             </span>
             <h3 className="text-3xl font-black text-zinc-900 tracking-tight font-mono mt-2">
@@ -126,7 +126,7 @@ function AdminDashboard() {
         {/* Processed Order Volumes Display Node */}
         <div className="bg-zinc-50/60 border border-zinc-200/60 rounded-xl p-6 relative overflow-hidden flex flex-col justify-between min-h-[120px]">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#8b5cf6] block">
               Processed Volume
             </span>
             <h3 className="text-3xl font-black text-zinc-900 tracking-tight font-mono mt-2">

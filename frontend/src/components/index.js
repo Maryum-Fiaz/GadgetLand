@@ -11,6 +11,7 @@ import DashboardLayout from './layout/DashboardLayout.jsx';
 import ScrollToTop from './ScrollToTop.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx'
 import SalesChart from './charts/SalesChart.jsx';
+import CustomTable from './layout/CustomTable.jsx';
 
 export {
     Footer,
@@ -26,4 +27,5 @@ export {
     ScrollToTop,
     ProtectedRoute,
     SalesChart,
+    CustomTable,
 }
