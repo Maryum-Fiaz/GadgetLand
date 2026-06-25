@@ -4,81 +4,142 @@ import ApiFilters from "../utils/apiFilters.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
 // Get Products => /api/v1/products
-export const getProducts = catchAsyncErrors(async(req, res) => {
+export const getProducts = catchAsyncErrors(async (req, res) => {
+  const resPerPage = 6;
+  const apiFilters = new ApiFilters(Product.find(), req.query)
+    .search()
+    .filter();
+  let products = await apiFilters.query;
 
-    const resPerPage = 6;
-    const apiFilters = new ApiFilters(Product.find(), req.query).search().filter();
-    let products = await apiFilters.query;
-    
+  const filteredProductsCount = products.length;
 
-       
-    const filteredProductsCount = products.length;
-    
-    
-    apiFilters.pagination(resPerPage);
-    products = await apiFilters.query.clone();
-    
-    res.status(200).json({
-        resPerPage,
-        filteredProductsCount,
-        products,
-    })
-})
+  apiFilters.pagination(resPerPage);
+  products = await apiFilters.query.clone();
+
+  res.status(200).json({
+    resPerPage,
+    filteredProductsCount,
+    products,
+  });
+});
 
 // Create new Product  =>  /api/v1/admin/products
 export const newProduct = catchAsyncErrors(async (req, res) => {
-    req.body.user = req.user._id;
-    
-    const product = await Product.create(req.body);
+  req.body.user = req.user._id;
 
-    res.status(200).json({
-        product,
-    });
-})
+  const product = await Product.create(req.body);
+
+  res.status(200).json({
+    product,
+  });
+});
 
 // Get Single Product => /api/v1/products/:id
-export const getProductDetails = catchAsyncErrors(async(req, res, next) => {
+export const getProductDetails = catchAsyncErrors(async (req, res, next) => {
+  const product = await Product.findById(req.params?.id);
 
-    const product = await Product.findById(req.params?.id);
+  if (!product) {
+    return next(new ErrorHandler("Product not found", 404));
+  }
 
-    if(!product){
-        return next(new ErrorHandler("Product not found", 404))
-    }
+  res.status(200).json({
+    product,
+  });
+});
 
-    res.status(200).json({
-        product,
-    })
-})
+// Get products - ADMIN   =>  /api/v1/admin/products
+export const getAdminProducts = catchAsyncErrors(async (req, res, next) => {
+  const products = await Product.find();
 
+  res.status(200).json({
+    products,
+  });
+});
 
 // Update Product details => /api/v1/admin/products/:id
 export const updateProduct = catchAsyncErrors(async (req, res) => {
-    let product = await Product.findById(req.params?.id);
+  let product = await Product.findById(req.params?.id);
 
-    if (!product) {
-        return next(new ErrorHandler("Product not found", 404))
-    }
+  if (!product) {
+    return next(new ErrorHandler("Product not found", 404));
+  }
 
-    product = await Product.findByIdAndUpdate(req.params?.id, req.body, {
-        new: true,
-    });
+  product = await Product.findByIdAndUpdate(req.params?.id, req.body, {
+    new: true,
+  });
 
-    res.status(200).json({
-        product,
-    });
-})
+  res.status(200).json({
+    product,
+  });
+});
 
 // Delete Product details => /api/v1/admin/products/:id
 export const deleteProduct = catchAsyncErrors(async (req, res) => {
-    let product = await Product.findById(req.params?.id);
+  let product = await Product.findById(req.params?.id);
 
-    if (!product) {
-        return next(new ErrorHandler("Product not found", 404))
-    }
+  if (!product) {
+    return next(new ErrorHandler("Product not found", 404));
+  }
 
-    await product.deleteOne()
+  await product.deleteOne();
 
-    res.status(200).json({
-        message: "Product Deleted"
+  res.status(200).json({
+    message: "Product Deleted",
+  });
+});
+
+// * Reviews
+
+// Create/Update product review   =>  /api/v1/reviews
+export const createProductReview = catchAsyncErrors(async (req, res, next) => {
+  const { comment, rating, productId } = req.body;
+
+  const review = {
+    user: req.user?._id,
+    rating: Number(rating),
+    comment,
+  }
+
+  const product = await Product.findById(productId);
+
+  if (!product) {
+    return next(new ErrorHandler("Product not found", 404));
+  }
+
+  const isReviewd = product.reviews.find( r => r.user.toString() === req.user?._id.toString())
+
+  if (isReviewed) {
+    product.reviews.forEach((review) => {
+      if (review?.user?.toString() === req?.user?._id.toString()) {
+        review.comment = comment;
+        review.rating = rating;
+      }
     });
+  } else {
+    product.reviews.push(review);
+    product.numOfReviews = product.reviews.length;
+  }
+
+  product.ratings =
+    product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+    product.reviews.length;
+
+  await product.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    success: true,
+  });
 })
+
+// Get product reviews   =>  /api/v1/reviews
+export const getProductReviews = catchAsyncErrors(async (req, res, next) => {
+  const product = await Product.findById(req.query.id).populate("reviews.user");
+
+  if (!product) {
+    return next(new ErrorHandler("Product not found", 404));
+  }
+
+  res.status(200).json({
+    reviews: product.reviews,
+  });
+});

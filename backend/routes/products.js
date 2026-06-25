@@ -1,5 +1,5 @@
 import express from 'express';
-import { deleteProduct, getProductDetails, getProducts, newProduct, updateProduct } from '../controllers/productControllers.js';
+import { createProductReview, deleteProduct, getAdminProducts, getProductDetails, getProductReviews, getProducts, newProduct, updateProduct } from '../controllers/productControllers.js';
 import { isAuthenticatedUser, authorizeRoles } from '../middleware/auth.js';
 
 const router = express.Router();
@@ -8,7 +8,8 @@ const router = express.Router();
 router.route('/products').get(getProducts);
 router
     .route("/admin/products")
-    .post(isAuthenticatedUser, authorizeRoles("admin"), newProduct);
+    .post(isAuthenticatedUser, authorizeRoles("admin"), newProduct)
+    .get(isAuthenticatedUser, authorizeRoles("admin"), getAdminProducts);
 
 router.route("/products/:id").get(getProductDetails);
 
@@ -19,5 +20,10 @@ router
 router
     .route("/admin/products/:id")
     .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteProduct);
+
+router
+  .route("/reviews")
+  .get(isAuthenticatedUser, getProductReviews)
+  .put(isAuthenticatedUser, createProductReview);
 
 export default router;
