@@ -12,6 +12,7 @@ import ScrollToTop from './ScrollToTop.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx'
 import SalesChart from './charts/SalesChart.jsx';
 import CustomTable from './layout/CustomTable.jsx';
+import NewReview from './reviews/NewReview.jsx';
 
 export {
     Footer,
@@ -28,4 +29,5 @@ export {
     ProtectedRoute,
     SalesChart,
     CustomTable,
+    NewReview,
 }
