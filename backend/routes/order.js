@@ -13,4 +13,5 @@ router
   .route("/admin/get_sales")
   .get(isAuthenticatedUser, authorizeRoles("admin"), getSales);
 
+
 export default router;
