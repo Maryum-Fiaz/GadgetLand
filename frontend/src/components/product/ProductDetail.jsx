@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Loader, MetaData, NewReview, ProductRating } from '../index.js'
+import { ListReviews, Loader, MetaData, NewReview, ProductRating } from '../index.js'
 import { useGetProductDetailsQuery } from '../../redux/api/productApi.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
@@ -181,7 +181,7 @@ function ProductDetail() {
                             {/* Add to cart Button */}
                             <button
                                 type="button"
-                                disabled={product.stock <= 0}
+                                disabled={product?.stock <= 0}
                                 onClick={setItemToCart}
                                 className="flex-1 h-12 p-4 bg-mauve-600 hover:bg-mauve-700 active:bg-mauve-800 text-white font-sans text-xs uppercase font-bold tracking-widest rounded-xl transition-all shadow-sm disabled:bg-zinc-200 disabled:text-zinc-400 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center active:scale-[0.98]"
                             >
@@ -221,16 +221,11 @@ function ProductDetail() {
                 </div>
 
                 {/* ── FOOTER FRAME: Multi-User Testimonial Stream ── */}
-                {product?.reviews?.length > 0 && (
-                    <div className="max-w-6xl mx-auto mt-12 md:mt-20 pt-8 border-t border-zinc-200/80">
-                        <div className="text-sm text-zinc-400 font-medium mb-6 uppercase tracking-wider text-[10px]">
-                            Feedbacks
-                        </div>
-                        <div className="text-zinc-700">
-                            reviews
-                        </div>
-                    </div>
-                )}
+{product?.reviews?.length > 0 && (
+    <div className="max-w-6xl mx-auto mt-12 md:mt-20 pt-8 border-t border-zinc-200/80">
+        <ListReviews reviews={product?.reviews} />
+    </div>
+)}
             </div>
         </>
     )

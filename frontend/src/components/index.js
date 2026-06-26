@@ -13,6 +13,7 @@ import ProtectedRoute from './ProtectedRoute.jsx'
 import SalesChart from './charts/SalesChart.jsx';
 import CustomTable from './layout/CustomTable.jsx';
 import NewReview from './reviews/NewReview.jsx';
+import ListReviews from './reviews/ListReviews.jsx';
 
 export {
     Footer,
@@ -30,4 +31,5 @@ export {
     SalesChart,
     CustomTable,
     NewReview,
+    ListReviews,
 }
