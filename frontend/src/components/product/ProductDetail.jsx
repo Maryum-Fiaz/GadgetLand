@@ -202,9 +202,8 @@ function ProductDetail() {
                         {/* Customer Review Feedback Canvas Frame */}
                         <div className="pt-2">
                             {isAuthenticated ? (
-                                <div className="text-sm font-medium text-zinc-700 bg-white border border-zinc-200 p-4 rounded-xl shadow-2xs">
                                     <NewReview productId={product?._id} />
-                                </div>
+                                
                             ) : (
                                 <div className="bg-white border border-dashed border-zinc-200/80 p-4 rounded-xl text-center">
                                     <p className="text-xs font-medium text-zinc-500">

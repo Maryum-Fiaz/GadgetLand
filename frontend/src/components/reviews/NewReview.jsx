@@ -52,7 +52,7 @@ const NewReview = ({ productId }) => {
       <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="w-full sm:w-auto inline-flex items-center justify-center h-11 px-6 bg-zinc-900 hover:bg-zinc-800 text-white text-xs uppercase font-bold tracking-widest rounded-xl transition-all shadow-xs active:scale-[0.98] cursor-pointer"
+          className="w-full sm:w-auto inline-flex items-center justify-center h-11 px-6 text-zinc-900 hover:bg-zinc-900 hover:text-white border boder-zinc-900 text-xs uppercase font-bold tracking-widest rounded-xl transition-all shadow-xs active:scale-[0.98] cursor-pointer"
         >
           Submit Your Review
         </button>
