@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Star } from "lucide-react"; // Double check your project's path or icon source
 
 import { toast } from "react-hot-toast";
-import { useSubmitReviewMutation } from "../../redux/api/productApi";
+import { useCanUserReviewQuery, useSubmitReviewMutation } from "../../redux/api/productApi";
 
 const NewReview = ({ productId }) => {
   const [rating, setRating] = useState(0);
@@ -11,8 +11,11 @@ const NewReview = ({ productId }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [submitReview, { isLoading, error, isSuccess }] = useSubmitReviewMutation();
-//   const { data } = useCanUserReviewQuery(productId);
-//   const canReview = data?.canReview;
+  const { data } = useCanUserReviewQuery(productId);
+  const canReview = data?.canReview;
+
+  console.log('canReview? ', canReview);
+  
 
   useEffect(() => {
     if (error) {
@@ -39,23 +42,15 @@ const NewReview = ({ productId }) => {
 
   return (
     <div className="w-full">
-      {/* {canReview && (
+      {canReview && (
         <button
-          type="button"
-          onClick={() => setIsOpen(true)}
-          className="w-full sm:w-auto inline-flex items-center justify-center h-11 px-6 bg-zinc-900 hover:bg-zinc-800 text-white text-xs uppercase font-bold tracking-widest rounded-xl transition-all shadow-xs active:scale-[0.98] cursor-pointer"
-        >
-          Submit Your Review
-        </button>
-      )} */}
-
-      <button
           type="button"
           onClick={() => setIsOpen(true)}
           className="w-full sm:w-auto inline-flex items-center justify-center h-11 px-6 text-zinc-900 hover:bg-zinc-900 hover:text-white border boder-zinc-900 text-xs uppercase font-bold tracking-widest rounded-xl transition-all shadow-xs active:scale-[0.98] cursor-pointer"
         >
           Submit Your Review
         </button>
+      )}
 
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/40 backdrop-blur-xs transition-opacity duration-300">
