@@ -146,9 +146,9 @@ const NewProduct = () => {
                   onChange={onChange}
                   className="w-full h-11 px-4 pr-10 text-sm font-medium rounded-xl bg-white border border-zinc-200 text-zinc-800 outline-none transition-all duration-200 focus:border-mauve-400 focus:ring-2 focus:ring-mauve-100 appearance-none cursor-pointer"
                 >
-                  {PRODUCT_CATEGORIES?.map((cat) => (
-                    <option key={cat} value={cat}>
-                      {cat}
+                  {PRODUCT_CATEGORIES?.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
                     </option>
                   ))}
                 </select>

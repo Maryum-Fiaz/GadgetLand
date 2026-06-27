@@ -76,7 +76,7 @@ const ListProducts = () => {
         {/* Edit Form Node Link */}
         <Link
           to={`/admin/products/${product?._id}`}
-          className="h-8 w-8 rounded-lg border border-zinc-200 bg-white hover:border-zinc-400 flex items-center justify-center text-zinc-500 hover:text-zinc-900 transition-colors cursor-pointer"
+          className="h-8 w-8 rounded-lg border border-zinc-200 bg-white hover:border-blue-200 flex items-center justify-center text-zinc-500 hover:text-blue-600 hover:bg-blue-50 transition-colors cursor-pointer"
           title="Edit Details"
         >
           <Pencil size={14} />
@@ -85,7 +85,7 @@ const ListProducts = () => {
         {/* Media Asset Manager Link */}
         <Link
           to={`/admin/products/${product?._id}/upload_images`}
-          className="h-8 w-8 rounded-lg border border-zinc-200 bg-white hover:border-zinc-400 flex items-center justify-center text-zinc-500 hover:text-zinc-900 transition-colors cursor-pointer"
+          className="h-8 w-8 rounded-lg border border-zinc-200 bg-white hover:border-yellow-200 flex items-center justify-center text-zinc-500 hover:text-yellow-600 hover:bg-yellow-50 transition-colors cursor-pointer"
           title="Upload Images"
         >
           <ImagePlus size={14} />
