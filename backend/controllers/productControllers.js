@@ -2,7 +2,8 @@ import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import Product from "../models/product.js";
 import ApiFilters from "../utils/apiFilters.js";
 import ErrorHandler from "../utils/errorHandler.js";
-import Order from '../models/order.js'
+import Order from "../models/order.js";
+import { upload_file } from "../utils/cloudinary.js";
 
 // Get Products => /api/v1/products
 export const getProducts = catchAsyncErrors(async (req, res) => {
@@ -37,7 +38,9 @@ export const newProduct = catchAsyncErrors(async (req, res) => {
 
 // Get Single Product => /api/v1/products/:id
 export const getProductDetails = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.findById(req.params?.id).populate("reviews.user");
+  const product = await Product.findById(req.params?.id).populate(
+    "reviews.user",
+  );
 
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
@@ -58,7 +61,7 @@ export const getAdminProducts = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Update Product details => /api/v1/admin/products/:id
-export const updateProduct = catchAsyncErrors(async (req, res) => {
+export const updateProduct = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.findById(req.params?.id);
 
   if (!product) {
@@ -68,6 +71,30 @@ export const updateProduct = catchAsyncErrors(async (req, res) => {
   product = await Product.findByIdAndUpdate(req.params?.id, req.body, {
     new: true,
   });
+
+  res.status(200).json({
+    product,
+  });
+});
+
+// Upload product images   =>  /api/v1/admin/products/:id/upload_images
+export const uploadProductImages = catchAsyncErrors(async (req, res, next) => {
+  let product = await Product.findById(req?.params?.id);
+
+  if (!product) {
+    return next(new ErrorHandler("Product not found", 404));
+  }
+
+  const imagesArray = req?.body?.images;
+
+  const urls = await Promise.all(
+    imagesArray.map(async (image) => {
+      return await upload_file(image, "gadgetland/products");
+    }),
+  );
+
+  product?.images?.push(...urls); // store urls in product database
+  await product?.save({ validateBeforeSave: false });
 
   res.status(200).json({
     product,
@@ -99,7 +126,7 @@ export const createProductReview = catchAsyncErrors(async (req, res, next) => {
     user: req.user?._id,
     rating: Number(rating),
     comment,
-  }
+  };
 
   const product = await Product.findById(productId);
 
@@ -107,7 +134,9 @@ export const createProductReview = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Product not found", 404));
   }
 
-  const isReviewd = product.reviews.find( r => r.user.toString() === req.user?._id.toString())
+  const isReviewd = product.reviews.find(
+    (r) => r.user.toString() === req.user?._id.toString(),
+  );
 
   if (isReviewd) {
     product.reviews.forEach((review) => {
@@ -130,12 +159,11 @@ export const createProductReview = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
   });
-})
+});
 
 // Get product reviews   =>  /api/v1/reviews
 export const getProductReviews = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.query.id).populate("reviews.user");
-  
 
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
@@ -161,4 +189,3 @@ export const canUserReview = catchAsyncErrors(async (req, res) => {
     canReview: true,
   });
 });
-

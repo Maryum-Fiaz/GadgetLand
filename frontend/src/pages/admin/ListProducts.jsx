@@ -97,7 +97,7 @@ const ListProducts = () => {
           // onClick={() => deleteProductHandler(product?._id)}
           // disabled={isDeleteLoading}
           className="h-8 w-8 rounded-lg border border-zinc-200 bg-white hover:border-rose-200 hover:bg-rose-50 flex items-center justify-center text-zinc-400 hover:text-rose-600 transition-colors disabled:opacity-40 cursor-pointer"
-          title="Purge Node"
+          title="Delete Product"
         >
           <Trash2 size={14} />
         </button>

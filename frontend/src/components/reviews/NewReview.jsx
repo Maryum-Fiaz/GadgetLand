@@ -13,8 +13,6 @@ const NewReview = ({ productId }) => {
   const [submitReview, { isLoading, error, isSuccess }] = useSubmitReviewMutation();
   const { data } = useCanUserReviewQuery(productId);
   const canReview = data?.canReview;
-
-  console.log('canReview? ', canReview);
   
 
   useEffect(() => {
