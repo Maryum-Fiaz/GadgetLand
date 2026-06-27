@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router";
-import { useCreateProductMutation } from "../../redux/api/productApi";
+import { useNavigate, useParams } from "react-router";
+import { useGetProductDetailsQuery, useUpdateProductMutation } from "../../redux/api/productApi";
 import { MetaData } from "../../components";
 import { PRODUCT_CATEGORIES } from "../../constants/constants";
 
 const NewProduct = () => {
   const navigate = useNavigate();
+  const params = useParams();
 
   const [product, setProduct] = useState({
     name: "",
@@ -19,19 +20,33 @@ const NewProduct = () => {
 
   const { name, description, price, category, stock, seller } = product;
 
-  const [createProduct, { isLoading, error, isSuccess }] =
-    useCreateProductMutation();
+  const [updateProduct, { isLoading, error, isSuccess }] =
+    useUpdateProductMutation();
+
+  const {data} = useGetProductDetailsQuery(params?.id)
+  
 
   useEffect(() => {
+    if (data?.product) {
+      setProduct({
+        name: data?.product?.name,
+        description: data?.product?.description,
+        price: data?.product?.price,
+        category: data?.product?.category,
+        stock: data?.product?.stock,
+        seller: data?.product?.seller,
+      });
+    }
+
     if (error) {
       toast.error(error?.data?.message);
     }
 
     if (isSuccess) {
-      toast.success("Product created successfully");
+      toast.success("Product updated successfully");
       navigate("/admin/products");
     }
-  }, [error, isSuccess, navigate]);
+  }, [error, isSuccess, navigate, data]);
 
   const onChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -39,12 +54,12 @@ const NewProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createProduct(product);
+    updateProduct({id: params?.id ,body: product});
   };
 
   return (
     <>
-      <MetaData title={"Create New Product"} />
+      <MetaData title={"Update Product"} />
 
       {/* Main Core Layout Form Grid Wrapper */}
       <div className="w-full max-w-3xl mx-auto px-2 py-6 font-sans selection:bg-mauve-100">
@@ -53,10 +68,10 @@ const NewProduct = () => {
           {/* Header Typography Group */}
           <div className="space-y-1 pb-4 border-b border-zinc-100">
             <h2 className="text-xl font-black text-zinc-900 tracking-tight">
-              Create New Product
+              Update Product
             </h2>
             <p className="text-xs font-medium text-zinc-400">
-              Deploy a new item record node to your global catalog ecosystem.
+              Update.
             </p>
           </div>
 
@@ -186,7 +201,7 @@ const NewProduct = () => {
               disabled={isLoading}
               className="w-full sm:w-44 h-11 bg-mauve-500 hover:bg-mauve-600 active:bg-mauve-700 text-white font-sans text-xs uppercase font-bold tracking-widest rounded-xl transition-all shadow-xs disabled:bg-zinc-300 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center"
             >
-              {isLoading ? "Creating record..." : "CREATE PRODUCT"}
+              {isLoading ? "Updating record..." : "UPDATE PRODUCT"}
             </button>
           </div>
 

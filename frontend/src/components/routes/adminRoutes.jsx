@@ -2,6 +2,7 @@ import AdminDashboard from '../../pages/admin/AdminDashboard';
 import AdminLayout from '../../pages/admin/AdminLayout'
 import ListProducts from '../../pages/admin/ListProducts';
 import NewProduct from '../../pages/admin/NewProduct';
+import UpdateProduct from '../../pages/admin/UpdateProduct'
 import {ProtectedRoute} from '../index'
 
 export const adminRoutes = [
@@ -24,6 +25,10 @@ export const adminRoutes = [
       {
         path: "product/new",
         element: <NewProduct />
+      },
+      {
+        path: "products/:id",
+        element: <UpdateProduct />
       }
     ]
     
