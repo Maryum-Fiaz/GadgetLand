@@ -1,7 +1,7 @@
 import express from "express";
 
 import { authorizeRoles, isAuthenticatedUser } from '../middleware/auth.js'
-import { getAdminOrders, getOrderDetails, getSales, myOrders, newOrder } from "../controllers/orderControllers.js";
+import { getAdminOrders, getOrderDetails, getSales, myOrders, newOrder, updateOrder } from "../controllers/orderControllers.js";
 
 const router = express.Router();
 router.route("/orders/new").post(isAuthenticatedUser, newOrder);
@@ -15,5 +15,9 @@ router
   .get(isAuthenticatedUser, authorizeRoles("admin"), getSales);
 
 router.route("/admin/orders").get(isAuthenticatedUser, authorizeRoles("admin"), getAdminOrders)
+
+router
+  .route("/admin/orders/:id")
+  .put(isAuthenticatedUser, authorizeRoles("admin"), updateOrder)
 
 export default router;

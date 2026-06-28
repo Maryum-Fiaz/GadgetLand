@@ -3,6 +3,7 @@ import AdminLayout from '../../pages/admin/AdminLayout'
 import ListOrders from '../../pages/admin/ListOrders';
 import ListProducts from '../../pages/admin/ListProducts';
 import NewProduct from '../../pages/admin/NewProduct';
+import ProcessOrder from '../../pages/admin/ProcessOrder';
 import UpdateProduct from '../../pages/admin/UpdateProduct'
 import UploadImages from '../../pages/admin/UploadImages';
 import {ProtectedRoute} from '../index'
@@ -39,6 +40,10 @@ export const adminRoutes = [
       {
         path: "orders",
         element: <ListOrders />
+      },
+      {
+        path: "orders/:id",
+        element: <ProcessOrder />
       }
     ]
     

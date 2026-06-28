@@ -65,7 +65,7 @@ function ListOrders() {
           <Pencil size={14} />
         </Link>
 
-        {/* Core Purge Trigger Action Button */}
+        {/* Delete Order Button */}
         <button
           type="button"
         //   onClick={() => deleteOrderHandler(order?._id)}
