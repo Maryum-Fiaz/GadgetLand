@@ -5,7 +5,7 @@ import { UploadCloud, X, Trash2 } from "lucide-react";
 import { MetaData } from "../../components/index";
 import { useNavigate, useParams } from "react-router";
 import {
-//   useDeleteProductImageMutation,
+  useDeleteImageMutation,
   useGetProductDetailsQuery,
   useUploadProductImagesMutation,
 } from "../../redux/api/productApi";
@@ -19,13 +19,14 @@ const UploadImages = () => {
   const [imagesPreview, setImagesPreview] = useState([]);
   const [uploadedImages, setUploadedImages] = useState([]);
 
+  // RTK Query
   const [uploadProductImages, { isLoading, error, isSuccess }] =
     useUploadProductImagesMutation();
 
-//   const [
-//     deleteProductImage,
-//     { isLoading: isDeleteLoading, error: deleteError },
-//   ] = useDeleteProductImageMutation();
+  const [
+    deleteProductImage,
+    { isLoading: isDeleteLoading, error: deleteError },
+  ] = useDeleteImageMutation();
 
   const { data } = useGetProductDetailsQuery(params?.id);
 
@@ -38,9 +39,9 @@ const UploadImages = () => {
       toast.error(error?.data?.message);
     }
 
-    // if (deleteError) {
-    //   toast.error(deleteError?.data?.message);
-    // }
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
 
     if (isSuccess) {
       setImagesPreview([]);
@@ -48,7 +49,7 @@ const UploadImages = () => {
       toast.success("Images Uploaded successfully");
       navigate("/admin/products");
     }
-  }, [data, error, isSuccess, navigate]);
+  }, [data, error, isSuccess, deleteError, navigate]);
 
   const onChange = (e) => {
     const files = Array.from(e.target.files);
@@ -87,11 +88,9 @@ const UploadImages = () => {
     uploadProductImages({ id: params?.id, body: { images } });
   };
 
-//   const deleteImage = (imgId) => {
-//     if (window.confirm("Are you sure you want to delete this live image?")) {
-//       deleteProductImage({ id: params?.id, body: { imgId } });
-//     }
-//   };
+  const deleteImage = (imgId) => {
+      deleteProductImage({ id: params?.id, body: { imgId } });
+  };
 
   return (
     <>
@@ -136,7 +135,7 @@ const UploadImages = () => {
             </div>
           </div>
 
-          {/* 1. New Local Image Selection Stage Queue Previews */}
+          {/* Previews */}
           {imagesPreview?.length > 0 && (
             <div className="space-y-3">
               <p className="text-xs font-bold uppercase tracking-wider text-amber-600">
@@ -172,7 +171,7 @@ const UploadImages = () => {
             </div>
           )}
 
-          {/* 2. Core Persistent Live Server Cloud Storage Images */}
+          {/* Stored Images */}
           {uploadedImages?.length > 0 && (
             <div className="space-y-3">
               <p className="text-xs font-bold uppercase tracking-wider text-emerald-600">
@@ -180,9 +179,9 @@ const UploadImages = () => {
               </p>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {uploadedImages.map((img) => (
+                {uploadedImages.map((img, index) => (
                   <div 
-                    key={img?.public_id} 
+                    key={img?.public_id || index} 
                     className="relative aspect-square rounded-xl border border-zinc-200 bg-white p-2 flex items-center justify-center"
                   >
                     <div className="w-full h-full rounded-lg overflow-hidden flex items-center justify-center">
@@ -194,11 +193,11 @@ const UploadImages = () => {
                     </div>
                     <button
                       type="button"
-                    //   disabled={isLoading || isDeleteLoading}
-                    //   onClick={(e) => {
-                    //     e.stopPropagation();
-                    //     deleteImage(img?.public_id);
-                    //   }}
+                      disabled={isLoading || isDeleteLoading}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        deleteImage(img?.public_id);
+                      }}
                       className="absolute top-1.5 right-1.5 h-6 w-6 rounded-lg bg-white border border-zinc-200 text-zinc-400 hover:text-rose-600 hover:border-rose-200 flex items-center justify-center shadow-xs cursor-pointer disabled:opacity-40 transition-all"
                     >
                       <Trash2 size={12} />
@@ -213,7 +212,7 @@ const UploadImages = () => {
           <div className="pt-2">
             <button
               type="submit"
-            //   disabled={isLoading || isDeleteLoading}
+              disabled={isLoading || isDeleteLoading}
               className="w-full sm:w-40 h-11 bg-mauve-500 hover:bg-mauve-600 disabled:bg-zinc-300 text-white text-xs uppercase font-bold tracking-widest rounded-xl transition-colors disabled:cursor-not-allowed cursor-pointer flex items-center justify-center"
             >
               {isLoading ? "Uploading..." : "Upload"}

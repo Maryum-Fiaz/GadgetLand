@@ -3,7 +3,7 @@ import Product from "../models/product.js";
 import ApiFilters from "../utils/apiFilters.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import Order from "../models/order.js";
-import { upload_file } from "../utils/cloudinary.js";
+import { delete_file, upload_file } from "../utils/cloudinary.js";
 
 // Get Products => /api/v1/products
 export const getProducts = catchAsyncErrors(async (req, res) => {
@@ -101,8 +101,31 @@ export const uploadProductImages = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// Delete product image   =>  /api/v1/admin/products/:id/delete_image
+export const deleteProductImage = catchAsyncErrors(async (req, res) => {
+  let product = await Product.findById(req?.params?.id);
+
+  if (!product) {
+    return next(new ErrorHandler("Product not found", 404));
+  }
+
+  const isDeleted = await delete_file(req.body.imgId);
+
+  if (isDeleted) {
+    product.images = product?.images?.filter(
+      (img) => img.public_id !== req.body.imgId
+    );
+
+    await product?.save({ validateBeforeSave: false });
+  }
+
+  res.status(200).json({
+    product,
+  });
+});
+
 // Delete Product details => /api/v1/admin/products/:id
-export const deleteProduct = catchAsyncErrors(async (req, res) => {
+export const deleteProduct = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.findById(req.params?.id);
 
   if (!product) {

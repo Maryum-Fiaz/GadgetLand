@@ -5,7 +5,6 @@ import { Link } from "react-router";
 
 import { Pencil, ImagePlus, Trash2 } from "lucide-react"; // Sleek native icons
 import {
-  // useDeleteProductMutation,
   useGetAdminProductsQuery,
 } from "../../redux/api/productApi";
 
