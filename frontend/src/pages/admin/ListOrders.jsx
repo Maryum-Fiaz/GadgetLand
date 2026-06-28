@@ -21,7 +21,7 @@ function ListOrders() {
   
     }, [error]);
   
-    // Define Columns configuration matching your CustomTable requirements
+    // Define Columns configuration matching CustomTable requirements
     const tableColumns = [
       { label: "ID", field: "id", align: "left" },
       { label: "Payment Status", field: "paymentStatus", align: "left" },
@@ -68,7 +68,7 @@ function ListOrders() {
         {/* Core Purge Trigger Action Button */}
         <button
           type="button"
-        //   onClick={() => deleteOrderHandler(product?._id)}
+        //   onClick={() => deleteOrderHandler(order?._id)}
         //   disabled={isDeleteLoading}
           className="h-8 w-8 rounded-lg border border-zinc-200 bg-white hover:border-rose-200 hover:bg-rose-50 flex items-center justify-center text-zinc-400 hover:text-rose-600 transition-colors disabled:opacity-40 cursor-pointer"
           title="Delete Product"
