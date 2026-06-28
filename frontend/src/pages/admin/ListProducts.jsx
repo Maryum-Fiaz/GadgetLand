@@ -5,6 +5,7 @@ import { Link } from "react-router";
 
 import { Pencil, ImagePlus, Trash2 } from "lucide-react"; // Sleek native icons
 import {
+  useDeleteProductMutation,
   useGetAdminProductsQuery,
 } from "../../redux/api/productApi";
 
@@ -14,36 +15,28 @@ import { Loader, MetaData, CustomTable } from "../../components";
 const ListProducts = () => {
   const { data, isLoading, error } = useGetAdminProductsQuery();
 
-  // const [
-  //   deleteProduct,
-  //   { isLoading: isDeleteLoading, error: deleteError, isSuccess },
-  // ] = useDeleteProductMutation();
-
-  // useEffect(() => {
-  //   if (error) {
-  //     toast.error(error?.data?.message);
-  //   }
-
-  //   if (deleteError) {
-  //     toast.error(deleteError?.data?.message);
-  //   }
-
-  //   if (isSuccess) {
-  //     toast.success("Product Deleted successfully");
-  //   }
-  // }, [error, deleteError, isSuccess]);
+  const [
+    deleteProduct,
+    { isLoading: isDeleteLoading, error: deleteError, isSuccess },
+  ] = useDeleteProductMutation();
 
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
     }
 
-  }, [error]);
-  // const deleteProductHandler = (id) => {
-  //   if (window.confirm("Are you sure you want to drop this asset node?")) {
-  //     deleteProduct(id);
-  //   }
-  // };
+    if (deleteError) {
+      toast.error(deleteError?.data?.message);
+    }
+
+    if (isSuccess) {
+      toast.success("Product Deleted successfully");
+    }
+  }, [error, deleteError, isSuccess]);
+
+  const deleteProductHandler = (id) => {
+      deleteProduct(id);
+  };
 
   // Define Columns configuration matching your CustomTable requirements
   const tableColumns = [
@@ -93,8 +86,8 @@ const ListProducts = () => {
         {/* Core Purge Trigger Action Button */}
         <button
           type="button"
-          // onClick={() => deleteProductHandler(product?._id)}
-          // disabled={isDeleteLoading}
+          onClick={() => deleteProductHandler(product?._id)}
+          disabled={isDeleteLoading}
           className="h-8 w-8 rounded-lg border border-zinc-200 bg-white hover:border-rose-200 hover:bg-rose-50 flex items-center justify-center text-zinc-400 hover:text-rose-600 transition-colors disabled:opacity-40 cursor-pointer"
           title="Delete Product"
         >
