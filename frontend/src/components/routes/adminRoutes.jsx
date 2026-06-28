@@ -1,5 +1,6 @@
 import AdminDashboard from '../../pages/admin/AdminDashboard';
 import AdminLayout from '../../pages/admin/AdminLayout'
+import ListOrders from '../../pages/admin/ListOrders';
 import ListProducts from '../../pages/admin/ListProducts';
 import NewProduct from '../../pages/admin/NewProduct';
 import UpdateProduct from '../../pages/admin/UpdateProduct'
@@ -34,6 +35,10 @@ export const adminRoutes = [
       {
         path: "products/:id/upload_images",
         element: <UploadImages />
+      },
+      {
+        path: "orders",
+        element: <ListOrders />
       }
     ]
     

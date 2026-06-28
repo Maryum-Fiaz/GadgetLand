@@ -58,6 +58,9 @@ export const getOrderDetails = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+
+// *Admin 
+// chart data
 const getSalesData = async(startDate, endDate) => {
     const salesData = await Order.aggregate([
       {
@@ -143,5 +146,14 @@ export const getSales = catchAsyncErrors(async(req, res, next) => {
     totalSales,
     totalNumOfOrders,
     sales: salesData,
+  });
+})
+
+// Admin display all orders => api/v1/admin/orders
+export const getAdminOrders = catchAsyncErrors(async(req, res, next) => {
+  const orders = await Order.find();
+
+  res.status(200).json({
+    orders,
   });
 })
