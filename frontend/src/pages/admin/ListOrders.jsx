@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { CustomTable, Loader, MetaData } from "../../components";
-import { useAdminOrdersQuery } from "../../redux/api/orderApi"
+import { useAdminOrdersQuery, useDeleteOrderMutation } from "../../redux/api/orderApi"
 import toast from "react-hot-toast";
 import { Link } from "react-router";
 import { Pencil, Trash2 } from "lucide-react";
@@ -10,12 +10,26 @@ function ListOrders() {
 
     const {data, isLoading, error} = useAdminOrdersQuery();
 
+    const [deleteOrder, {isLoading: isDeleteLoading, error: deleteError, isSuccess}] = useDeleteOrderMutation()
+
   useEffect(() => {
       if (error) {
         toast.error(error?.data?.message);
       }
+
+      if(deleteError){
+        toast.error(deleteError?.data?.message);
+      }
+
+      if(isSuccess) {
+        toast.success('Order deleted successfully!')
+      }
   
-    }, [error]);
+    }, [error, deleteError, isSuccess]);
+
+    const deleteOrderHandler = (id) => {
+      deleteOrder(id)
+    }
   
     // Define Columns configuration matching CustomTable requirements
     const tableColumns = [
@@ -64,8 +78,8 @@ function ListOrders() {
         {/* Delete Order Button */}
         <button
           type="button"
-        //   onClick={() => deleteOrderHandler(order?._id)}
-        //   disabled={isDeleteLoading}
+          onClick={() => deleteOrderHandler(order?._id)}
+          disabled={isDeleteLoading}
           className="h-8 w-8 rounded-lg border border-zinc-200 bg-white hover:border-rose-200 hover:bg-rose-50 flex items-center justify-center text-zinc-400 hover:text-rose-600 transition-colors disabled:opacity-40 cursor-pointer"
           title="Delete Product"
         >
