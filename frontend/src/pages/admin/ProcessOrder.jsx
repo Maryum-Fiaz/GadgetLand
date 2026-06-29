@@ -26,7 +26,7 @@ const ProcessOrder = () => {
     orderStatus,
   } = order;
 
-  const isPaid = paymentInfo?.status === "paid";
+  const isPaid = paymentInfo?.status === "Paid";
 
   useEffect(() => {
     if (orderStatus) {
@@ -46,8 +46,6 @@ const ProcessOrder = () => {
 
   const updateOrderHandler = (id) => {
     const data = { status };
-    console.log('status: ', data);
-    
     updateOrder({ id, body: data });
   };
 

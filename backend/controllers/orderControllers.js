@@ -192,6 +192,9 @@ export const updateOrder = catchAsyncErrors(async (req, res, next) => {
   }
 
   order.orderStatus = req.body.status;
+  if(req.body.status === 'Delivered'){
+    order.paymentInfo.status = 'Paid'
+  }
   order.deliveredAt = Date.now();
 
   await order.save();

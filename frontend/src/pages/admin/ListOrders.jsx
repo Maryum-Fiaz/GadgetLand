@@ -10,10 +10,6 @@ function ListOrders() {
 
     const {data, isLoading, error} = useAdminOrdersQuery();
 
-    const orders = data?.orders;
-
-
-    console.log("data is --> ", orders)
   useEffect(() => {
       if (error) {
         toast.error(error?.data?.message);
