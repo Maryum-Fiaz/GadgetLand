@@ -1,5 +1,7 @@
 import catchAsyncErrors from '../middleware/catchAsyncErrors.js'
 import Order from "../models/order.js";
+import Product from "../models/product.js";
+import ErrorHandler from "../utils/errorHandler.js";
 
 // Create new Order  =>  /api/v1/orders/new
 export const newOrder = catchAsyncErrors(async (req, res, next) => { // ** IMPORTANT: This only create order when 'COD' -> Cash on Delivery
