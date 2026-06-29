@@ -6,6 +6,7 @@ import ListUsers from '../../pages/admin/ListUsers';
 import NewProduct from '../../pages/admin/NewProduct';
 import ProcessOrder from '../../pages/admin/ProcessOrder';
 import UpdateProduct from '../../pages/admin/UpdateProduct'
+import UpdateUser from '../../pages/admin/UpdateUser';
 import UploadImages from '../../pages/admin/UploadImages';
 import {ProtectedRoute} from '../index'
 
@@ -49,6 +50,10 @@ export const adminRoutes = [
       {
         path: "users",
         element: <ListUsers />
+      },
+      {
+        path: "users/:id",
+        element: <UpdateUser />
       },
     ]
     

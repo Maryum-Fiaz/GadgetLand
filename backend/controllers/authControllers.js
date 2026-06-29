@@ -187,6 +187,38 @@ export const allUsers = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// Get User Details - ADMIN  =>  /api/v1/admin/users/:id
+export const getUserDetails = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      new ErrorHandler(`User not found with id: ${req.params.id}`, 404)
+    );
+  }
+
+  res.status(200).json({
+    user,
+  });
+});
+
+// Update User Details - ADMIN  =>  /api/v1/admin/users/:id
+export const updateUser = catchAsyncErrors(async (req, res, next) => {
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+    role: req.body.role, //only admin can update the role
+  };
+
+  const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+    new: true,
+  });
+
+  res.status(200).json({
+    user,
+  });
+});
+
 // Delete User - ADMIN  =>  /api/v1/admin/users/:id
 export const deleteUser = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);

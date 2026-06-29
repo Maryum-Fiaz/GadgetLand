@@ -1,8 +1,21 @@
 // User Routes
 
 import express from "express";
-import { allUsers, deleteUser, forgotPassword, getUserProfile, loginUser, logout, registerUser, resetPassword, updatePassword, updateProfile } from "../controllers/authControllers.js";
-import { authorizeRoles, isAuthenticatedUser } from '../middleware/auth.js'
+import {
+  allUsers,
+  deleteUser,
+  forgotPassword,
+  getUserDetails,
+  getUserProfile,
+  loginUser,
+  logout,
+  registerUser,
+  resetPassword,
+  updatePassword,
+  updateProfile,
+  updateUser,
+} from "../controllers/authControllers.js";
+import { authorizeRoles, isAuthenticatedUser } from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -18,9 +31,14 @@ router.route("/password/update").put(isAuthenticatedUser, updatePassword);
 router.route("/me/update").put(isAuthenticatedUser, updateProfile);
 
 // Admin
-router.route("/admin/users").get(isAuthenticatedUser, authorizeRoles("admin") ,allUsers);
+router
+  .route("/admin/users")
+  .get(isAuthenticatedUser, authorizeRoles("admin"), allUsers);
 
 router
-  .route("/admin/users/:id").delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser);
+  .route("/admin/users/:id")
+  .get(isAuthenticatedUser, authorizeRoles("admin"), getUserDetails)
+  .put(isAuthenticatedUser, authorizeRoles("admin"), updateUser)
+  .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser);
 
 export default router;
