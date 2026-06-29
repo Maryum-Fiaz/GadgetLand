@@ -2,6 +2,7 @@ import AdminDashboard from '../../pages/admin/AdminDashboard';
 import AdminLayout from '../../pages/admin/AdminLayout'
 import ListOrders from '../../pages/admin/ListOrders';
 import ListProducts from '../../pages/admin/ListProducts';
+import ListUsers from '../../pages/admin/ListUsers';
 import NewProduct from '../../pages/admin/NewProduct';
 import ProcessOrder from '../../pages/admin/ProcessOrder';
 import UpdateProduct from '../../pages/admin/UpdateProduct'
@@ -44,7 +45,11 @@ export const adminRoutes = [
       {
         path: "orders/:id",
         element: <ProcessOrder />
-      }
+      },
+      {
+        path: "users",
+        element: <ListUsers />
+      },
     ]
     
   },
