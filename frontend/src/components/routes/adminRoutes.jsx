@@ -5,6 +5,7 @@ import ListProducts from '../../pages/admin/ListProducts';
 import ListUsers from '../../pages/admin/ListUsers';
 import NewProduct from '../../pages/admin/NewProduct';
 import ProcessOrder from '../../pages/admin/ProcessOrder';
+import ProductReviews from '../../pages/admin/ProductReviews';
 import UpdateProduct from '../../pages/admin/UpdateProduct'
 import UpdateUser from '../../pages/admin/UpdateUser';
 import UploadImages from '../../pages/admin/UploadImages';
@@ -54,6 +55,10 @@ export const adminRoutes = [
       {
         path: "users/:id",
         element: <UpdateUser />
+      },
+      {
+        path: "reviews",
+        element: <ProductReviews />
       },
     ]
     
