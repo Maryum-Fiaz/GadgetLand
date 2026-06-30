@@ -58,6 +58,9 @@ export const orderApi = createApi({
       },
       invalidatesTags: ["AdminOrders"],
     }),
+    getTopSellingItems: builder.query({
+      query: () => '/topselling'
+    })
   }),
 });
 
@@ -70,4 +73,5 @@ export const {
   useAdminOrdersQuery,
   useUpdateOrderMutation,
   useDeleteOrderMutation,
+  useGetTopSellingItemsQuery,
 } = orderApi;

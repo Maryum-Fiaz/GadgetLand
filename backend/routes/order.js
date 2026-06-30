@@ -1,7 +1,7 @@
 import express from "express";
 
 import { authorizeRoles, isAuthenticatedUser } from '../middleware/auth.js'
-import { deleteOrder, getAdminOrders, getOrderDetails, getSales, myOrders, newOrder, updateOrder } from "../controllers/orderControllers.js";
+import { deleteOrder, getAdminOrders, getOrderDetails, getSales, myOrders, newOrder, topSellingItems, updateOrder } from "../controllers/orderControllers.js";
 
 const router = express.Router();
 router.route("/orders/new").post(isAuthenticatedUser, newOrder);
@@ -13,6 +13,8 @@ router.route("/me/orders").get(isAuthenticatedUser,myOrders)
 router
   .route("/admin/get_sales")
   .get(isAuthenticatedUser, authorizeRoles("admin"), getSales);
+
+router.route("/topselling").get(topSellingItems)
 
 router.route("/admin/orders").get(isAuthenticatedUser, authorizeRoles("admin"), getAdminOrders)
 

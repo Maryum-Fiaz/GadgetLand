@@ -60,6 +60,51 @@ export const getOrderDetails = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+// Get Top Selling Items => /api/v1/topselling
+export const topSellingItems = catchAsyncErrors(async (req, res, next) => {
+  let topSelling = await Order.aggregate([
+    {
+      $unwind: "$orderItems"
+    },
+    {
+      $group: {
+        _id: "$orderItems.product",
+        totalQuantitySold : {$sum: "$orderItems.quantity"}
+      }
+    },
+    {
+      $sort: {totalQuantitySold : -1}
+    },
+    {
+      $limit: 4
+    },
+    {
+   $lookup:
+     {
+       from: "products",
+       localField: "_id",
+       foreignField: "_id",
+       as: "productDetails",
+     }
+  },
+  {
+    $unwind: "$productDetails"
+  }
+  ])
+
+  if (!topSelling || topSelling.length === 0) {
+  return res.status(200).json({
+    success: true,
+    message: "No sales data available yet",
+    topSelling: []
+  });
+}
+
+  res.status(200).json({
+    topSelling,
+  })
+})
+
 
 // *Admin 
 // chart data

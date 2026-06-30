@@ -15,6 +15,9 @@ import CustomTable from './layout/CustomTable.jsx';
 import NewReview from './reviews/NewReview.jsx';
 import ListReviews from './reviews/ListReviews.jsx';
 
+// homepage
+import Hero from './homepage/Hero.jsx';
+
 export {
     Footer,
     Header,
@@ -32,4 +35,5 @@ export {
     CustomTable,
     NewReview,
     ListReviews,
+    Hero,
 }

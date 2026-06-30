@@ -1,11 +1,17 @@
-import {MetaData} from "../components/index.js"
+import Brands from "../components/homepage/Brands.jsx"
+import TopSelling from "../components/homepage/TopSelling.jsx"
+import TrustMetrics from "../components/homepage/TrustMetrics.jsx"
+import {Hero, MetaData} from "../components/index.js"
 
 
 function Home() {
   return (
     <>
     <MetaData title='Buy Best Gadgets' />
-    <div>Hey Imma Home page</div>
+    <Hero />
+    <Brands />
+    <TopSelling />
+    <TrustMetrics />
     </>
   )
 }
