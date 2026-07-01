@@ -25,6 +25,23 @@ export const getProducts = catchAsyncErrors(async (req, res) => {
   });
 });
 
+// Get Products => /api/v1/new_arrivals
+export const getHomeNewArrivals = catchAsyncErrors(async(req, res, next) => {
+  const homeNewArrivals = await Product.find().sort({createdAt: -1}).limit(4);
+
+  if(!homeNewArrivals || homeNewArrivals.length === 0){
+    return res.status(200).json({
+    success: true,
+    message: "No data available yet",
+    homeNewArrivals: []
+  });
+  }
+
+  res.status(200).json({
+    homeNewArrivals,
+  })
+})
+
 // Create new Product  =>  /api/v1/admin/products
 export const newProduct = catchAsyncErrors(async (req, res) => {
   req.body.user = req.user._id;

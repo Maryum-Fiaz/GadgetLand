@@ -6,6 +6,7 @@ import {
   deleteProductImage,
   deleteReview,
   getAdminProducts,
+  getHomeNewArrivals,
   getProductDetails,
   getProductReviews,
   getProducts,
@@ -19,6 +20,7 @@ const router = express.Router();
 
 // endpoints
 router.route("/products").get(getProducts);
+router.route("/new_arrivals").get(getHomeNewArrivals);
 router
   .route("/admin/products")
   .post(isAuthenticatedUser, authorizeRoles("admin"), newProduct)

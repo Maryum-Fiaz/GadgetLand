@@ -11,9 +11,9 @@ function RootLayout() {
       <ScrollToTop />
 
     <Header />
-    <Container>
+    {/* <Container> */}
         <Outlet />
-    </Container>
+    {/* </Container> */}
     <Footer />
     </HelmetProvider>
   )

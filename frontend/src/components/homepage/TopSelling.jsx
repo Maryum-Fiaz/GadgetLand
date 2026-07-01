@@ -1,24 +1,18 @@
-import { useEffect } from 'react';
-import { ProductCard } from '../index';
-import toast from 'react-hot-toast';
+import { useEffect } from "react";
+import { ProductCard } from "../index";
+import toast from "react-hot-toast";
 
-const TopSelling = ({ data = [] , error}) => {
+const TopSelling = ({ data = [], error }) => {
+  useEffect(() => {
+    if (error) {
+      toast.error(error?.data?.message || "Failed to load top selling items"); // how can we use isLoading and error as this is just section of homepage so we need loading on homepage until all sections load
+    }
+  }, [error]);
 
-    
-    console.log('data -> ',data?.topSelling);
-    console.log('error -> ', error)
-
-    useEffect(() => {
-        if(error){
-            toast.error(error?.data?.message || "Failed to load top selling items") // how can we use isLoading and error as this is just section of homepage so we need loading on homepage until all sections load
-        }
-    }, [error])
-    
-    const topSellingProducts = data?.topSelling || [];
+  const topSellingProducts = data?.topSelling || [];
 
   return (
     <section className="w-full bg-white py-20 px-6 sm:px-12 max-w-7xl mx-auto">
-      
       {/* Editorial Header Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
         <div>
@@ -30,7 +24,8 @@ const TopSelling = ({ data = [] , error}) => {
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-mauve-500 max-w-xs font-light leading-relaxed">
-          The absolute standard in premium workspace essentials, handpicked for creative performance.
+          The absolute standard in premium workspace essentials, handpicked for
+          creative performance.
         </p>
       </div>
 
@@ -40,7 +35,6 @@ const TopSelling = ({ data = [] , error}) => {
           <ProductCard key={product._id} product={product?.productDetails} />
         ))}
       </div>
-
     </section>
   );
 };

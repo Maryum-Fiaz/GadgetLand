@@ -1,44 +1,71 @@
+import React from "react";
 import { motion } from "framer-motion";
+import { Globe, ShieldCheck, Zap } from "lucide-react";
 
 const TrustMetrics = () => {
   const metrics = [
-    { value: "99.4%", label: "Sound Accuracy" },
-    { value: "Global", label: "Priority Shipping" },
-    { value: "3 Years", label: "Full Warranty" },
+    { 
+      icon: <Globe size={20} className="text-mauve-600" />,
+      value: "Nationwide", 
+      label: "Premium Shipping Across Pakistan" 
+    },
+    { 
+      icon: <Zap size={20} className="text-mauve-600" />,
+      value: "99.4%", 
+      label: "Accuracy Standards" 
+    },
+    { 
+      icon: <ShieldCheck size={20} className="text-mauve-600" />,
+      value: "3 Years", 
+      label: "Official Warranty Coverage" 
+    },
   ];
 
+  // Framer Motion layout configuration for staggering elements into frame
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 15 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+  };
+
   return (
-    <section className="w-full bg-white border-b border-zinc-100 py-16 px-6 font-sans">
-      <div className="max-w-5xl mx-auto">
+    <section className="w-full bg-[#fdfbfe] border-b border-mauve-100/60 py-16 px-6 font-sans">
+      <div className="max-w-6xl mx-auto">
         
-        {/* Staggered container fade-in effect on scroll */}
         <motion.div 
+          variants={containerVariants}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={{
-            hidden: {},
-            show: {
-              transition: { staggerChildren: 0.15 }
-            }
-          }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-6 text-center"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center md:text-left"
         >
           {metrics.map((item, index) => (
             <motion.div 
               key={index}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-              }}
-              className="space-y-1"
+              variants={itemVariants}
+              className="flex flex-col items-center md:items-start space-y-3 p-4 rounded-2xl transition-all duration-300 hover:bg-mauve-50/40"
             >
-              <h3 className="text-2xl sm:text-3xl font-black text-zinc-900 font-mono tracking-tight">
-                {item.value}
-              </h3>
-              <p className="text-[10px] uppercase font-bold tracking-widest text-zinc-400">
-                {item.label}
-              </p>
+              {/* Dynamic Icon Wrapper Frame */}
+              <div className="w-10 h-10 rounded-xl bg-mauve-50 flex items-center justify-center shadow-xs">
+                {item.icon}
+              </div>
+
+              {/* Title Stat Block using premium tracking and color */}
+              <div className="space-y-1">
+                <h3 className="text-xl sm:text-2xl font-black text-mauve-950 tracking-tight uppercase font-heading">
+                  {item.value}
+                </h3>
+                <p className="text-[10px] uppercase font-bold tracking-widest text-mauve-400 leading-normal max-w-[200px]">
+                  {item.label}
+                </p>
+              </div>
             </motion.div>
           ))}
         </motion.div>

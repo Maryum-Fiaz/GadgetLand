@@ -18,6 +18,9 @@ export const productApi = createApi({
         },
       }),
     }),
+    getHomeNewArrivals: builder.query({
+      query: () => `/new_arrivals`,
+    }),
     getProductDetails: builder.query({
       query: (id) => `/products/${id}`,
       providesTags: ["Product"],
@@ -106,6 +109,7 @@ export const productApi = createApi({
 
 export const {
   useGetProductsQuery,
+  useGetHomeNewArrivalsQuery,
   useGetProductDetailsQuery,
   useGetAdminProductsQuery,
   useSubmitReviewMutation,

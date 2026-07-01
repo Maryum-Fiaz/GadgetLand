@@ -8,8 +8,8 @@ const Hero = () => {
       {/* Background Flagship Image with Framer Motion subtle zoom */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.img 
-          src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=1600&q=80" 
-          alt="Sony WH-1000XM5 Featured Product" 
+          src="/images/hero2.jpg" 
+          alt="Premium Workspace Setup" 
           className="w-full h-full object-cover object-center pointer-events-none"
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 0.45 }}
@@ -43,7 +43,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight uppercase leading-none font-heading"
           >
-            Acoustic
+            PREMIUM
           </motion.h1>
           
           <motion.span 
@@ -52,7 +52,7 @@ const Hero = () => {
             transition={{ duration: 1, delay: 0.6 }}
             className="text-transparent stroke-text font-serif italic lowercase font-normal block text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-normal"
           >
-            architecture.
+            ecosystem.
           </motion.span>
         </div>
         
@@ -63,7 +63,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="text-xs sm:text-sm text-mauve-100 font-light max-w-sm sm:max-w-md mx-auto leading-relaxed tracking-wide"
         >
-          Discover pure sound design with the Sony WH-1000XM5. Engineered for extreme sound accuracy and high-end focus.
+          Hand-selected laptops, custom mechanical keyboards, high-performance power tools, and premium audio instruments engineered for pure creative performance.
         </motion.p>
 
         {/* Action Buttons */}
