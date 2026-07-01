@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { useNavigate } from "react-router";
 
 const Hero = () => {
+  const navigate = useNavigate()
+
   return (
     <section className="relative w-full h-[85vh] flex flex-col justify-center items-center px-4 text-white overflow-hidden bg-mauve-950">
       
@@ -73,13 +76,11 @@ const Hero = () => {
           transition={{ duration: 0.6, delay: 1 }}
           className="flex flex-col sm:flex-row items-center gap-3 pt-2 w-full sm:w-auto"
         >
-          <button className="w-full sm:w-auto h-11 px-6 bg-white hover:bg-mauve-50 text-mauve-950 text-[11px] uppercase font-bold tracking-widest rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 group shadow-sm">
+          <button 
+          onClick={() => navigate('/products')}
+          className="w-full sm:w-auto h-11 px-6 bg-white hover:bg-mauve-50 text-mauve-950 text-[11px] uppercase font-bold tracking-widest rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 group shadow-sm">
             Buy Now
             <ArrowUpRight size={13} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </button>
-          
-          <button className="w-full sm:w-auto h-11 px-6 bg-white/5 hover:bg-white/10 backdrop-blur-md text-white text-[11px] uppercase font-bold tracking-widest rounded-xl border border-white/10 transition-all cursor-pointer flex items-center justify-center">
-            View Details
           </button>
         </motion.div>
 
