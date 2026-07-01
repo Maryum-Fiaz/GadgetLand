@@ -1,12 +1,10 @@
 import { useEffect } from 'react';
 import { ProductCard } from '../index';
-import { useGetTopSellingItemsQuery } from '../../redux/api/orderApi';
 import toast from 'react-hot-toast';
 
-const TopSelling = () => {
+const TopSelling = ({ data = [] , error}) => {
 
-    // TODO: take isLoading to Home.jsx
-    const {data, error, isLoading} = useGetTopSellingItemsQuery()
+    
     console.log('data -> ',data?.topSelling);
     console.log('error -> ', error)
 
