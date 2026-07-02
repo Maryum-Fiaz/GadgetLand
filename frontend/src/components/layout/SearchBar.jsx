@@ -35,7 +35,7 @@ function SearchBar({ className= '' }) {
 
   return (
     <>
-      {/* 🔍 TRIGGER ICON: Always visible on both mobile and desktop headers */}
+      {/* 🔍 HAMBURGER ICON */}
       <button
         type="button"
         onClick={() => setIsOpen(true)}
@@ -44,11 +44,10 @@ function SearchBar({ className= '' }) {
         <Search size={20} strokeWidth={2.2} />
       </button>
 
-      {/* 🖼️ FULL OVERLAY PANEL: Displays across all viewports when triggered */}
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-start justify-center backdrop-blur-md pt-15 px-4 animate-in fade-in duration-200">
           
-          {/* Main search form wrapper */}
+          {/* Main search form */}
           <form 
             onSubmit={submitHandler} 
             className="relative flex items-center w-full max-w-2xl bg-white rounded-2xl border border-zinc-200 shadow-xl h-14 px-4 overflow-hidden"
@@ -64,7 +63,7 @@ function SearchBar({ className= '' }) {
               className="w-full h-full pl-3 pr-12 font-sans text-sm font-medium outline-none text-zinc-800 bg-transparent"
             />
 
-            {/* 🎯 CLEAR / CLOSE BUTTON */}
+            {/*  CLOSE BUTTON */}
             <button
               type="button"
               onClick={() => {

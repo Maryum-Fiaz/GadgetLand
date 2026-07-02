@@ -63,7 +63,7 @@ function Filters() {
   return (
     <div className="flex flex-col gap-8 w-full">
 
-      {/* 🔄 Clear Filters Action Trigger */}
+      {/* Clear Filters Button */}
       {(searchParams.get("category") || searchParams.get("ratings") || searchParams.get("min") || searchParams.get("max")) && (
         <button
           onClick={handleClearFilters}
@@ -73,7 +73,7 @@ function Filters() {
         </button>
       )}
       
-      {/* 💰 Price Filter Section */}
+      {/* Price Filter Section */}
       <div className="flex flex-col gap-3">
         <h3 className="text-xs font-black uppercase tracking-widest text-zinc-400 font-sans">
           Filter by Price
@@ -109,7 +109,7 @@ function Filters() {
         </form>
       </div>
 
-      {/* 📁 Category Filter Section */}
+      {/* Category Filter Section */}
       <div className="flex flex-col gap-3 border-t border-zinc-100 pt-6">
         <h3 className="text-xs font-black uppercase tracking-widest text-zinc-400 font-sans">
           Categories

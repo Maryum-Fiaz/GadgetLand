@@ -1,21 +1,15 @@
-
 import { Star, User } from "lucide-react";
 
 const ListReviews = ({ reviews }) => {
-
   return (
     <div className="w-full space-y-6">
-      {/* SECTION TITLE ACCENT */}
       <h3 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 font-sans">
         Customers Reviews ({reviews?.length || 0})
       </h3>
 
-      {/* Borderless Stream Stack */}
       <div className="space-y-6">
         {reviews?.map((review) => (
           <div key={review?._id} className="space-y-4">
-            
-            {/* Main Header Row: User Info + Stars */}
             <div className="flex items-start sm:items-center justify-between gap-4 flex-col sm:flex-row">
               {/* User Identity Info */}
               <div className="flex items-center gap-3">
@@ -39,7 +33,9 @@ const ListReviews = ({ reviews }) => {
                     key={i}
                     size={13}
                     fill={i < review?.rating ? "#fbbf24" : "none"}
-                    className={i < review?.rating ? "text-amber-400" : "text-zinc-200"}
+                    className={
+                      i < review?.rating ? "text-amber-400" : "text-zinc-200"
+                    }
                   />
                 ))}
               </div>
@@ -50,7 +46,7 @@ const ListReviews = ({ reviews }) => {
               {review?.comment}
             </p>
 
-            {/* Clean Dividing Separator Rule */}
+            {/* Dividing Separator */}
             <hr className="border-zinc-200/60 pt-2" />
           </div>
         ))}

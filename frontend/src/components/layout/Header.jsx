@@ -138,10 +138,10 @@ function Header() {
                       Profile Settings
                     </Link>
 
-                    {/* Premium Divider Separator */}
+                    {/* Separator */}
                     <div className="my-1 border-t border-zinc-200/60" />
 
-                    {/* Logout Action Trigger */}
+                    {/* Logout Action */}
                     <div
                       onClick={() => {
                         setIsOpen(false);

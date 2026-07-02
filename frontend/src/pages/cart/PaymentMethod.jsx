@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MetaData } from '../../components/index'
+import { Container, MetaData } from '../../components/index'
 import CheckoutSteps from './CheckoutSteps'
 import { useSelector } from 'react-redux';
 import { caluclateOrderCost } from '../../helper/helper';
@@ -83,7 +83,7 @@ function PaymentMethod() {
     }
 
   return (
-    <>
+    <Container>
   <MetaData title={"Payment Method"} />
 
   <div className="w-full bg-white min-h-screen font-sans text-zinc-900 antialiased selection:bg-zinc-100 px-4 sm:px-8 py-10 md:py-16">
@@ -175,7 +175,7 @@ function PaymentMethod() {
 
     </div>
   </div>
-</>
+</Container>
   )
 }
 

@@ -27,7 +27,7 @@ function ProductRating({ rating = 0, reviewsCount }) {
         })}
       </div>
 
-      {/* 📊 Optional: Show the exact text rating and reviews count if passed down */}
+      {/* the exact text rating and reviews count if passed down */}
       {reviewsCount !== undefined && (
         <span className="text-xs font-semibold text-zinc-500 ml-1">
           {rating.toFixed(1)} <span className="text-zinc-400 font-normal">({reviewsCount})</span>

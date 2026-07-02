@@ -43,7 +43,7 @@ const Invoice = () => {
       <MetaData title={"Order Invoice"} />
 
       <div className="max-w-4xl mx-auto">
-        {/* DOWNLOAD ACTION BUTTON */}
+        {/* DOWNLOAD BUTTON */}
         <div className="flex justify-center mb-6">
           <button
             className="inline-flex items-center justify-center gap-2 h-11 px-6 font-semibold text-white bg-zinc-900 hover:bg-zinc-800 rounded-xl shadow-xs transition-all cursor-pointer"
@@ -86,7 +86,6 @@ const Invoice = () => {
               </div>
             </header>
 
-            {/* ASSOCIATED PARTICIPANTS IDENTIFICATION GRID */}
             <div className="grid grid-cols-2 gap-12 mb-10 text-xs">
               {/* FROM COMPANY INFO */}
               <div>
@@ -198,7 +197,7 @@ const Invoice = () => {
                     </tr>
                   ))}
 
-                  {/* FINANCIAL SUB-STATEMENTS BLOCK */}
+                  {/* PAYMENT BLOCK */}
                   <tr className="border-t border-zinc-200">
                     <td colSpan="3" className="py-3"></td>
                     <td className="py-3 px-4 text-zinc-400 font-mono uppercase text-right">
@@ -253,7 +252,7 @@ const Invoice = () => {
                 </tbody>
               </table>
 
-              {/* FOOTER ANNOTATIONS */}
+              {/* FOOTER */}
               <div
                 id="notices"
                 className="border-t border-zinc-100 pt-6 text-[11px] text-zinc-400 space-y-1"

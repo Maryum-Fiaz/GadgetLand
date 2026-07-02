@@ -2,18 +2,21 @@ import { useEffect, useState } from "react";
 import { Star } from "lucide-react"; // Double check your project's path or icon source
 
 import { toast } from "react-hot-toast";
-import { useCanUserReviewQuery, useSubmitReviewMutation } from "../../redux/api/productApi";
+import {
+  useCanUserReviewQuery,
+  useSubmitReviewMutation,
+} from "../../redux/api/productApi";
 
 const NewReview = ({ productId }) => {
   const [rating, setRating] = useState(0);
-  const [hoverRating, setHoverRating] = useState(0); // Track transient cursor hovering
+  const [hoverRating, setHoverRating] = useState(0); // Track cursor hovering
   const [comment, setComment] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const [submitReview, { isLoading, error, isSuccess }] = useSubmitReviewMutation();
+  const [submitReview, { isLoading, error, isSuccess }] =
+    useSubmitReviewMutation();
   const { data } = useCanUserReviewQuery(productId);
   const canReview = data?.canReview;
-  
 
   useEffect(() => {
     if (error) {
@@ -53,7 +56,6 @@ const NewReview = ({ productId }) => {
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/40 backdrop-blur-xs transition-opacity duration-300">
           <div className="bg-white border border-zinc-200 w-full max-w-md rounded-2xl p-6 shadow-xl relative animate-in fade-in zoom-in-95 duration-200">
-            
             <button
               type="button"
               onClick={() => setIsOpen(false)}
@@ -72,7 +74,7 @@ const NewReview = ({ productId }) => {
             </div>
 
             <div className="space-y-5">
-              {/* INTERACTIVE NATIVE STAR PIPELINE */}
+              {/* STAR */}
               <div>
                 <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block mb-2">
                   Overall Rating
@@ -100,7 +102,7 @@ const NewReview = ({ productId }) => {
                       </button>
                     );
                   })}
-                  
+
                   {/* Subtle Context State String Tag */}
                   {(hoverRating || rating) > 0 && (
                     <span className="text-xs font-mono font-bold text-zinc-400 ml-1.5 pt-0.5">
@@ -111,7 +113,10 @@ const NewReview = ({ productId }) => {
               </div>
 
               <div>
-                <label htmlFor="review-comment" className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block mb-2">
+                <label
+                  htmlFor="review-comment"
+                  className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block mb-2"
+                >
                   Review Statement
                 </label>
                 <textarea
@@ -134,7 +139,6 @@ const NewReview = ({ productId }) => {
                 {isLoading ? "Submitting Statement..." : "Publish Review"}
               </button>
             </div>
-
           </div>
         </div>
       )}
