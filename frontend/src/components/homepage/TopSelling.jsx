@@ -15,7 +15,7 @@ const TopSelling = ({ data = [], error }) => {
   return (
     <section className="w-full bg-white py-20 px-6 sm:px-12 max-w-7xl mx-auto">
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 border-b border-mauve-100/60 pb-6">
         <div>
           <div className="flex items-center gap-2 mb-2">
             <span className="h-px w-6 bg-mauve-300" />
