@@ -1,6 +1,6 @@
 import { SlidersHorizontal, X } from "lucide-react";
 import Container from "../components/Container";
-import { CustomPagination, Filters, Loader, ProductCard } from "../components/index.js";
+import { CustomPagination, Filters, Loader, MetaData, ProductCard } from "../components/index.js";
 import { useEffect, useState } from "react";
 import { useGetProductsQuery } from "../redux/api/productApi";
 import { useSearchParams } from "react-router";
@@ -41,8 +41,12 @@ function Products() {
   const productList = data?.products || [];
 
   return (
-    <div className="w-full bg-zinc-50 min-h-screen font-sans text-zinc-900 antialiased">
-      <Container className="pb-1">
+    <>
+    
+    <MetaData title={"Products"} />
+
+      <Container>
+    <div className="w-full p-8 bg-zinc-50 min-h-screen font-sans text-zinc-900 antialiased">
         {/* 🏷️ SECTION 1: Minimalist Header Header */}
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between pt-12 pb-6 px-2">
           <div>
@@ -123,8 +127,9 @@ function Products() {
           resPerPage={data?.resPerPage || 6}
           filteredProductsCount={data?.filteredProductsCount || 0}
         />
-      </Container>
     </div>
+      </Container>
+    </>
   );
 }
 
