@@ -2,10 +2,9 @@ import { Link } from "react-router";
 
 const CheckoutSteps = ({ shipping, confirmOrder, payment }) => {
   return (
-    /* max-w-md keeps the steps in a short, elegant central area instead of spreading */
     <div className="w-full max-w-md mx-auto flex items-center justify-between gap-2 py-4 select-none">
       
-      {/* ── STEP 1: SHIPPING ── */}
+      {/* 1. SHIPPING */}
       <div className="flex-1 text-center">
         {shipping ? (
           <Link to="/shipping" className="block group">
@@ -22,7 +21,7 @@ const CheckoutSteps = ({ shipping, confirmOrder, payment }) => {
         )}
       </div>
 
-      {/* ── STEP 2: CONFIRM ORDER ── */}
+      {/* 2. CONFIRM ORDER */}
       <div className="flex-1 text-center">
         {confirmOrder ? (
           <Link to="/confirm_order" className="block group">
@@ -39,7 +38,7 @@ const CheckoutSteps = ({ shipping, confirmOrder, payment }) => {
         )}
       </div>
 
-      {/* ── STEP 3: PAYMENT ── */}
+      {/* 3. PAYMENT */}
       <div className="flex-1 text-center">
         {payment ? (
           <Link to="/payment_method" className="block group">

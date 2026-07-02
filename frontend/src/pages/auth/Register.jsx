@@ -44,22 +44,20 @@ function Register() {
     <>
   <MetaData title={"Register"} />
   
-  {/* Centered responsive container wrapper */}
   <div className="flex min-h-[75vh] items-center justify-center px-4 py-12 font-sans selection:bg-mauve-100">
     <div className="w-full max-w-110 px-2">
-      
-      {/* Main Premium Card View */}
+
       <form 
         onSubmit={handleSubmit} 
         className="bg-zinc-50 border border-zinc-200/80 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6"
       >
-        {/* Card Header Title */}
+        {/* Heading */}
         <div className="space-y-1">
           <h2 className="text-2xl font-bold tracking-tight text-zinc-800">Create Account</h2>
           <p className="text-xs font-medium text-zinc-400">Join our premium gadget platform today</p>
         </div>
 
-        {/* Name Field Block */}
+        {/* Name Field */}
         <div className="space-y-1.5">
           <label htmlFor="name_field" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
             Full Name
@@ -76,7 +74,7 @@ function Register() {
           />
         </div>
 
-        {/* Email Field Block */}
+        {/* Email Field */}
         <div className="space-y-1.5">
           <label htmlFor="email_field" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
             Email Address
@@ -93,7 +91,7 @@ function Register() {
           />
         </div>
 
-        {/* Password Field Block */}
+        {/* Password Field */}
         <div className="space-y-1.5">
           <label htmlFor="password_field" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
             Password
@@ -110,7 +108,6 @@ function Register() {
           />
         </div>
 
-        {/* Premium Action Button */}
         <button
           id="register_button"
           type="submit"
@@ -120,7 +117,7 @@ function Register() {
           {isLoading ? "Creating Account..." : "REGISTER"}
         </button>
 
-        {/* Form Footer Redirect Block */}
+        {/* Login, if already registered */}
         <div className="pt-2 border-t border-zinc-100 text-center">
           <p className="text-xs font-medium text-zinc-400">
             Already have an account?{" "}

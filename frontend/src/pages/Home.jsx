@@ -15,9 +15,7 @@ function Home() {
    const { data: newArrivalData , isLoading: newArrivalLoading } = useGetHomeNewArrivalsQuery();
 
    const { hash } = useLocation();
-   const location = useLocation();
 
-   console.log('url: ', location.pathname) // its showing / no matter whichever i select
 
 
    useEffect(() => {

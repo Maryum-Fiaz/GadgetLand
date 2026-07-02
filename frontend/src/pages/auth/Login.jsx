@@ -18,7 +18,6 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      
       navigate("/");
     }
     if (error) {
@@ -41,11 +40,10 @@ const Login = () => {
     <>
   <MetaData title={"Login"} />
   
-  {/* Centered responsive container wrapper */}
   <div className="flex min-h-[75vh] items-center justify-center px-4 py-12 font-sans selection:bg-mauve-100">
     <div className="w-full max-w-110 px-2">
       
-      {/* Main Login Card View */}
+      {/* Login */}
       <form 
         onSubmit={handleSubmit} 
         className="bg-zinc-50 border border-zinc-200/80 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6"
@@ -98,7 +96,6 @@ const Login = () => {
           />
         </div>
 
-        {/* Action Button */}
         <button
           id="login_button"
           type="submit"
@@ -108,7 +105,7 @@ const Login = () => {
           {isLoading ? "Authenticating..." : "LOGIN"}
         </button>
 
-        {/* Form Footer Redirect Block */}
+        {/* Sign Up if not registered */}
         <div className="pt-2 border-t border-zinc-100 text-center">
           <p className="text-xs font-medium text-zinc-400">
             Don't have an account?{" "}

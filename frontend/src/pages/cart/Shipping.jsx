@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MetaData } from '../../components/index'
+import { Container, MetaData } from '../../components/index'
 import { countries } from 'countries-list'
 import { saveShippingInfo } from '../../redux/features/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,20 +40,19 @@ function Shipping() {
     }
 
   return (
-    <>
+    <Container>
   <MetaData title={"Shipping Info"} />
 
   {/* Page Container */}
-  <div className="w-full bg-zinc-50 min-h-screen font-sans text-zinc-900 antialiased selection:bg-mauve-100 selection:text-mauve-900 px-4 sm:px-6 py-10 md:py-16">
+  <div className="w-full bg-white min-h-screen font-sans text-zinc-900 antialiased selection:bg-zinc-100 px-4 sm:px-8 py-10 md:py-16">
     <div className="max-w-xl mx-auto space-y-10">
       
-      {/* ── CHECKOUT STEPS TIMELINE WRAPPER ── */}
       <div className="w-full overflow-x-auto pb-2">
         <CheckoutSteps shipping />
       </div>
 
-      {/* ── FORM ── */}
-      <div className="bg-white border border-zinc-200/80 rounded-[2rem] p-6 sm:p-10 shadow-2xs">
+      {/* FORM */}
+      <div className="bg-zinc-50/50 border border-zinc-200/80 rounded-xl p-6 sm:p-10 shadow-2xs">
         <form onSubmit={handleSubmit} className="space-y-6">
           
           {/* Form Header */}
@@ -172,7 +171,7 @@ function Shipping() {
           </div>
 
           <div className="pt-4">
-            {/* Submission Action Dispatch Button Trigger */}
+            {/*  Action Button */}
             <button
               id="shipping_btn"
               type="submit"
@@ -187,7 +186,7 @@ function Shipping() {
 
     </div>
   </div>
-</>
+</Container>
   )
 }
 

@@ -11,69 +11,68 @@ const Profile = () => {
 
   return (
     <>
-      <MetaData title={"Your Profile"} />
+  <MetaData title={"Your Profile"} />
+  
+  <div className="w-full max-w-xl mx-auto px-4 py-8 font-sans">
+    <div className="space-y-6">
       
-      <div className="space-y-6 font-sans max-w-2xl">
-        
-        {/* Section Headline */}
-        <div>
-          <h3 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">Account Overview</h3>
-          <p className="text-xs text-zinc-400 mt-0.5">Your personal credentials and account details.</p>
-        </div>
-
-        {/* Info Grid Container */}
-        <div className={`grid grid-cols-1 ${user?.role === 'admin' ? 'md:grid-cols-2' : 'md:grid-cols-1'} gap-4`}>
-          
-          {/* Full Name Block */}
-          <div className="bg-zinc-50 border border-zinc-200/60 rounded-xl p-4 flex items-start gap-3">
-            <div className="p-2 bg-white border border-zinc-200 rounded-lg text-zinc-500 shrink-0">
-              <User size={16} />
-            </div>
-            <div className="space-y-0.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Full Name</span>
-              <p className="text-sm font-semibold text-zinc-700">{user?.name || "N/A"}</p>
-            </div>
-          </div>
-
-          {/* Email Address Block */}
-          <div className="bg-zinc-50 border border-zinc-200/60 rounded-xl p-4 flex items-start gap-3">
-            <div className="p-2 bg-white border border-zinc-200 rounded-lg text-zinc-500 shrink-0">
-              <Mail size={16} />
-            </div>
-            <div className="space-y-0.5 break-all">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Email Address</span>
-              <p className="text-sm font-semibold text-zinc-700">{user?.email || "N/A"}</p>
-            </div>
-          </div>
-
-          {/* Account Status / Role Block */}
-          {user?.role === 'admin' && 
-          
-          <div className="bg-zinc-50 border border-zinc-200/60 rounded-xl p-4 flex items-start gap-3">
-            <div className="p-2 bg-white border border-zinc-200 rounded-lg text-zinc-500 shrink-0">
-              <ShieldAlert size={16} />
-            </div>
-            <div className="space-y-0.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Account Privilege</span>
-              <p className="text-sm font-bold text-mauve-500 capitalize">{user?.role || "user"}</p>
-            </div>
-          </div>
-          }
-
-          {/* Membership Joined Date Block */}
-          <div className="bg-zinc-50 border border-zinc-200/60 rounded-xl p-4 flex items-start gap-3">
-            <div className="p-2 bg-white border border-zinc-200 rounded-lg text-zinc-500 shrink-0">
-              <Calendar size={16} />
-            </div>
-            <div className="space-y-0.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Member Since</span>
-              <p className="text-sm font-semibold text-zinc-700">{joinedDate}</p>
-            </div>
-          </div>
-
-        </div>
+      <div className="pb-4 border-b border-zinc-100">
+        <h2 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">
+          Account Overview
+        </h2>
+        <p className="text-xs text-zinc-400 mt-0.5">
+          Your personal credentials and account details.
+        </p>
       </div>
-    </>
+
+      <div className="space-y-4">
+        
+        <div className="space-y-1.5">
+          <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 block">
+            Full Name
+          </span>
+          <div className="text-xs font-medium text-zinc-800 py-2.5 flex items-center gap-2">
+            <User size={14} className="text-zinc-400 shrink-0" />
+            <span>{user?.name || "N/A"}</span>
+          </div>
+        </div>
+
+        <div className="space-y-1.5">
+          <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 block">
+            Email Address
+          </span>
+          <div className="text-xs font-medium text-zinc-800 py-2.5 flex items-center gap-2 break-all">
+            <Mail size={14} className="text-zinc-400 shrink-0" />
+            <span>{user?.email || "N/A"}</span>
+          </div>
+        </div>
+
+        {user?.role === 'admin' && (
+          <div className="space-y-1.5">
+            <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 block">
+              Account Authority Status
+            </span>
+            <div className="text-xs font-bold text-mauve-500 capitalize py-2.5 flex items-center gap-2">
+              <ShieldAlert size={14} className="text-mauve-400 shrink-0" />
+              <span>{user?.role}</span>
+            </div>
+          </div>
+        )}
+
+        <div className="space-y-1.5">
+          <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 block">
+            Member Since
+          </span>
+          <div className="text-xs font-medium text-zinc-800 py-2.5 flex items-center gap-2">
+            <Calendar size={14} className="text-zinc-400 shrink-0" />
+            <span>{joinedDate}</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</>
   );
 };
 

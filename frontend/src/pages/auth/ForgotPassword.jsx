@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { useNavigate, Link } from "react-router"; // 🎯 Clean matching router import
+import { useNavigate, Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { useForgotPasswordMutation } from "../../redux/api/userApi";
 import MetaData from "../../components/layout/MetaData";
@@ -41,7 +41,6 @@ const ForgotPassword = () => {
     <>
       <MetaData title={"Forgot Password"} />
       
-      {/* Centered responsive full-page container wrapper */}
       <div className="flex min-h-[75vh] items-center justify-center px-4 py-12 font-sans selection:bg-mauve-100">
         <div className="w-full max-w-110 px-2">
           

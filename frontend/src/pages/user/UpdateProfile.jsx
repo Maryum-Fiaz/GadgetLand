@@ -41,73 +41,78 @@ const UpdateProfile = () => {
   };
 
   return (
-    <>
-      <MetaData title={"Update Profile"} />
+   <>
+  <MetaData title={"Update Profile"} />
 
-      <div className="space-y-6 font-sans max-w-xl">
-        <div>
-          <h3 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">
-            Update Profile
-          </h3>
-          <p className="text-xs text-zinc-400 mt-0.5">
-            Modify your basic account info and identities.
-          </p>
+  <div className="w-full max-w-xl mx-auto px-4 py-8 font-sans">
+    <form onSubmit={handleSubmit} className="space-y-6">
+      
+      {/* Heading */}
+      <div className="pb-4 border-b border-zinc-100">
+        <h2 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">
+          Update Profile
+        </h2>
+        <p className="text-xs text-zinc-400 mt-0.5">
+          Modify your basic account info and identities.
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        
+        {/* Name Input */}
+        <div className="space-y-1.5">
+          <label
+            htmlFor="name_field"
+            className="text-xs font-bold uppercase tracking-wider text-zinc-400"
+          >
+            Full Name
+          </label>
+          <input
+            type="text"
+            id="name_field"
+            name="name"
+            placeholder="Your Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full h-10 px-3 bg-zinc-50 border border-zinc-200/70 rounded-lg text-xs font-medium text-zinc-800 focus:outline-none focus:border-mauve-400 focus:bg-white transition-all"
+            required
+          />
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="bg-zinc-50 border border-zinc-200/60 rounded-2xl p-5 sm:p-6 space-y-4"
-        >
-          <div className="space-y-1.5">
-            <label
-              htmlFor="name_field"
-              className="text-xs font-bold uppercase tracking-wider text-zinc-500"
-            >
-              Full Name
-            </label>
-            <input
-              type="text"
-              id="name_field"
-              name="name"
-              placeholder="Your Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full h-11 px-4 text-sm font-medium rounded-xl bg-white border border-zinc-200 text-zinc-800 placeholder-zinc-300 outline-none transition-all duration-200 focus:border-mauve-400 focus:ring-2 focus:ring-mauve-100"
-              required
-            />
-          </div>
+        {/* Email Input */}
+        <div className="space-y-1.5">
+          <label
+            htmlFor="email_field"
+            className="text-xs font-bold uppercase tracking-wider text-zinc-400"
+          >
+            Email Address
+          </label>
+          <input
+            type="email"
+            id="email_field"
+            name="email"
+            placeholder="name@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full h-10 px-3 bg-zinc-50 border border-zinc-200/70 rounded-lg text-xs font-medium text-zinc-800 focus:outline-none focus:border-mauve-400 focus:bg-white transition-all"
+            required
+          />
+        </div>
 
-          <div className="space-y-1.5">
-            <label
-              htmlFor="email_field"
-              className="text-xs font-bold uppercase tracking-wider text-zinc-500"
-            >
-              Email Address
-            </label>
-            <input
-              type="email"
-              id="email_field"
-              name="email"
-              placeholder="name@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full h-11 px-4 text-sm font-medium rounded-xl bg-white border border-zinc-200 text-zinc-800 placeholder-zinc-300 outline-none transition-all duration-200 focus:border-mauve-400 focus:ring-2 focus:ring-mauve-100"
-              required
-            />
-          </div>
-
-          <div className="pt-2">
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full h-11 bg-mauve-500 hover:bg-mauve-600 active:bg-mauve-700 text-white font-sans text-xs uppercase font-bold tracking-widest rounded-xl transition-all shadow-sm disabled:bg-zinc-300 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center"
-            >
-              {isLoading ? "Saving changes..." : "SAVE PROFILE"}
-            </button>
-          </div>
-        </form>
       </div>
-    </>
+
+      <div className="pt-2">
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full sm:w-36 h-11 bg-mauve-500 hover:bg-mauve-600 disabled:bg-zinc-200 text-white text-xs uppercase font-bold tracking-widest rounded-xl transition-colors shadow-xs disabled:cursor-not-allowed cursor-pointer flex items-center justify-center"
+        >
+          {isLoading ? "Saving..." : "Update"}
+        </button>
+      </div>
+    </form>
+  </div>
+</>
   );
 };
 
