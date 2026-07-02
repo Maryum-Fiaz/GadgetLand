@@ -17,7 +17,7 @@ const Profile = () => {
         
         {/* Section Headline */}
         <div>
-          <h3 className="text-base font-bold text-zinc-800">Account Overview</h3>
+          <h3 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">Account Overview</h3>
           <p className="text-xs text-zinc-400 mt-0.5">Your personal credentials and account details.</p>
         </div>
 

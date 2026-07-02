@@ -43,13 +43,13 @@ function AdminDashboard() {
 
   <div className="w-full bg-white font-sans text-zinc-900 antialiased px-1 py-4">
     
-    {/* ── CORE PANEL LAYOUT CONTAINER ── */}
+
     <div className="bg-white border border-zinc-200/80 rounded-2xl p-6 sm:p-8 shadow-xs space-y-10">
       
-      {/* ── HEADER & CONTROLS ── */}
+      {/* Heading */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-zinc-100 pb-6">
         <div>
-          <h1 className="text-xl font-black tracking-tight text-zinc-900">
+          <h1 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">
             Sales Insights
           </h1>
           <p className="text-xs font-mono text-zinc-400 uppercase tracking-wider mt-1">
@@ -57,7 +57,6 @@ function AdminDashboard() {
           </p>
         </div>
 
-        {/* ── TAILWIND STYLED DATE FILTERS ROW ── */}
         <div className="flex flex-wrap items-center gap-4">
           
           {/* Start Date Field */}
@@ -65,7 +64,7 @@ function AdminDashboard() {
             <label className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block">
               Start Date
             </label>
-            {/* Added relative and z-20 wrapper to fix the see-through overlap layout */}
+
             <div className="relative z-20 [&>.react-datepicker-wrapper]:w-full [&>.react-datepicker__popper]:z-20 [&>.react-datepicker]:bg-white [&>.react-datepicker]:border-zinc-200 [&>.react-datepicker]:shadow-xl [&>.react-datepicker]:rounded-xl [&>.react-datepicker]:font-sans">
               <DatePicker
                 selected={startDate}
@@ -96,7 +95,6 @@ function AdminDashboard() {
             </div>
           </div>
 
-          {/* Action Query Fetch Trigger */}
           <button
             type="button"
             onClick={handleSubmit}
@@ -107,10 +105,10 @@ function AdminDashboard() {
         </div>
       </div>
 
-      {/* ── METRIC DISPLAY PANEL GRID ── */}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         
-        {/* Gross Sales Revenue Display Node */}
+        {/* Revenue Display Box */}
         <div className="bg-zinc-50/60 border border-zinc-200/60 rounded-xl p-6 relative overflow-hidden flex flex-col justify-between min-h-30">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#10b981] block">
@@ -123,8 +121,8 @@ function AdminDashboard() {
           <div className="absolute top-0 right-0 w-1 h-full bg-mauve-600" />
         </div>
 
-        {/* Processed Order Volumes Display Node */}
-        <div className="bg-zinc-50/60 border border-zinc-200/60 rounded-xl p-6 relative overflow-hidden flex flex-col justify-between min-h-[120px]">
+        {/* Order Volumes Box */}
+        <div className="bg-zinc-50/60 border border-zinc-200/60 rounded-xl p-6 relative overflow-hidden flex flex-col justify-between min-h-30">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#8b5cf6] block">
               Processed Volume
@@ -139,7 +137,7 @@ function AdminDashboard() {
 
       </div>
 
-      {/* ── DATA VISUALIZATION AREA ── */}
+      {/* Chart */}
       <div className="w-full h-80 sm:h-96 bg-white border border-zinc-200/80 rounded-xl p-4">
         <SalesChart salesData={data?.sales} />
       </div>

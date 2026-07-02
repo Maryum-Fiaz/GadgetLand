@@ -61,13 +61,12 @@ const NewProduct = () => {
     <>
       <MetaData title={"Update Product"} />
 
-      {/* Main Core Layout Form Grid Wrapper */}
       <div className="w-full max-w-3xl mx-auto px-2 py-6 font-sans selection:bg-mauve-100">
         <form onSubmit={handleSubmit} className="space-y-6">
           
-          {/* Header Typography Group */}
+          {/* Heading */}
           <div className="space-y-1 pb-4 border-b border-zinc-100">
-            <h2 className="text-xl font-black text-zinc-900 tracking-tight">
+            <h2 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">
               Update Product
             </h2>
             <p className="text-xs font-medium text-zinc-400">
@@ -75,7 +74,7 @@ const NewProduct = () => {
             </p>
           </div>
 
-          {/* Product Name Input Field */}
+          {/* Product Name */}
           <div className="space-y-1.5">
             <label htmlFor="name_field" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
               Product Title
@@ -92,7 +91,7 @@ const NewProduct = () => {
             />
           </div>
 
-          {/* Description Block */}
+          {/* Description */}
           <div className="space-y-1.5">
             <label htmlFor="description_field" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
               Detailed Specifications
@@ -109,7 +108,7 @@ const NewProduct = () => {
             ></textarea>
           </div>
 
-          {/* Price & Stock Twin Split Row Grid */}
+          {/* Price & Stock */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {/* Price Field */}
             <div className="space-y-1.5">
@@ -146,9 +145,9 @@ const NewProduct = () => {
             </div>
           </div>
 
-          {/* Category Selection & Seller Twin Split Row Grid */}
+          {/* Category Selection & Seller */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {/* Dynamic Category Selector */}
+            {/* Category */}
             <div className="space-y-1.5">
               <label htmlFor="category_field" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
                 Product Category
@@ -167,7 +166,7 @@ const NewProduct = () => {
                     </option>
                   ))}
                 </select>
-                {/* Minimal Custom Dropdown Arrow */}
+                {/* Custom Dropdown Arrow */}
                 <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-zinc-400">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
@@ -176,10 +175,10 @@ const NewProduct = () => {
               </div>
             </div>
 
-            {/* Seller Asset Name Input */}
+            {/* Seller Brand */}
             <div className="space-y-1.5">
               <label htmlFor="seller_field" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
-                Vendor / Seller Name
+                Brand
               </label>
               <input
                 type="text"
@@ -194,7 +193,6 @@ const NewProduct = () => {
             </div>
           </div>
 
-          {/* Action Trigger Buttons Group */}
           <div className="pt-4 flex items-center justify-end gap-3">
             <button
               type="submit"

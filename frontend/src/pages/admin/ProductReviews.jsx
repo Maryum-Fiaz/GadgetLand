@@ -105,10 +105,9 @@ const ProductReviews = () => {
 
       <div className="w-full max-w-5xl mx-auto px-4 py-4 font-sans space-y-8">
         
-        {/* Top Header Block */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
           <div>
-            <h1 className="text-xl font-black text-zinc-900 tracking-tight font-heading">
+            <h1 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">
               Product Reviews
             </h1>
             <p className="text-xs text-zinc-400 mt-0.5">
@@ -145,7 +144,7 @@ const ProductReviews = () => {
           </button>
         </form>
 
-        {/* Dynamic Content Display Area */}
+        {/* Review Display Area */}
         {isLoading ? (
           <div className="py-12 flex justify-center"><Loader /></div>
         ) : data?.reviews?.length > 0 ? (

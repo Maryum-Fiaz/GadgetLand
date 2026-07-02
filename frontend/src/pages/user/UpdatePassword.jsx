@@ -1,60 +1,63 @@
 import { MetaData } from "../../components";
-import { useUpdatePasswordMutation } from "../../redux/api/userApi"
+import { useUpdatePasswordMutation } from "../../redux/api/userApi";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 
 function UpdatePassword() {
+  const [oldPassword, setOldPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-    const [oldPassword, setOldPassword] = useState('');
-    const [password, setPassword] = useState('');
-    const navigate = useNavigate();
+  const [updatePassword, { error, isLoading, isSuccess }] =
+    useUpdatePasswordMutation();
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error?.data?.message);
+    }
 
-    const [updatePassword, {error, isLoading, isSuccess}] = useUpdatePasswordMutation();
-
-
-    useEffect(() => {
-        if(error) {
-            toast.error(error?.data?.message);
-        }
-
-        if (isSuccess) {
+    if (isSuccess) {
       toast.success("Password Updated");
       navigate("/me/profile");
     }
-    }, [error, isSuccess, navigate])
+  }, [error, isSuccess, navigate]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-        const userPasswordData = {
-            oldPassword,
-            password
-        }
+    const userPasswordData = {
+      oldPassword,
+      password,
+    };
 
-        updatePassword(userPasswordData);
-    }
+    updatePassword(userPasswordData);
+  };
 
   return (
     <>
       <MetaData title={"Update Password"} />
-      
+
       <div className="space-y-6 font-sans max-w-xl">
-        
-        {/* Section Headline */}
         <div>
-          <h3 className="text-base font-bold text-zinc-800">Security Configuration</h3>
-          <p className="text-xs text-zinc-400 mt-0.5">Update your password parameters to keep your account secure.</p>
+          <h3 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">
+            Security Configuration
+          </h3>
+          <p className="text-xs text-zinc-400 mt-0.5">
+            Update your password parameters to keep your account secure.
+          </p>
         </div>
 
-        {/* Premium Form Body Container */}
-        <form onSubmit={handleSubmit} className="bg-zinc-50 border border-zinc-200/60 rounded-2xl p-5 sm:p-6 space-y-4">
-          
-          {/* Old Password Input Box */}
+        <form
+          onSubmit={handleSubmit}
+          className="bg-zinc-50 border border-zinc-200/60 rounded-2xl p-5 sm:p-6 space-y-4"
+        >
           <div className="space-y-1.5">
-            <label htmlFor="old_password_field" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
+            <label
+              htmlFor="old_password_field"
+              className="text-xs font-bold uppercase tracking-wider text-zinc-500"
+            >
               Old Password
             </label>
             <input
@@ -68,9 +71,11 @@ function UpdatePassword() {
             />
           </div>
 
-          {/* New Password Input Box */}
           <div className="space-y-1.5">
-            <label htmlFor="new_password_field" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
+            <label
+              htmlFor="new_password_field"
+              className="text-xs font-bold uppercase tracking-wider text-zinc-500"
+            >
               New Password
             </label>
             <input
@@ -84,7 +89,6 @@ function UpdatePassword() {
             />
           </div>
 
-          {/* Action Trigger Submit Button */}
           <div className="pt-2">
             <button
               type="submit"
@@ -94,11 +98,10 @@ function UpdatePassword() {
               {isLoading ? "Updating..." : "UPDATE PASSWORD"}
             </button>
           </div>
-
         </form>
       </div>
     </>
-  )
+  );
 }
 
-export default UpdatePassword
+export default UpdatePassword;

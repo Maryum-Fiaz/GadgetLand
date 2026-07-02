@@ -89,7 +89,7 @@ const UploadImages = () => {
   };
 
   const deleteImage = (imgId) => {
-      deleteProductImage({ id: params?.id, body: { imgId } });
+    deleteProductImage({ id: params?.id, body: { imgId } });
   };
 
   return (
@@ -98,21 +98,22 @@ const UploadImages = () => {
 
       <div className="w-full max-w-3xl mx-auto px-4 py-6 font-sans">
         <form onSubmit={submitHandler} className="space-y-6">
-          
           {/* Header */}
           <div className="pb-4 border-b border-zinc-100">
-            <h2 className="text-xl font-bold text-zinc-800">
+            <h2 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">
               Upload Product Images
             </h2>
           </div>
 
-          {/* Interactive Custom Drag & Click File Upload Zone */}
           <div className="space-y-2">
-            <label htmlFor="customFile" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
+            <label
+              htmlFor="customFile"
+              className="text-xs font-bold uppercase tracking-wider text-zinc-500"
+            >
               Choose Images
             </label>
-            
-            <div 
+
+            <div
               onClick={() => fileInputRef.current?.click()}
               className="relative flex flex-col items-center justify-center w-full h-36 border-2 border-dashed border-zinc-200 hover:border-mauve-400 rounded-xl bg-zinc-50/50 hover:bg-white transition-colors cursor-pointer"
             >
@@ -141,11 +142,11 @@ const UploadImages = () => {
               <p className="text-xs font-bold uppercase tracking-wider text-amber-600">
                 New Images Previews:
               </p>
-              
+
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {imagesPreview.map((img, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className="relative aspect-square rounded-xl border border-zinc-200 bg-white p-2 flex items-center justify-center"
                   >
                     <div className="w-full h-full rounded-lg overflow-hidden flex items-center justify-center">
@@ -180,8 +181,8 @@ const UploadImages = () => {
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {uploadedImages.map((img, index) => (
-                  <div 
-                    key={img?.public_id || index} 
+                  <div
+                    key={img?.public_id || index}
                     className="relative aspect-square rounded-xl border border-zinc-200 bg-white p-2 flex items-center justify-center"
                   >
                     <div className="w-full h-full rounded-lg overflow-hidden flex items-center justify-center">
@@ -208,7 +209,6 @@ const UploadImages = () => {
             </div>
           )}
 
-          {/* Master Trigger Global Form Save Submission */}
           <div className="pt-2">
             <button
               type="submit"
@@ -218,7 +218,6 @@ const UploadImages = () => {
               {isLoading ? "Uploading..." : "Upload"}
             </button>
           </div>
-
         </form>
       </div>
     </>

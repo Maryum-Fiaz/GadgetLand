@@ -56,13 +56,11 @@ const ProcessOrder = () => {
       <MetaData title={"Process Order"} />
 
       <div className="w-full max-w-6xl mx-auto px-4 py-6 font-sans">
-        {/* Main Split Layout: Left Data Stream, Right Operations Node Panel */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* LEFT COLUMN: Data Details Panels (8 Cols) */}
           <div className="lg:col-span-8 space-y-8">
-            {/* Panel 1: Order Meta & Status Node */}
+            {/* Order details */}
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-zinc-800 tracking-tight">
+              <h3 className="text-lg font-bold text-zinc-800 tracking-tight font-heading">
                 Order Details
               </h3>
               <div className="border border-zinc-200/60 rounded-xl bg-white p-4 space-y-3 shadow-xs">
@@ -91,9 +89,9 @@ const ProcessOrder = () => {
               </div>
             </div>
 
-            {/* Panel 2: Shipping Vector Area */}
+            {/* Shipping Area */}
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-zinc-800 tracking-tight">
+              <h3 className="text-lg font-bold text-zinc-800 tracking-tight font-heading">
                 Shipping Info
               </h3>
               <div className="border border-zinc-200/60 rounded-xl bg-white p-4 space-y-3 shadow-xs text-xs">
@@ -125,9 +123,9 @@ const ProcessOrder = () => {
               </div>
             </div>
 
-            {/* Panel 3: Financial Settlement Ledger */}
+            {/* Payment info */}
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-zinc-800 tracking-tight">
+              <h3 className="text-lg font-bold text-zinc-800 tracking-tight font-heading">
                 Payment Info
               </h3>
               <div className="border border-zinc-200/60 rounded-xl bg-white p-4 space-y-3 shadow-xs text-xs">
@@ -172,9 +170,9 @@ const ProcessOrder = () => {
               </div>
             </div>
 
-            {/* Panel 4: Physical Order Items Manifest Queue */}
+            {/* Order Items Queue */}
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-zinc-800 tracking-tight">
+              <h3 className="text-lg font-bold text-zinc-800 tracking-tight font-heading">
                 Order Items
               </h3>
               <div className="border border-zinc-200/60 rounded-xl bg-white divide-y divide-zinc-100 shadow-xs overflow-hidden">
@@ -216,11 +214,9 @@ const ProcessOrder = () => {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Action & Operations Management Node Panel (4 Cols) */}
-          <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-6">
-            {/* Control Panel Block Card */}
+          {/* RIGHT COLUMN */}
+          <div className="lg:col-span-4 space-y-6 lg:top-6">
             <div className="border border-zinc-200/60 bg-white rounded-xl p-5 shadow-xs space-y-6">
-              {/* Operation 1: Logistics Status Dispatch Selection */}
               <div className="space-y-3">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-400">
                   Update Logistics

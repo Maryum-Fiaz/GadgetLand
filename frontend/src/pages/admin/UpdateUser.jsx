@@ -53,20 +53,19 @@ const UpdateUser = () => {
       <div className="w-full max-w-xl mx-auto px-4 py-8 font-sans">
         <form onSubmit={submitHandler} className="space-y-6">
           
-          {/* Flat Minimal Header Area */}
+
           <div className="pb-4 border-b border-zinc-100">
-            <h2 className="text-xl font-bold text-zinc-900 tracking-tight">
-              Update Profile Node
+            <h2 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">
+              Update Profile
             </h2>
             <p className="text-xs text-zinc-400 mt-0.5">
               Modify database parameters for internal account systems
             </p>
           </div>
 
-          {/* Form Input Streams */}
           <div className="space-y-4">
             
-            {/* Input Node 1: Name */}
+            {/* Name */}
             <div className="space-y-1.5">
               <label htmlFor="name_field" className="text-xs font-bold uppercase tracking-wider text-zinc-400">
                 Full Name
@@ -82,7 +81,7 @@ const UpdateUser = () => {
               />
             </div>
 
-            {/* Input Node 2: Email */}
+            {/* Email */}
             <div className="space-y-1.5">
               <label htmlFor="email_field" className="text-xs font-bold uppercase tracking-wider text-zinc-400">
                 Email Address
@@ -98,7 +97,7 @@ const UpdateUser = () => {
               />
             </div>
 
-            {/* Input Node 3: System Role Matrix */}
+            {/* Role */}
             <div className="space-y-1.5">
               <label htmlFor="role_field" className="text-xs font-bold uppercase tracking-wider text-zinc-400">
                 Account Authority Status
@@ -124,7 +123,6 @@ const UpdateUser = () => {
 
           </div>
 
-          {/* Action Submission Node Trigger */}
           <div className="pt-2">
             <button 
               type="submit" 

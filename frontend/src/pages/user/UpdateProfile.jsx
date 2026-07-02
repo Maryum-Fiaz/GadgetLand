@@ -12,7 +12,8 @@ const UpdateProfile = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
 
-  const [updateProfile, { isLoading, error, isSuccess }] = useUpdateProfileMutation();
+  const [updateProfile, { isLoading, error, isSuccess }] =
+    useUpdateProfileMutation();
 
   useEffect(() => {
     if (user) {
@@ -42,21 +43,26 @@ const UpdateProfile = () => {
   return (
     <>
       <MetaData title={"Update Profile"} />
-      
+
       <div className="space-y-6 font-sans max-w-xl">
-        
-        {/* Section Headline */}
         <div>
-          <h3 className="text-base font-bold text-zinc-800">Update Profile</h3>
-          <p className="text-xs text-zinc-400 mt-0.5">Modify your basic account info and identities.</p>
+          <h3 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">
+            Update Profile
+          </h3>
+          <p className="text-xs text-zinc-400 mt-0.5">
+            Modify your basic account info and identities.
+          </p>
         </div>
 
-        {/* Premium Form Body Container */}
-        <form onSubmit={handleSubmit} className="bg-zinc-50 border border-zinc-200/60 rounded-2xl p-5 sm:p-6 space-y-4">
-          
-          {/* Name Input Box Element */}
+        <form
+          onSubmit={handleSubmit}
+          className="bg-zinc-50 border border-zinc-200/60 rounded-2xl p-5 sm:p-6 space-y-4"
+        >
           <div className="space-y-1.5">
-            <label htmlFor="name_field" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
+            <label
+              htmlFor="name_field"
+              className="text-xs font-bold uppercase tracking-wider text-zinc-500"
+            >
               Full Name
             </label>
             <input
@@ -71,9 +77,11 @@ const UpdateProfile = () => {
             />
           </div>
 
-          {/* Email Input Box Element */}
           <div className="space-y-1.5">
-            <label htmlFor="email_field" className="text-xs font-bold uppercase tracking-wider text-zinc-500">
+            <label
+              htmlFor="email_field"
+              className="text-xs font-bold uppercase tracking-wider text-zinc-500"
+            >
               Email Address
             </label>
             <input
@@ -88,7 +96,6 @@ const UpdateProfile = () => {
             />
           </div>
 
-          {/* Action Trigger Submit Button */}
           <div className="pt-2">
             <button
               type="submit"
@@ -98,7 +105,6 @@ const UpdateProfile = () => {
               {isLoading ? "Saving changes..." : "SAVE PROFILE"}
             </button>
           </div>
-
         </form>
       </div>
     </>

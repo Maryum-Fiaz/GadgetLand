@@ -38,7 +38,7 @@ const ListProducts = () => {
       deleteProduct(id);
   };
 
-  // Define Columns configuration matching your CustomTable requirements
+  // Define Columns matching CustomTable requirements
   const tableColumns = [
     { label: "ID", field: "id", align: "left" },
     { label: "Product Name", field: "name", align: "left" },
@@ -46,7 +46,7 @@ const ListProducts = () => {
     { label: "Actions", field: "actions", align: "right" },
   ];
 
-  // Format the raw backend array to populate rows reactively
+
   const tableData = data?.products?.map((product) => ({
     id: <span className="font-mono text-zinc-400 text-[11px]">#{product?._id}</span>,
     name: (
@@ -65,7 +65,7 @@ const ListProducts = () => {
     ),
     actions: (
       <div className="flex items-center justify-end gap-2">
-        {/* Edit Form Node Link */}
+
         <Link
           to={`/admin/products/${product?._id}`}
           className="h-8 w-8 rounded-lg border border-zinc-200 bg-white hover:border-blue-200 flex items-center justify-center text-zinc-500 hover:text-blue-600 hover:bg-blue-50 transition-colors cursor-pointer"
@@ -74,7 +74,7 @@ const ListProducts = () => {
           <Pencil size={14} />
         </Link>
 
-        {/* Media Asset Manager Link */}
+
         <Link
           to={`/admin/products/${product?._id}/upload_images`}
           className="h-8 w-8 rounded-lg border border-zinc-200 bg-white hover:border-yellow-200 flex items-center justify-center text-zinc-500 hover:text-yellow-600 hover:bg-yellow-50 transition-colors cursor-pointer"
@@ -83,7 +83,6 @@ const ListProducts = () => {
           <ImagePlus size={14} />
         </Link>
 
-        {/* Core Purge Trigger Action Button */}
         <button
           type="button"
           onClick={() => deleteProductHandler(product?._id)}
@@ -105,7 +104,7 @@ const ListProducts = () => {
 
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-black text-zinc-900 tracking-tight font-heading">
+          <h1 className="text-3xl font-black tracking-tight text-zinc-900 font-heading">
             Product Database Inventory
           </h1>
           <p className="text-xs text-zinc-400 mt-0.5">
@@ -114,7 +113,7 @@ const ListProducts = () => {
         </div>
       </div>
 
-      {/* Render your exact custom dynamic workspace wrapper table asset */}
+
       <CustomTable columns={tableColumns} data={tableData} />
     </>
   );
