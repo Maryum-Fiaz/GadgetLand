@@ -17,11 +17,16 @@ import PaymentMethod from "../../pages/cart/PaymentMethod";
 import MyOrder from "../../pages/order/MyOrder";
 import OrderDetails from "../../pages/order/OrderDetails";
 import Invoice from "../../pages/invoice/Invoice";
+import AboutUs from "../../pages/AboutUs";
 
 export const userRoutes = [
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/about",
+    element: <AboutUs />,
   },
   {
     path: "/products",
