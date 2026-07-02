@@ -9,32 +9,27 @@ const CustomPagination = ({ resPerPage, filteredProductsCount }) => {
   // Total pages needed
   const totalPages = Math.ceil(filteredProductsCount / resPerPage);
 
-
-  // Scroll smoothly up on each page click
+  // Scroll up on each page click
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
   }, [currentPage]);
 
-  // If all products fit on a single page, hide the pagination bar
+  // If all products fit on single page, hide the pagination bar
   if (filteredProductsCount <= resPerPage) return null;
 
-
-  // Handle page change
   const handlePageChange = (pageNumber) => {
     let newParams = new URLSearchParams(searchParams);
 
     newParams.set("page", pageNumber);
-    
+
     setSearchParams(newParams);
   };
 
   return (
     <div className="flex items-center justify-center gap-1.5 my-12 font-sans selection:bg-transparent">
-      
-      {/* ⬅️ PREVIOUS PAGE CONTROL BUTTON */}
       <button
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -43,7 +38,6 @@ const CustomPagination = ({ resPerPage, filteredProductsCount }) => {
         <ChevronLeft size={16} strokeWidth={2.5} />
       </button>
 
-      {/* 🔢 INDIVIDUAL NUMERICAL LINKS CANVASES */}
       {[...Array(totalPages)].map((_, index) => {
         const pageNumber = index + 1;
         const isActive = currentPage === pageNumber;
@@ -53,9 +47,10 @@ const CustomPagination = ({ resPerPage, filteredProductsCount }) => {
             key={pageNumber}
             onClick={() => handlePageChange(pageNumber)}
             className={`w-9 h-9 text-xs font-bold rounded-xl transition-all cursor-pointer shadow-sm active:scale-95 flex items-center justify-center
-              ${isActive 
-                ? "bg-mauve-700 text-white font-black scale-105 border border-mauve-800" 
-                : "bg-white border border-mauve-200 text-mauve-600 hover:border-mauve-400 hover:text-mauve-900"
+              ${
+                isActive
+                  ? "bg-mauve-700 text-white font-black scale-105 border border-mauve-800"
+                  : "bg-white border border-mauve-200 text-mauve-600 hover:border-mauve-400 hover:text-mauve-900"
               }`}
           >
             {pageNumber}
@@ -63,7 +58,6 @@ const CustomPagination = ({ resPerPage, filteredProductsCount }) => {
         );
       })}
 
-      {/* ➡️ NEXT PAGE CONTROL BUTTON */}
       <button
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
@@ -71,7 +65,6 @@ const CustomPagination = ({ resPerPage, filteredProductsCount }) => {
       >
         <ChevronRight size={16} strokeWidth={2.5} />
       </button>
-
     </div>
   );
 };
