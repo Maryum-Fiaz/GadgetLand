@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ShoppingCart, LogIn, Menu, X, User } from "lucide-react";
 import Container from "../Container";
 import logo from "../../assets/logo.png";
@@ -27,6 +27,8 @@ function Header() {
 
   const { user } = useSelector((state) => state.auth);
 
+  const dropdownRef = useRef(null);
+
   // ─── Handlers
   const handleCart = () => {
     navigate("/cart");
@@ -46,6 +48,25 @@ function Header() {
       console.error("Logout failed:", error);
     }
   };
+
+  // to close DROPDOWN, when click outside of dropdown
+  useEffect(() => {
+
+    const handleOutsideClick = (event) => {
+      if(dropdownRef.current && !dropdownRef.current.contains(event.target)){
+        setIsOpen(false)
+      }
+    }
+  
+    if(isOpen){
+      document.addEventListener('mousedown', handleOutsideClick)
+    }
+
+    // clear event listening
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  },[isOpen])
 
   // cart value from redux store
   const { cartItems } = useSelector((state) => state.cart);
@@ -111,8 +132,9 @@ function Header() {
                   <span className="hidden sm:inline">{user?.name}</span>
                 </button>
                 {isOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-zinc-50 border border-zinc-200/80 rounded-xl p-1.5 shadow-md z-50 animate-in fade-in slide-in-from-top-1 duration-100">
+                  <div ref={dropdownRef} className="absolute right-0 mt-2 w-48 bg-zinc-50 border border-zinc-200/80 rounded-xl p-1.5 shadow-md z-50 animate-in fade-in slide-in-from-top-1 duration-100">
                     {user?.role === "admin" && (
+                      
                       <Link
                         to="/admin/dashboard"
                         onClick={() => setIsOpen(false)}
