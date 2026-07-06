@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import cors from "cors";
 const app = express()
 import cookieParser from 'cookie-parser'
 import { connectDatabase } from './config/dbConnect.js'
@@ -16,6 +17,12 @@ dotenv.config({path: 'backend/config/config.env'})
 
 // Database connection
 connectDatabase()
+
+// cors
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
+}));
 
 app.set('query parser', 'extended');
 app.use(express.json({ limit: "10mb",
