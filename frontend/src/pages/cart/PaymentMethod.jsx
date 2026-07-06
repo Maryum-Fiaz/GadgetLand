@@ -22,7 +22,6 @@ function PaymentMethod() {
 
   // for Card
   useEffect(() => {
-    console.log('checkoutData: ', checkoutData);
     if(checkoutData){
       window.location.href = checkoutData.url;
     }
@@ -48,7 +47,7 @@ function PaymentMethod() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        
         if(method === 'COD'){
             // create COD order
             const orderData = {
@@ -77,7 +76,6 @@ function PaymentMethod() {
         taxAmount: taxPrice,
         totalAmount: totalPrice,
       };
-
       stripeCheckoutSession(orderData);
         }
     }

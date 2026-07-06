@@ -21,7 +21,6 @@ app.set('query parser', 'extended');
 app.use(express.json({ limit: "10mb",
     verify: (req, res, buf) => {
       req.rawBody = buf.toString();
-    //   console.log('bufff is: ', buf)
     },
  }));
 
@@ -42,8 +41,8 @@ app.use("/api/v1", paymentRoutes);
 // Using error middleware
 app.use(errorMiddleware)
 
-
-const server = app.listen(process.env.PORT, () => {
+const PORT = process.env.PORT || 4000;
+const server = app.listen(PORT, () => {
   console.log(`App listening on port ${process.env.PORT} in ${process.env.NODE_ENV} mode`)
 })
 

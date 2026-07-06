@@ -1,18 +1,16 @@
 import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import Order from "../models/order.js";
-import dotenv from 'dotenv'
+import dotenv from "dotenv";
 
-dotenv.config({path: 'backend/config/config.env'});
+dotenv.config({ path: "backend/config/config.env" });
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
 
 // Create stripe checkout session   =>  /api/v1/payment/checkout_session
 export const stripeCheckoutSession = catchAsyncErrors(
   async (req, res, next) => {
     const body = req?.body;
-    
-    
+
     const line_items = body?.orderItems?.map((item) => {
       return {
         price_data: {
@@ -52,17 +50,16 @@ export const stripeCheckoutSession = catchAsyncErrors(
       line_items,
     });
 
-
     res.status(200).json({
       url: session.url,
     });
-  }
+  },
 );
 
-const getOrderItems =  (line_items) => {
+const getOrderItems = (line_items) => {
   const itemPromises = line_items?.data?.map(async (item) => {
-    const product = await stripe.products.retrieve(item.price.product); 
-    
+    const product = await stripe.products.retrieve(item.price.product);
+
     return {
       product: product.metadata.productId,
       name: product.name,
@@ -71,33 +68,32 @@ const getOrderItems =  (line_items) => {
       image: product.images[0],
     };
   });
-  
+
   return Promise.all(itemPromises);
 };
 
 // Create new order after payment   =>  /api/v1/payment/webhook
 export const stripeWebhook = catchAsyncErrors(async (req, res, next) => {
-
   // Get the signature sent by Stripe
-  
+
   try {
-       const signature = req.headers['stripe-signature'];
+    const signature = req.headers["stripe-signature"];
 
-      const event = stripe.webhooks.constructEvent(
-        req.rawBody,
-        signature,
-        process.env.STRIPE_WEBHOOK_SECRET
-      );
+    const event = stripe.webhooks.constructEvent(
+      req.rawBody,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET,
+    );
 
-      if (event.type === "checkout.session.completed") {
+    if (event.type === "checkout.session.completed") {
       const session = event.data.object;
-      
+
       const line_items = await stripe.checkout.sessions.listLineItems(
-        session.id
+        session.id,
       );
-      const orderItems = await getOrderItems(line_items);  //above function called
+      const orderItems = await getOrderItems(line_items); //above function called
       const user = session.client_reference_id;
-      
+
       const totalAmount = session.amount_total / 100;
       const taxAmount = session.total_details.amount_tax / 100;
       const shippingAmount = session.total_details.amount_shipping / 100;
@@ -129,12 +125,11 @@ export const stripeWebhook = catchAsyncErrors(async (req, res, next) => {
       };
 
       await Order.create(orderData);
-      
 
       res.status(200).json({ success: true });
     }
-    } catch (err) {
-      console.log(`⚠️ Webhook signature verification failed.`, err.message);
-      return res.sendStatus(400);
-    }
-})
+  } catch (err) {
+    console.log(`⚠️ Webhook signature verification failed.`, err.message);
+    return res.sendStatus(400);
+  }
+});
