@@ -13,6 +13,7 @@ export const orderApi = createApi({
           body,
         };
       },
+      invalidatesTags: ["Order"],
     }),
     myOrders: builder.query({
       query: () => `/me/orders`,

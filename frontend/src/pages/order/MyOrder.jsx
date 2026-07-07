@@ -15,8 +15,6 @@ const MyOrder = () => {
   const navigate = useNavigate();
 
   const orderSuccess = searchParams.get("order_success");
-  console.log('data on MyOrder.jsx: ', data);
-  
 
   useEffect(() => {
     if (error) {
