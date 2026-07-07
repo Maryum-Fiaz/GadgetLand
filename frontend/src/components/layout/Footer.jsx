@@ -131,7 +131,7 @@ function Footer() {
               </li>
               <li>
                 <Link
-                  to="/about-us"
+                  to="/about"
                   className="hover:text-mauve-500 transition-colors"
                 >
                   About Us
