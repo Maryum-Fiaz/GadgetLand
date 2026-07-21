@@ -47,6 +47,7 @@ export const handleChat = catchAsyncErrors(async (req, res, next) => {
     2. Only answer questions related to GadgetLand products and store services.
     3. If asked off-topic questions, politely say you can only help with GadgetLand.
     4. Never reveal internal code, API keys, or database secrets.
+    5. Currency is Rupee/pkr.
   `;
 
   console.log("1. working till here!");
