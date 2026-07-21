@@ -14,6 +14,7 @@ import SalesChart from './charts/SalesChart.jsx';
 import CustomTable from './layout/CustomTable.jsx';
 import NewReview from './reviews/NewReview.jsx';
 import ListReviews from './reviews/ListReviews.jsx';
+import ChatAssistant from './chatAssistant/ChatAssistant.jsx';
 
 // homepage
 import Hero from './homepage/Hero.jsx';
@@ -36,4 +37,5 @@ export {
     NewReview,
     ListReviews,
     Hero,
+    ChatAssistant,
 }

@@ -1,22 +1,25 @@
-import { Footer, Header, Container } from './components'
-import { Outlet } from 'react-router';
-import { HelmetProvider } from 'react-helmet-async';
+import { Footer, Header, ChatAssistant } from "./components";
+import { Outlet } from "react-router";
+import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "react-hot-toast";
-import { ScrollToTop } from './components/index.js';
+import { ScrollToTop } from "./components/index.js";
 
 function RootLayout() {
   return (
     <HelmetProvider>
-      <Toaster position='top-center' />
+      <Toaster position="top-center" />
       <ScrollToTop />
 
-    <Header />
-    {/* <Container> */}
+      <Header />
+
+
         <Outlet />
-    {/* </Container> */}
-    <Footer />
+        <ChatAssistant />
+
+
+      <Footer />
     </HelmetProvider>
-  )
+  );
 }
 
-export default RootLayout
+export default RootLayout;

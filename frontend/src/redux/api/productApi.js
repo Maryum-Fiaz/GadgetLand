@@ -104,6 +104,13 @@ export const productApi = createApi({
       },
       invalidatesTags: ["Reviews"],
     }),
+    sendMessage: builder.mutation({
+      query: (body) => ({
+        url: "/chat",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -122,4 +129,6 @@ export const {
 
   useLazyGetProductReviewsQuery,
   useDeleteReviewMutation,
+
+  useSendMessageMutation,
 } = productApi;
